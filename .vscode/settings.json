@@ -1,0 +1,16 @@
+{
+    "folder-color.pathColors": [
+        {
+            "folderPath": "next.js-home-budget-app\\src\\app\\",
+            "color": "foldercolorizer.PaleVioletRed"
+        },
+        {
+            "folderPath": "next.js-home-budget-app\\src\\components\\",
+            "color": "foldercolorizer.LawnGreen"
+        },
+        {
+            "folderPath": "next.js-home-budget-app\\src\\lib\\",
+            "color": "foldercolorizer.LightYellow"
+        }
+    ]
+}

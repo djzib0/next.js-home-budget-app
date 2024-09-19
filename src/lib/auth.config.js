@@ -25,6 +25,9 @@ export const authConfig = {
         const isOnAdminPanel = request.nextUrl?.pathname.startsWith("/admin");
         const isOnBudgetsPage = request.nextUrl?.pathname.startsWith("/budgets");
         const isOnLoginPage = request.nextUrl?.pathname.startsWith("/login");
+        const isOnRegisterPage = request.nextUrl?.pathname.startsWith("/register");
+        
+    
   
         if (isOnAdminPanel && !user?.isAdmin) {
           return false;
@@ -32,6 +35,14 @@ export const authConfig = {
 
         if (isOnBudgetsPage && !user) {
           return false;
+        }
+
+        if (isOnRegisterPage && !user) {
+          return true;
+        }
+
+        if (isOnRegisterPage && user) {
+          return Response.redirect(new URL("/", request.nextUrl));
         }
   
         if (isOnLoginPage && user) {

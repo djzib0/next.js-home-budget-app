@@ -28,6 +28,13 @@ const userSchema = new mongoose.Schema(
     {timestamps: true}
 )
 
+const budgetCommentSchema = new mongoose.Schema(
+    {comment: {
+        type: String,
+    }
+    }
+)
+
 const budgetSchema = new mongoose.Schema(
     {
         budgetId: {
@@ -39,12 +46,30 @@ const budgetSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        budgetData: {
+        groceriesBudget: {
             type: String,
-        }
+            required: true,
+        },
+        groceriesBudgetComments: {
+            type: [budgetCommentSchema],
+        },
+        clothesBudget: {
+            type: Number,
+        },
+        clothesBudgetComments: {
+            type: [budgetCommentSchema],
+        },
+        billsBudget: {
+            type: Number,
+        },
+        billsBudgetComments: {
+            type: [budgetCommentSchema],
+        },
+
     },
     {timestamps: true}
 );
 
 export const User = mongoose.models.User || mongoose.model("User", userSchema);
 export const Budget = mongoose.models.Budget || mongoose.model("Budget", budgetSchema);
+export const BudgetComment = mongoose.models.BudgetComment || mongoose.model("BudgetComment", budgetCommentSchema);

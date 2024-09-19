@@ -1,3 +1,13 @@
 .container {
-    background-color: yellowgreen;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    background-color: var(--colorLight);
+}
+
+.navbarRight {
+    display: flex;
+    gap: 2rem;
 }

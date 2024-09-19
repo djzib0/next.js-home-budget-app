@@ -1,7 +1,7 @@
 'use server'
 import { revalidatePath } from "next/cache";
 import { signIn, signOut } from "./auth";
-import { Budget, User } from "./models";
+import { Budget, User, BudgetComment } from "./models";
 import { connectToDb } from "./utils";
 import bcrypt from "bcryptjs";
 
@@ -93,11 +93,17 @@ export const createNewBudget = async (prevState, formData) => {
         const {userId} = Object.fromEntries(formData);
         connectToDb();
         const newBudget = new Budget({
-            budgetId: "2410",
+            budgetId: "2411",
             userId: userId,
-            budgetData: "test data 3"
+            groceriesBudget: "1100",
+            groceriesBudgetComments: [new BudgetComment({comment: " test comment"})],
+            clothesBudget: 500,
+            clothesBudgetComments: [],
+            billsBudget: 780,
+            billsBudgetComments: [],
         })
 
+        console.log(newBudget, " new budget here...")
         await newBudget.save();
         revalidatePath("/budgets")
     } catch (error) {
