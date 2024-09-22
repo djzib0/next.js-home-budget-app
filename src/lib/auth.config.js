@@ -3,6 +3,9 @@ export const authConfig = {
         signIn: "/login",
     },
     providers: [],
+    // session: {
+    //   maxAge: 5,
+    // },
     callbacks: {
         async jwt({token, user}) {
             if(user) {

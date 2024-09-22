@@ -2,7 +2,7 @@
 import { revalidatePath } from "next/cache";
 import { signIn, signOut } from "./auth";
 import { Budget, User, BudgetComment } from "./models";
-import { connectToDb } from "./utils";
+import { connectToDb } from "./mongooseUtils";
 import bcrypt from "bcryptjs";
 
 export const handleGitHubLogin = async () => {
@@ -93,9 +93,9 @@ export const createNewBudget = async (prevState, formData) => {
         const {userId} = Object.fromEntries(formData);
         connectToDb();
         const newBudget = new Budget({
-            budgetId: "2411",
+            budgetId: "2412",
             userId: userId,
-            groceriesBudget: "1100",
+            groceriesBudget: "110",
             groceriesBudgetComments: [new BudgetComment({comment: " test comment"})],
             clothesBudget: 500,
             clothesBudgetComments: [],
@@ -103,11 +103,42 @@ export const createNewBudget = async (prevState, formData) => {
             billsBudgetComments: [],
         })
 
-        console.log(newBudget, " new budget here...")
-        await newBudget.save();
-        revalidatePath("/budgets")
+        try {
+            // try to find budget with the givenBudgetId
+            const budget = await Budget.find({budgetId: "2412"});
+            // if the budget for specific month/year exists, ...
+            // ...return an error
+            if (budget) {
+                console.log("There is already a budget for this month.")
+                return {error: "There is already a budget for this month."}
+            }
+            // if there is no budget for specific month/year
+            // create and save a new one
+            await newBudget.save();
+            revalidatePath("/budgets")
+        } catch (error) {
+            console.log(error)
+            return {error: "Something went wrong."}
+        }
+
     } catch (error) {
         console.log("Something went wrong while saving a new budget")
         return {error: "Something went wrong while savinga a new budget"}
+    }
+}
+
+export const addComment = async (prevState, formData) => {
+    const {budgetId} = Object.fromEntries(formData)
+    try {
+        connectToDb();
+        const filter = {budgetId: budgetId}
+        const newComment = {comment: "this is a new comment"};
+        const update = {$push: {groceriesBudgetComments: newComment}};
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const budget = await Budget.findOneAndUpdate(filter, update, {new: true});
+        
+    } catch (error) {
+        console.log("console logged error")
+        return {error: "Couldn't find requested budget"}
     }
 }

@@ -29,10 +29,12 @@ const userSchema = new mongoose.Schema(
 )
 
 const budgetCommentSchema = new mongoose.Schema(
-    {comment: {
-        type: String,
-    }
-    }
+    {
+        comment: {
+            type: String,
+        }
+    },
+    {timestamps: true}
 )
 
 const budgetSchema = new mongoose.Schema(
@@ -40,14 +42,13 @@ const budgetSchema = new mongoose.Schema(
         budgetId: {
             type: String,
             required: true,
-            unique: true,
         },
         userId: {
             type: String,
             required: true,
         },
         groceriesBudget: {
-            type: String,
+            type: Number,
             required: true,
         },
         groceriesBudgetComments: {

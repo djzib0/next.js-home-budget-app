@@ -2,7 +2,7 @@ import NextAuth from "next-auth"
 import GitHub from "next-auth/providers/github"
 import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs"
-import { connectToDb } from "./utils"
+import { connectToDb } from "./mongooseUtils"
 import { User } from "./models";
 import {authConfig} from "@/lib/auth.config"
 

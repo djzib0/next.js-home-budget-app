@@ -1,5 +1,5 @@
 import { Budget } from "./models";
-import { connectToDb } from "./utils";
+import { connectToDb } from "./mongooseUtils";
 import { unstable_noStore as noStore } from "next/cache";
 
 export const getBudgets = async () => {
