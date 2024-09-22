@@ -39,34 +39,38 @@ const budgetCommentSchema = new mongoose.Schema(
 
 const budgetSchema = new mongoose.Schema(
     {
-        budgetId: {
-            type: String,
-            required: true,
-        },
-        userId: {
-            type: String,
-            required: true,
-        },
-        groceriesBudget: {
-            type: Number,
-            required: true,
-        },
-        groceriesBudgetComments: {
-            type: [budgetCommentSchema],
-        },
-        clothesBudget: {
-            type: Number,
-        },
-        clothesBudgetComments: {
-            type: [budgetCommentSchema],
-        },
-        billsBudget: {
-            type: Number,
-        },
-        billsBudgetComments: {
-            type: [budgetCommentSchema],
-        },
-
+        budgetName: {type: String,required: true},
+        userId: {type: String,required: true},
+        groceriesBudget: {type: Number,required: true},
+        eatingOutBudget: {type: Number, required: true},
+        groceriesBudgetComments: {type: [budgetCommentSchema]},
+        otherFoodAndDrinksBudget: {type: Number, required: true},
+        foodAndDrinksBudgetComments: {type: [budgetCommentSchema]},
+        doctorsBudget: {type: Number, required: true},
+        drugsBudget: {type: Number, required: true},
+        otherMedicalBudget: {type: Number, required: true},
+        healthBudgetComments: {type: [budgetCommentSchema]},
+        fuelBudget: {type: Number, required: true},
+        publicTransportBudget: {type: Number, required: true},
+        otherTransportBudget: {type: Number, required: true},
+        transportBudgetComments: {type: [budgetCommentSchema]},
+        clothesHerBudget: {type: Number, required: true},
+        clothesHisBudget: {type: Number, required: true},
+        clothesKidsBudget: {type: Number, required: true},
+        clothesBudgetComments: {type: [budgetCommentSchema]},
+        rentBudget: {type: Number, required: true},
+        electricityBudget: {type: Number, required: true},
+        waterSupplyAndSewageBudget: {type: Number, required: true},
+        gasBudget: {type: Number, required: true},
+        billsBudgetComments: {type: [budgetCommentSchema]},
+        internetBudget: {type: Number, required: true},
+        phonesBudget: {type: Number, required: true},
+        streamingServicesBudget: {type: Number, required: true},
+        telecommunicationBudgetComments: {type: [budgetCommentSchema]},
+        hobbyBudget: {type: Number, required: true},
+        hobbyBudgetComments: {type: [budgetCommentSchema]},
+        otherBudget: {type: Number, required: true},
+        otherBudgetComments: {type: [budgetCommentSchema]},
     },
     {timestamps: true}
 );

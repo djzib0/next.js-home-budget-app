@@ -24,7 +24,7 @@ const BudgetsForm = ({session} : {session: Session}) => {
         <button>Add new budget, HOMIE!</button>
       </form>
       <form action={commentFormAction}>
-        <input type='hidden' name='budgetId' value={'66efb495fac002748cde411b'} />
+        <input type='hidden' name='budgetId' value={'66efd1a51d3e87d3dbb08bf1'} />
         <button>Add comment</button>
       </form>
     </>

@@ -93,7 +93,7 @@ export const createNewBudget = async (prevState, formData) => {
         const {userId} = Object.fromEntries(formData);
         connectToDb();
         const newBudget = new Budget({
-            budgetId: "2412",
+            budgetName: "2412",
             userId: userId,
             groceriesBudget: "110",
             groceriesBudgetComments: [new BudgetComment({comment: " test comment"})],
@@ -104,8 +104,8 @@ export const createNewBudget = async (prevState, formData) => {
         })
 
         try {
-            // try to find budget with the givenBudgetId
-            const budget = await Budget.find({budgetId: "2412"});
+            // try to find budget with the given budget name
+            const budget = await Budget.find({budgetName: "2412"});
             // if the budget for specific month/year exists, ...
             // ...return an error
             if (budget) {
@@ -127,16 +127,30 @@ export const createNewBudget = async (prevState, formData) => {
     }
 }
 
+export const getBudget = async (budgetName) => {
+    try {
+        connectToDb();
+        const budget = await Budget.findById(budgetName);
+        if (budget) {
+            return budget
+        }
+        
+    } catch (error) {
+        console.log("Couldn't find budget with the given id.")
+        return {error: "Couldn't find budget with the give id."}
+    }
+    return {message: "There is no budget for current month."}
+}
+
 export const addComment = async (prevState, formData) => {
     const {budgetId} = Object.fromEntries(formData)
     try {
         connectToDb();
-        const filter = {budgetId: budgetId}
+        const filter = {_id: budgetId}
         const newComment = {comment: "this is a new comment"};
         const update = {$push: {groceriesBudgetComments: newComment}};
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const budget = await Budget.findOneAndUpdate(filter, update, {new: true});
-        
     } catch (error) {
         console.log("console logged error")
         return {error: "Couldn't find requested budget"}

@@ -3,7 +3,6 @@ import { ExpenseType } from "./enums";
 export type BudgetType = {
     // budgetName is a combination of year and month
     // for example 2411 = budget for November 2024
-    budgetId: string; 
     budgetName: string;
     userId: string;
     groceriesBudget: number;
@@ -14,6 +13,10 @@ export type BudgetType = {
     drugsBudget: number;
     otherMedicalBudget: number;
     healthBudgetComments: string[],
+    fuelBudget: number;
+    publicTransportBudget: number;
+    otherTransportBudget: number;
+    transportBudgetComments: string[];
     clothesHerBudget: number;
     clothesHisBudget: number;
     clothesKidsBudget: number;
@@ -27,6 +30,8 @@ export type BudgetType = {
     phonesBudget: number;
     streamingServicesBudget: number;
     telecommunicationBudgetComments: string[];
+    hobbyBudget: number;
+    hobbyBudgetComments: string[];
     otherBudget: number;
     otherBudgetComments: string[];
 }

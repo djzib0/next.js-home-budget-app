@@ -22,15 +22,14 @@ const BudgetsPage = async () => {
 
   const budgets: BudgetType[] = await getData(session?.user?.id);
 
-  const latestBudgetId = findLatestBudget(budgets)
-  const latestBudget = budgets.find((budget) => budget.budgetId === latestBudgetId)
+  const latestBudgetName = findLatestBudget(budgets)
+  const latestBudget = budgets.find((budget) => budget.budgetName === latestBudgetName)
 
   return (
     <div className={styles.container}>
       <p>{session?.user?.id}</p>
       {session && <BudgetsForm session={session} />}
-      {/* {budgets && budgets.find((budget: BudgetType) => <p key={budget.budgetId}>{budget.budgetId}</p>)} */}
-      {latestBudget && latestBudget.budgetId}
+      {latestBudget && latestBudget.budgetName}
     </div>
   )
 }
