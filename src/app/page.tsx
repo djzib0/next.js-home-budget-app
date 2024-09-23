@@ -1,21 +1,22 @@
 import HomePageContent from "@/components/homePageContent/HomePageContent";
-import { getBudget } from "@/lib/actions";
 import { auth } from "@/lib/auth";
-import { BudgetType } from "@/lib/types";
-import { getExpectedCurrentBudgetName } from "@/lib/utils";
+import { getAllBudgetsByUserId, getCurrentBudget, getLatestBudget } from "@/lib/actions";
+import { findLatestBudgetName, getExpectedCurrentBudgetName } from "@/lib/utils";
 
-const Home = async () => {
+
+const HomePage = async () => {
 
   const session = await auth();
 
-  const currentBudget = getBudget(getExpectedCurrentBudgetName())
-  console.log(currentBudget, " current budget")
+  const budgets = session && await getAllBudgetsByUserId(session?.user?.id ? session?.user.id : "")
+  const currentBudget = session && await getCurrentBudget(session?.user?.id ? session.user.id : "", getExpectedCurrentBudgetName())
+  const latestBudget = await getLatestBudget(session?.user?.id ? session.user.id : "", findLatestBudgetName(budgets))
 
   return (
     <div>
-      {session && <HomePageContent session={session} currentBudget={currentBudget} />}
+      {session && <HomePageContent currentBudget={currentBudget} latestBudget={latestBudget} />}
     </div>
   );
 }
 
-export default Home;
+export default HomePage;

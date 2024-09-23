@@ -15,7 +15,8 @@ export const handleGitHubLogout = async () => {
     await signOut()
 }
 
-export const registerNewUser = async (prevState, formData) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const registerNewUser = async (prevState: any, formData: any) => {
     // 'use server'
     const {username, password, email, passwordRepeat, img} = Object.fromEntries(formData)
     if (password !== passwordRepeat) {
@@ -67,13 +68,15 @@ export const registerNewUser = async (prevState, formData) => {
     }
 }
 
-export const login = async (prevState, formData) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const login = async (prevState: any, formData: any) => {
     const {username, password} = Object.fromEntries(formData)
 
     try {
         await signIn("credentials", {username, password});
         revalidatePath("/budgets")
-    } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
         console.log(error) 
         if (error.message.includes("credentialssignin")) {
             return {error: "Wrong username or password!"}
@@ -88,7 +91,8 @@ export const logout = async () => {
     await signOut();
 }
 
-export const createNewBudget = async (prevState, formData) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const createNewBudget = async (prevState: any, formData: any) => {
     try {
         const {userId} = Object.fromEntries(formData);
         connectToDb();
@@ -127,22 +131,43 @@ export const createNewBudget = async (prevState, formData) => {
     }
 }
 
-export const getBudget = async (budgetName) => {
-    try {
-        connectToDb();
-        const budget = await Budget.findById(budgetName);
-        if (budget) {
-            return budget
-        }
+export const getCurrentBudget = async (userId: string, currentBudgetName: string) => {
+    if (userId) {
+        const res = await fetch(`http://localhost:3000/api/${userId}/budgets/${currentBudgetName}`)
         
-    } catch (error) {
-        console.log("Couldn't find budget with the given id.")
-        return {error: "Couldn't find budget with the give id."}
-    }
-    return {message: "There is no budget for current month."}
+        if (!res.ok) {
+          throw new Error("Something went wrong")
+        } 
+        return res.json()
+     }
 }
 
-export const addComment = async (prevState, formData) => {
+export const getLatestBudget = async (userId: string, latestBudgetName: string) => {
+
+    if (userId) {
+        const res = await fetch(`http://localhost:3000/api/${userId}/budgets/${latestBudgetName}`)
+        
+        if (!res.ok) {
+          throw new Error("Something went wrong")
+        } 
+        return res.json()
+     }
+}
+
+export const getAllBudgetsByUserId = async (userId: string) => {
+    console.log(userId, " userId, hihi")
+    if (userId) {
+        const res = await fetch(`http://localhost:3000/api/${userId}/budgets`)
+
+        if (!res.ok) {
+            throw new Error("Something went wrong while fetching all budgets")
+        } 
+        return res.json()
+    }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const addComment = async (prevState: any, formData: any) => {
     const {budgetId} = Object.fromEntries(formData)
     try {
         connectToDb();

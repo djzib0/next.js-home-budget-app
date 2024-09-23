@@ -1,6 +1,6 @@
 import { BudgetType } from "./types";
 
-export const findLatestBudget = (budgetsArr: BudgetType[]) => {
+export const findLatestBudgetName = (budgetsArr: BudgetType[]) => {
     const budgetNamesArr: string[] = [];
     let latestId = "0";
     budgetsArr.map((budget) => budgetNamesArr.push(budget.budgetName))
@@ -9,11 +9,9 @@ export const findLatestBudget = (budgetsArr: BudgetType[]) => {
             latestId = id;
         } 
     }
-    console.log(latestId, "latest id")
 
     return latestId
 }
-
 
 // budget name is a combination of year and month (for example)
 // 2024 Nov = 2411. Below function checks the current date

@@ -1,18 +1,17 @@
 'use client'
 
 import { BudgetType } from '@/lib/types'
-import { getExpectedCurrentBudgetName } from '@/lib/utils'
-import { Session } from 'next-auth'
 import React from 'react'
 
-const HomePageContent = ({session, currentBudget} : {session: Session; currentBudget: BudgetType | {message: string}}) => {
-
-  const userId = session.user?.id;
+const HomePageContent = ({currentBudget, latestBudget} : {currentBudget: BudgetType; latestBudget: BudgetType}) => {
 
   return (
     <div>
-      {getExpectedCurrentBudgetName()}
-      {userId}
+      {!currentBudget && <p>There is no budget for this month</p>}
+      {currentBudget && 
+      <p>{currentBudget.budgetName}</p>}
+      {latestBudget && 
+      <p>{latestBudget.budgetName}</p>}
     </div>
   )
 }
