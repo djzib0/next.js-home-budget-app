@@ -1,13 +1,13 @@
 // styles import
 import { auth } from "@/lib/auth";
 import styles from "./budgets.module.css"
-import BudgetsForm from "@/components/budgetsForm/BudgetsForm";
 import { BudgetType } from "@/lib/types";
-import { findLatestBudget } from "@/lib/utils";
+import { findLatestBudgetName } from "@/lib/utils";
+import Link from "next/link";
 
 const getData = async (userId: string | undefined) => {
   if (userId) {
-    const res = await fetch(`http://localhost:3000/api/budgets/${userId}`)
+    const res = await fetch(`http://localhost:3000/api/${userId}/budgets`)
     
     if (!res.ok) {
       throw new Error("Something went wrong")
@@ -22,14 +22,14 @@ const BudgetsPage = async () => {
 
   const budgets: BudgetType[] = await getData(session?.user?.id);
 
-  const latestBudgetName = findLatestBudget(budgets)
+  const latestBudgetName = findLatestBudgetName(budgets)
   const latestBudget = budgets.find((budget) => budget.budgetName === latestBudgetName)
 
   return (
     <div className={styles.container}>
       <p>{session?.user?.id}</p>
-      {session && <BudgetsForm session={session} />}
       {latestBudget && latestBudget.budgetName}
+      <Link href={"/budgets/add"}>Add new budget</Link>
     </div>
   )
 }

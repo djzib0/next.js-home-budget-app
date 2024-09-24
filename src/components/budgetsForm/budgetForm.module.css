@@ -1,0 +1,21 @@
+.formContainer {
+    display: flex;
+    max-width: 800px;
+    border: 1px solid var(--colorDarker);
+    margin: 1em;
+    flex-wrap: wrap;
+}
+
+.formContainer > label {
+    flex: 1;
+    background-color: var(--colorDarker);
+    display: flex;
+    flex-basis: 50%;
+}
+
+.formContainer > input,
+.formContainer > select {
+    display: flex;
+    flex: 1;
+    flex-basis: 50%;
+}

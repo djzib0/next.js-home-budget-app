@@ -1,3 +1,4 @@
+import { MonthNameLength } from "./enums";
 import { BudgetType } from "./types";
 
 export const findLatestBudgetName = (budgetsArr: BudgetType[]) => {
@@ -25,6 +26,10 @@ export const getExpectedCurrentBudgetName = () : string =>  {
     return currentBudgetName
 }
 
+export const converYearToBudgetName = (year: string) : string => {
+    return year.slice(2)
+}
+
 export const addZeroPrefix = (num: number) : string => {
     let newNum: string = num.toString();
     if (num < 10) {
@@ -32,4 +37,12 @@ export const addZeroPrefix = (num: number) : string => {
         return newNum
     }
     return newNum;
+}
+
+export const convertToMonthName = (monthNumber: number, language: string, monthNameLength: MonthNameLength) : string => {
+    // declare new generic date to get the month name from it
+    const date = new Date(`2000-${addZeroPrefix(monthNumber)}-01`);
+    // get name 
+    const monthName = date.toLocaleString(language, {month: monthNameLength});
+    return monthName
 }

@@ -4,6 +4,7 @@ import { signIn, signOut } from "./auth";
 import { Budget, User, BudgetComment } from "./models";
 import { connectToDb } from "./mongooseUtils";
 import bcrypt from "bcryptjs";
+import { converYearToBudgetName } from "./utils";
 
 export const handleGitHubLogin = async () => {
     'use server'
@@ -94,26 +95,50 @@ export const logout = async () => {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const createNewBudget = async (prevState: any, formData: any) => {
     try {
-        const {userId} = Object.fromEntries(formData);
+        const {
+            userId,
+            budgetNameYear,
+            budgetNameMonth,
+            groceriesBudget,
+            eatingOutBudget,
+        } = Object.fromEntries(formData);
         connectToDb();
         const newBudget = new Budget({
-            budgetName: "2412",
+            budgetName: converYearToBudgetName(budgetNameYear) + budgetNameMonth,
             userId: userId,
-            groceriesBudget: "110",
+            groceriesBudget: 0,
+            eatingOutBudget: 0,
+            otherFoodAndDrinksBudget: 0,
             groceriesBudgetComments: [new BudgetComment({comment: " test comment"})],
-            clothesBudget: 500,
+            doctorsBudget: 0,
+            drugsBudget: 0,
+            otherMedicalBudget: 0,
+            fuelBudget: 0,
+            publicTransportBudget: 0,
+            otherTransportBudget: 0,
+            clothesHerBudget: 0,
+            clothesHisBudget: 0,
+            clothesKidsBudget: 0,
+            rentBudget: 0,
+            electricityBudget: 0,
+            waterSupplyAndSewageBudget: 0,
+            gasBudget: 0,
+            internetBudget: 0, 
+            phonesBudget: 0,
+            streamingServicesBudget: 0,
+            hobbyBudget: 0,
+            otherBudget: 0,
             clothesBudgetComments: [],
             billsBudget: 780,
             billsBudgetComments: [],
         })
-
         try {
             // try to find budget with the given budget name
-            const budget = await Budget.find({budgetName: "2412"});
+            const budgets = await Budget.find({budgetName: converYearToBudgetName(budgetNameYear) + budgetNameMonth, userId: userId});
             // if the budget for specific month/year exists, ...
             // ...return an error
-            if (budget) {
-                console.log("There is already a budget for this month.")
+            if (budgets.length > 0) {
+                console.log("There is already a budget for this month. Mate")
                 return {error: "There is already a budget for this month."}
             }
             // if there is no budget for specific month/year
