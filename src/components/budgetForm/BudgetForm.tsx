@@ -8,7 +8,7 @@ import React, { useEffect, useState } from 'react'
 import { useFormState } from 'react-dom';
 import styles from './budgetForm.module.css'
 
-const BudgetsForm = ({session} : {session: Session}) => {
+const BudgetForm = ({session} : {session: Session}) => {
 
   const [formData, setFormData] = useState(
     {
@@ -66,7 +66,12 @@ const BudgetsForm = ({session} : {session: Session}) => {
       </form> */}
       {state && state.error}
       <form className={styles.formContainer} action={formAction}>
-        <label htmlFor='budgetNameMonth'>Month</label>
+        <label 
+          htmlFor='budgetNameMonth'
+          className={state && state.error.includes("budgetName") ? styles.errorFont : ""}
+        >
+          Month
+        </label>
         <select
           id='budgetNameMonth'
           name='budgetNameMonth'
@@ -86,7 +91,12 @@ const BudgetsForm = ({session} : {session: Session}) => {
           <option value={"11"}>November</option>
           <option value={"12"}>December</option>
         </select>
-        <label htmlFor='budgetNameYear'>Year</label>
+        <label 
+          htmlFor='budgetNameYear'
+          className={state && state.error.includes("budgetName") ? styles.errorFont : ""}
+        >
+          Year
+        </label>
         <input 
           type="number" 
           min="1900" 
@@ -97,7 +107,10 @@ const BudgetsForm = ({session} : {session: Session}) => {
           onChange={handleChange}
           id='budgetNameYear'
         />
-        <label htmlFor='groceriesBudget'>Groceries budget</label>
+        <label 
+          htmlFor='groceriesBudget'
+          className={state && state.error.includes("groceriesBudget") ? styles.errorFont : ""}
+        >Groceries budget</label>
         <input 
           type="number"  
           name='groceriesBudget'
@@ -105,7 +118,10 @@ const BudgetsForm = ({session} : {session: Session}) => {
           onChange={handleChange}
           min={0}
         />
-        <label htmlFor='eatingOutBudget'>Eating out budget</label>
+        <label 
+          htmlFor='eatingOutBudget'
+          className={state && state.error.includes("eatingOutBudget") ? styles.errorFont : ""}
+        >Eating out budget</label>
         <input 
           type="number"  
           name='eatingOutBudget'
@@ -273,4 +289,4 @@ const BudgetsForm = ({session} : {session: Session}) => {
   )
 }
 
-export default BudgetsForm
+export default BudgetForm

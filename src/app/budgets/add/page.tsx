@@ -1,4 +1,4 @@
-import BudgetsForm from '@/components/budgetsForm/BudgetsForm'
+import BudgetsForm from '@/components/budgetForm/BudgetForm'
 import { auth } from '@/lib/auth'
 import React from 'react'
 

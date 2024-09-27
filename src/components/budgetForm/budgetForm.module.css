@@ -19,3 +19,7 @@
     flex: 1;
     flex-basis: 50%;
 }
+
+.errorFont {
+    color: red;
+}

@@ -5,6 +5,7 @@ import { Budget, User, BudgetComment } from "./models";
 import { connectToDb } from "./mongooseUtils";
 import bcrypt from "bcryptjs";
 import { converYearToBudgetName } from "./utils";
+import mongoose from "mongoose";
 
 export const handleGitHubLogin = async () => {
     'use server'
@@ -101,41 +102,69 @@ export const createNewBudget = async (prevState: any, formData: any) => {
             budgetNameMonth,
             groceriesBudget,
             eatingOutBudget,
+            otherFoodAndDrinksBudget,
+            doctorsBudget,
+            drugsBudget,
+            otherMedicalBudget,
+            fuelBudget,
+            publicTransportBudget,
+            otherTransportBudget,
+            clothesHerBudget,
+            clothesHisBudget,
+            clothesKidsBudget,
+            rentBudget,
+            electricityBudget,
+            waterSupplyAndSewageBudget,
+            gasBudget,
+            internetBudget, 
+            phonesBudget,
+            streamingServicesBudget,
+            hobbyBudget,
+            otherBudget,
+            billsBudget,
         } = Object.fromEntries(formData);
         connectToDb();
         const newBudget = new Budget({
             budgetName: converYearToBudgetName(budgetNameYear) + budgetNameMonth,
             userId: userId,
-            groceriesBudget: 0,
-            eatingOutBudget: 0,
-            otherFoodAndDrinksBudget: 0,
+            groceriesBudget: groceriesBudget,
+            eatingOutBudget: eatingOutBudget,
+            otherFoodAndDrinksBudget: otherFoodAndDrinksBudget,
             groceriesBudgetComments: [new BudgetComment({comment: " test comment"})],
-            doctorsBudget: 0,
-            drugsBudget: 0,
-            otherMedicalBudget: 0,
-            fuelBudget: 0,
-            publicTransportBudget: 0,
-            otherTransportBudget: 0,
-            clothesHerBudget: 0,
-            clothesHisBudget: 0,
-            clothesKidsBudget: 0,
-            rentBudget: 0,
-            electricityBudget: 0,
-            waterSupplyAndSewageBudget: 0,
-            gasBudget: 0,
-            internetBudget: 0, 
-            phonesBudget: 0,
-            streamingServicesBudget: 0,
-            hobbyBudget: 0,
-            otherBudget: 0,
+            doctorsBudget: doctorsBudget,
+            drugsBudget: drugsBudget,
+            otherMedicalBudget: otherMedicalBudget,
+            fuelBudget: fuelBudget,
+            publicTransportBudget: publicTransportBudget,
+            otherTransportBudget: otherTransportBudget,
+            clothesHerBudget: clothesHerBudget,
+            clothesHisBudget: clothesHisBudget,
+            clothesKidsBudget: clothesKidsBudget,
+            rentBudget: rentBudget,
+            electricityBudget: electricityBudget,
+            waterSupplyAndSewageBudget: waterSupplyAndSewageBudget,
+            gasBudget: gasBudget,
+            internetBudget: internetBudget, 
+            phonesBudget: phonesBudget,
+            streamingServicesBudget: streamingServicesBudget,
+            hobbyBudget: hobbyBudget,
+            otherBudget: otherBudget,
             clothesBudgetComments: [],
-            billsBudget: 780,
+            billsBudget: billsBudget,
             billsBudgetComments: [],
         })
+
+        
         try {
+
+            if (newBudget.budgetName.length > 4 || newBudget.budgetName < 4) {
+                return {error: ["budgetName"]}
+            }
             // try to find budget with the given budget name
             const budgets = await Budget.find({budgetName: converYearToBudgetName(budgetNameYear) + budgetNameMonth, userId: userId});
-            // if the budget for specific month/year exists, ...
+            // if the budget for specific month/year exists,
+            // the budgets (array) will be longer than 0, so it means
+            // there is a budget with the given name 
             // ...return an error
             if (budgets.length > 0) {
                 console.log("There is already a budget for this month. Mate")
@@ -147,12 +176,19 @@ export const createNewBudget = async (prevState: any, formData: any) => {
             revalidatePath("/budgets")
         } catch (error) {
             console.log(error)
+            if (error instanceof mongoose.Error.ValidationError) {
+                const invalidFormFields: string[] = [];
+                for (const field in error.errors) {
+                    invalidFormFields.push(field);
+                }
+                return {error: invalidFormFields}
+            }
             return {error: "Something went wrong."}
         }
 
     } catch (error) {
         console.log("Something went wrong while saving a new budget")
-        return {error: "Something went wrong while savinga a new budget"}
+        return {error: "Something went wrong while saving a a new budget"}
     }
 }
 
