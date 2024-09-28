@@ -193,6 +193,7 @@ export const createNewBudget = async (prevState: any, formData: any) => {
 }
 
 export const getCurrentBudget = async (userId: string, currentBudgetName: string) => {
+    console.log("fetching budget for ", currentBudgetName)
     if (userId) {
         const res = await fetch(`http://localhost:3000/api/${userId}/budgets/${currentBudgetName}`)
         

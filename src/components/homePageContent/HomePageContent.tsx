@@ -1,18 +1,23 @@
 'use client'
-
 import { BudgetType } from '@/lib/types'
+import Link from 'next/link';
 import React from 'react';
-// @ts-expect-error this library does not have declared types
-import Plot from 'react-plotly.js';
 
 const HomePageContent = ({currentBudget} : {currentBudget: BudgetType}) => {
 
   return (
     <div>
-      {!currentBudget && <p>There is no budget for this month</p>}
-      {currentBudget && 
-      <p>{currentBudget.budgetName}</p>}
-      <Plot
+      {!currentBudget && 
+      <div>
+        <p>There is no budget for this month</p>
+        <p>Do you want to add budget for this month?</p>
+        <Link href={'budgets/add'}>
+          <button>Add new budget</button>
+        </Link>
+      </div>
+      }
+      <p>{currentBudget.budgetName}</p>
+      {/* <Plot
         data={[
           {
             values: [1, 2, 3],
@@ -31,7 +36,7 @@ const HomePageContent = ({currentBudget} : {currentBudget: BudgetType}) => {
             margin: {"t": 0, "b": 0, "l": 0, "r": 0},
           }
         }
-      />
+      /> */}
     </div>
   )
 }

@@ -46,3 +46,84 @@ export const convertToMonthName = (monthNumber: number, language: string, monthN
     const monthName = date.toLocaleString(language, {month: monthNameLength});
     return monthName
 }
+
+export const convertBudgetNameToDate = (budgetName: string, language: string) : string => {
+
+    const yearFromBudgetName = 2000 + parseInt(budgetName.slice(0,2));
+    const monthFromBudgetName = parseInt(budgetName.slice(2)) - 1;
+    const newDate = new Date(yearFromBudgetName, monthFromBudgetName )
+    const monthName = newDate.toLocaleDateString(language , {month: "long"})
+    
+    return monthName + " " + newDate.getFullYear();
+}
+
+export const convertBudgetDataToChartData = (budget: BudgetType) => {
+    // array with all budgets values from passed budget
+    const valuesArr = [
+        budget.groceriesBudget,
+        budget.eatingOutBudget,
+        budget.otherFoodAndDrinksBudget,
+        budget.doctorsBudget,
+        budget.drugsBudget,
+        budget.otherMedicalBudget,
+        budget.fuelBudget,
+        budget.publicTransportBudget,
+        budget.otherTransportBudget,
+        budget.clothesHerBudget,
+        budget.clothesHisBudget,
+        budget.clothesKidsBudget,
+        budget.rentBudget,
+        budget.electricityBudget,
+        budget.waterSupplyAndSewageBudget,
+        budget.gasBudget,
+        budget.internetBudget,
+        budget.phonesBudget,
+        budget.streamingServicesBudget,
+        budget.hobbyBudget,
+        budget.otherBudget,
+    ]
+
+    const valuesWithoutZeroValues = valuesArr.filter((value) => value > 0);
+    console.log(valuesWithoutZeroValues)
+    // create labels - when the budget for specific item is 
+    // equal to zero, don't return the name
+    const lablesArr = [
+        getLabelName(budget.groceriesBudget, 'Groceries'),
+        getLabelName(budget.eatingOutBudget,  'Eating out'),
+        getLabelName(budget.otherFoodAndDrinksBudget, 'Other Food and Drinks'),
+        getLabelName(budget.doctorsBudget,'Doctor/health'),
+        getLabelName(budget.drugsBudget, 'Drugs'),
+        getLabelName(budget.otherMedicalBudget, 'Other medical'),
+        getLabelName(budget.fuelBudget, 'Fuel'),
+        getLabelName(budget.publicTransportBudget,'Public Transport'),
+        getLabelName(budget.otherTransportBudget, 'Other Transport'),
+        getLabelName(budget.clothesHerBudget,'Clothes - Her'),
+        getLabelName(budget.clothesHisBudget,'Clothes - His'),
+        getLabelName(budget.clothesKidsBudget,'Clothes - Kids'),
+        getLabelName(budget.rentBudget, 'Rent'),
+        getLabelName(budget.electricityBudget, 'Electricity'),
+        getLabelName(budget.waterSupplyAndSewageBudget, 'Water and Sewage'),
+        getLabelName(budget.gasBudget, 'Gas'),
+        getLabelName(budget.internetBudget, 'Internet'),
+        getLabelName(budget.phonesBudget, 'Phones'),
+        getLabelName(budget.streamingServicesBudget,'Streaming Services'),
+        getLabelName(budget.hobbyBudget,'Hobby'),
+        getLabelName(budget.otherBudget,'Other'),
+    ]
+    const labelsWithoutUndefined = lablesArr.filter((label) => label != undefined)
+    const data = [
+        {
+          values: valuesWithoutZeroValues,
+          labels: labelsWithoutUndefined,
+          type: 'pie',
+          textinfo: "label+percent",
+          textposition: "outside",
+          insidetextorientation: "radial",
+        }
+      ]
+    return data;
+}
+
+export const getLabelName = (value: number, labelName: string) => {
+    if (value > 0) return labelName;
+}

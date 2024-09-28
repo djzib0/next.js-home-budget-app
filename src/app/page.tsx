@@ -10,10 +10,9 @@ const HomePage = async () => {
 
   const currentBudget = session && await getCurrentBudget(session?.user?.id ? session.user.id : "", getExpectedCurrentBudgetName())
 
-
   return (
     <div>
-      {session && <HomePageContent currentBudget={currentBudget}/>}
+      {session && <HomePageContent currentBudget={currentBudget} />}
     </div>
   );
 }
