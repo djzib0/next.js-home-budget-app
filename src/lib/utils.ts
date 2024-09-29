@@ -58,7 +58,7 @@ export const convertBudgetNameToDate = (budgetName: string, language: string) : 
 }
 
 export const convertBudgetDataToChartData = (budget: BudgetType) => {
-    // array with all budgets values from passed budget
+    // array with all budgets values from the passed budget
     const valuesArr = [
         budget.groceriesBudget,
         budget.eatingOutBudget,
@@ -76,18 +76,20 @@ export const convertBudgetDataToChartData = (budget: BudgetType) => {
         budget.electricityBudget,
         budget.waterSupplyAndSewageBudget,
         budget.gasBudget,
+        budget.otherBillsBudget,
         budget.internetBudget,
         budget.phonesBudget,
         budget.streamingServicesBudget,
+        budget.otherDigitalServices,
         budget.hobbyBudget,
         budget.otherBudget,
     ]
-
+    // when the sum is equal to zero it means there was not budget
+    // set, so no need to display it on the chart.
     const valuesWithoutZeroValues = valuesArr.filter((value) => value > 0);
-    console.log(valuesWithoutZeroValues)
     // create labels - when the budget for specific item is 
     // equal to zero, don't return the name
-    const lablesArr = [
+    const labelsArr = [
         getLabelName(budget.groceriesBudget, 'Groceries'),
         getLabelName(budget.eatingOutBudget,  'Eating out'),
         getLabelName(budget.otherFoodAndDrinksBudget, 'Other Food and Drinks'),
@@ -104,16 +106,18 @@ export const convertBudgetDataToChartData = (budget: BudgetType) => {
         getLabelName(budget.electricityBudget, 'Electricity'),
         getLabelName(budget.waterSupplyAndSewageBudget, 'Water and Sewage'),
         getLabelName(budget.gasBudget, 'Gas'),
+        getLabelName(budget.otherBillsBudget, 'Other bills'),
         getLabelName(budget.internetBudget, 'Internet'),
         getLabelName(budget.phonesBudget, 'Phones'),
-        getLabelName(budget.streamingServicesBudget,'Streaming Services'),
+        getLabelName(budget.streamingServicesBudget,'Streaming Serv.'),
+        getLabelName(budget.otherDigitalServices,'Other Digital Serv.'),
         getLabelName(budget.hobbyBudget,'Hobby'),
         getLabelName(budget.otherBudget,'Other'),
     ]
     // The above array contains the label name for the entries with
     // value more than zero, but when the value is zero it return undefined
     // We want to remove these undefined values.
-    const labelsWithoutUndefined = lablesArr.filter((label) => label != undefined)
+    const labelsWithoutUndefined = labelsArr.filter((label) => label != undefined)
     const data = [
         {
           values: valuesWithoutZeroValues,
@@ -129,4 +133,55 @@ export const convertBudgetDataToChartData = (budget: BudgetType) => {
 
 export const getLabelName = (value: number, labelName: string) => {
     if (value > 0) return labelName;
+}
+
+export const convertBudgetToAggregatedChartData = (budget: BudgetType) => {
+    const foodBudget: number = budget.groceriesBudget + budget.eatingOutBudget + budget.otherFoodAndDrinksBudget;
+    const healthBudget: number = budget.doctorsBudget + budget.drugsBudget + budget.otherMedicalBudget;
+    const transportBudget: number = budget.fuelBudget + budget.publicTransportBudget + budget.otherTransportBudget;
+    const clothesBudget: number = budget.clothesHerBudget + budget.clothesHisBudget + budget.clothesKidsBudget;
+    const costOfLivingBudget: number = budget.rentBudget + budget.electricityBudget + budget.waterSupplyAndSewageBudget + budget.gasBudget + budget.otherBillsBudget;
+    const billsBudget: number = budget.internetBudget + budget.phonesBudget + budget.streamingServicesBudget + budget.otherDigitalServices;
+    const hobbyBudget: number = budget.hobbyBudget
+    const otherBudget: number = budget.otherBudget
+    
+    const valuesArr = [
+        foodBudget,
+        healthBudget,
+        transportBudget,
+        clothesBudget,
+        costOfLivingBudget,
+        billsBudget,
+        hobbyBudget,
+        otherBudget,
+    ]
+    // when the sum is equal to zero it means there was not budget
+    // set, so no need to display it on the chart.
+    const valuesWithoutZeroValues = valuesArr.filter((value) => value > 0);
+
+    const labelsArr = [
+        getLabelName(foodBudget, 'Food'),
+        getLabelName(healthBudget, 'Health'),
+        getLabelName(transportBudget, 'Transport'),
+        getLabelName(clothesBudget, 'Clothes'),
+        getLabelName(costOfLivingBudget, 'Home Living'),
+        getLabelName(billsBudget, 'Digital services'),
+        getLabelName(hobbyBudget, 'Hobby'),
+        getLabelName(otherBudget, 'Other')
+    ]
+    // The above array contains the label name for the entries with
+    // value more than zero, but when the value is zero it return undefined
+    // We want to remove these undefined values.
+    const labelsWithoutUndefined = labelsArr.filter((label) => label != undefined)
+    const data = [
+        {
+          values: valuesWithoutZeroValues,
+          labels: labelsWithoutUndefined,
+          type: 'pie',
+          textinfo: "label+percent",
+          textposition: "outside",
+          insidetextorientation: "radial",
+        }
+      ]
+    return data;
 }

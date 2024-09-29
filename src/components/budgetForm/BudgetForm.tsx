@@ -7,10 +7,13 @@ import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { useFormState } from 'react-dom';
 import styles from './budgetForm.module.css'
+import { BudgetFormType } from '@/lib/types'
+
+
 
 const BudgetForm = ({session} : {session: Session}) => {
 
-  const [formData, setFormData] = useState(
+  const [formData, setFormData] = useState<BudgetFormType>(
     {
       budgetNameYear: new Date().getFullYear(),
       budgetNameMonth: "01",
@@ -30,9 +33,11 @@ const BudgetForm = ({session} : {session: Session}) => {
       electricityBudget: 0,
       waterSupplyAndSewageBudget: 0,
       gasBudget: 0,
+      otherBillsBudget: 0,
       internetBudget: 0, 
       phonesBudget: 0,
       streamingServicesBudget: 0,
+      otherDigitalServices: 0,
       hobbyBudget: 0,
       otherBudget: 0,
     }
@@ -241,6 +246,14 @@ const BudgetForm = ({session} : {session: Session}) => {
           onChange={handleChange}
           min={0}
         />
+        <label htmlFor='otherBillsBudget'>Other bills budget</label>
+        <input 
+          type="number"  
+          name='otherBillsBudget'
+          value={formData.otherBillsBudget}
+          onChange={handleChange}
+          min={0}
+        />
         <label htmlFor='internetBudget'>Internet budget</label>
         <input 
           type="number"  
@@ -262,6 +275,14 @@ const BudgetForm = ({session} : {session: Session}) => {
           type="number"  
           name='streamingServicesBudget'
           value={formData.streamingServicesBudget}
+          onChange={handleChange}
+          min={0}
+        />
+        <label htmlFor='otherDigitalServices'>Other digital budget</label>
+        <input 
+          type="number"  
+          name='otherDigitalServices'
+          value={formData.otherDigitalServices}
           onChange={handleChange}
           min={0}
         />

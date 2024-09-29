@@ -116,9 +116,11 @@ export const createNewBudget = async (prevState: any, formData: any) => {
             electricityBudget,
             waterSupplyAndSewageBudget,
             gasBudget,
+            otherBillsBudget,
             internetBudget, 
             phonesBudget,
             streamingServicesBudget,
+            otherDigitalServices,
             hobbyBudget,
             otherBudget,
             billsBudget,
@@ -144,9 +146,11 @@ export const createNewBudget = async (prevState: any, formData: any) => {
             electricityBudget: electricityBudget,
             waterSupplyAndSewageBudget: waterSupplyAndSewageBudget,
             gasBudget: gasBudget,
+            otherBillsBudget: otherBillsBudget,
             internetBudget: internetBudget, 
             phonesBudget: phonesBudget,
             streamingServicesBudget: streamingServicesBudget,
+            otherDigitalServices: otherDigitalServices,
             hobbyBudget: hobbyBudget,
             otherBudget: otherBudget,
             clothesBudgetComments: [],
@@ -154,10 +158,9 @@ export const createNewBudget = async (prevState: any, formData: any) => {
             billsBudgetComments: [],
         })
 
-        
         try {
 
-            if (newBudget.budgetName.length > 4 || newBudget.budgetName < 4) {
+            if (newBudget.length > 4 || newBudget.budgetName < 4) {
                 return {error: ["budgetName"]}
             }
             // try to find budget with the given budget name

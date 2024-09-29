@@ -75,6 +75,17 @@ const budgetSchema = new mongoose.Schema(
     {timestamps: true}
 );
 
+const expenseSchema = new mongoose.Schema(
+    {
+        userId: {type: String, required: true},
+        budgetId: {type: String, required: true},
+        value: {type: Number, required: true},
+        group: {type: String, required: true}
+    },
+    {timestamps: true}
+)
+
 export const User = mongoose.models.User || mongoose.model("User", userSchema);
 export const Budget = mongoose.models.Budget || mongoose.model("Budget", budgetSchema);
 export const BudgetComment = mongoose.models.BudgetComment || mongoose.model("BudgetComment", budgetCommentSchema);
+export const Expense = mongoose.models.Expense|| mongoose.model("Expense", expenseSchema)

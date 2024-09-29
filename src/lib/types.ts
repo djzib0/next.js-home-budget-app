@@ -1,4 +1,4 @@
-import { ExpenseType } from "./enums";
+import { ClothesExpense, DigitalServicesExpense, FoodExpense, HealthExpense, HobbyExpense, HomeExpense, OtherExpense, TransportExpense } from "./enums";
 
 export type BudgetType = {
     // budgetName is a combination of year and month
@@ -25,10 +25,12 @@ export type BudgetType = {
     electricityBudget: number;
     waterSupplyAndSewageBudget: number;
     gasBudget: number;
+    otherBillsBudget: number,
     billsBudgetComments: string[];
     internetBudget: number;
     phonesBudget: number;
     streamingServicesBudget: number;
+    otherDigitalServices: number;
     telecommunicationBudgetComments: string[];
     hobbyBudget: number;
     hobbyBudgetComments: string[];
@@ -36,8 +38,37 @@ export type BudgetType = {
     otherBudgetComments: string[];
 }
 
+export type BudgetFormType = {
+    budgetNameYear: number,
+    budgetNameMonth: string,
+    groceriesBudget: number;
+    eatingOutBudget: number;
+    otherFoodAndDrinksBudget: number;
+    doctorsBudget: number;
+    drugsBudget: number;
+    otherMedicalBudget: number;
+    fuelBudget: number;
+    publicTransportBudget: number;
+    otherTransportBudget: number;
+    clothesHerBudget: number;
+    clothesHisBudget: number;
+    clothesKidsBudget: number;
+    rentBudget: number;
+    electricityBudget: number;
+    waterSupplyAndSewageBudget: number;
+    gasBudget: number;
+    otherBillsBudget: number,
+    internetBudget: number;
+    phonesBudget: number;
+    streamingServicesBudget: number;
+    otherDigitalServices: number;
+    hobbyBudget: number;
+    otherBudget: number;
+}
+
 export type Expense = {
     userId: string;
+    budgetId: string;
     value: number;
-    group: ExpenseType;
+    group: FoodExpense | HealthExpense | TransportExpense | ClothesExpense | HomeExpense | DigitalServicesExpense | HobbyExpense | OtherExpense
 }
