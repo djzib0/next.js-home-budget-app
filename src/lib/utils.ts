@@ -110,6 +110,9 @@ export const convertBudgetDataToChartData = (budget: BudgetType) => {
         getLabelName(budget.hobbyBudget,'Hobby'),
         getLabelName(budget.otherBudget,'Other'),
     ]
+    // The above array contains the label name for the entries with
+    // value more than zero, but when the value is zero it return undefined
+    // We want to remove these undefined values.
     const labelsWithoutUndefined = lablesArr.filter((label) => label != undefined)
     const data = [
         {

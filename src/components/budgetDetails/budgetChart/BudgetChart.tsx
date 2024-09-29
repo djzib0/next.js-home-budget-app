@@ -1,14 +1,16 @@
 'use client'
-// @ts-expect-error this library does not have declared types
-import Plot from 'react-plotly.js';
-
+import dynamic from "next/dynamic";
+import { PlotParams } from "react-plotly.js";
 import { BudgetType } from "@/lib/types"
 import { convertBudgetDataToChartData } from "@/lib/utils";
 
-const BudgetChart = ({budget} : {budget: BudgetType}) => {
 
+const BudgetChart = ({budget} : {budget: BudgetType}) => {
+  
   const budgetData = convertBudgetDataToChartData(budget);
-  console.log(budgetData)
+  
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const Plot: PlotParams | any = dynamic(() => import("react-plotly.js"), { ssr: false, })
   return (
     <div>
      {budgetData && <Plot
