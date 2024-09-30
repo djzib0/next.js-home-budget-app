@@ -1,7 +1,7 @@
 'use server'
 import { revalidatePath } from "next/cache";
 import { signIn, signOut } from "./auth";
-import { Budget, User, BudgetComment } from "./models";
+import { Budget, User, BudgetComment, Expense } from "./models";
 import { connectToDb } from "./mongooseUtils";
 import bcrypt from "bcryptjs";
 import { converYearToBudgetName } from "./utils";
@@ -196,7 +196,6 @@ export const createNewBudget = async (prevState: any, formData: any) => {
 }
 
 export const getCurrentBudget = async (userId: string, currentBudgetName: string) => {
-    console.log("fetching budget for ", currentBudgetName)
     if (userId) {
         const res = await fetch(`http://localhost:3000/api/${userId}/budgets/${currentBudgetName}`)
         
@@ -208,7 +207,6 @@ export const getCurrentBudget = async (userId: string, currentBudgetName: string
 }
 
 export const getLatestBudget = async (userId: string, latestBudgetName: string) => {
-
     if (userId) {
         const res = await fetch(`http://localhost:3000/api/${userId}/budgets/${latestBudgetName}`)
         
@@ -220,7 +218,6 @@ export const getLatestBudget = async (userId: string, latestBudgetName: string) 
 }
 
 export const getAllBudgetsByUserId = async (userId: string) => {
-    console.log(userId, " userId, hihi")
     if (userId) {
         const res = await fetch(`http://localhost:3000/api/${userId}/budgets`)
 
@@ -244,5 +241,38 @@ export const addComment = async (prevState: any, formData: any) => {
     } catch (error) {
         console.log("console logged error")
         return {error: "Couldn't find requested budget"}
+    }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const addExpense = async(prevState: any, formData: any) => {
+    console.log(formData, " formData")
+    const {userId, budgetId, value, group} = Object.fromEntries(formData);
+    console.log(userId, " in function add Expense")
+    console.log("test in addExpense")
+    try {
+        connectToDb();
+        const newExpense = new Expense({
+            userId: userId,
+            budgetId: budgetId,
+            value: value,
+            group: group,
+        })
+        await newExpense.save();
+        revalidatePath("/budgets")
+        console.log("saving new Expense")
+    } catch (error) {
+        console.log(error)
+        return {error: "Something went wrong while saving a new expense"}
+    }
+}
+
+export const getAllExpensesByUserAndBudgetId = async (userId: string, budgetId: string) => {
+    if (userId && budgetId) {
+        const res = await fetch(`http://localhost:3000/api/${userId}/expenses/${budgetId}`);
+        if (!res.ok) {
+            throw new Error("Something went wrong while fetching all expenses")
+        }
+        return res.json();
     }
 }

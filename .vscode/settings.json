@@ -11,6 +11,10 @@
         {
             "folderPath": "next.js-home-budget-app\\src\\lib\\",
             "color": "foldercolorizer.LightYellow"
+        },
+        {
+            "folderPath": "next.js-home-budget-app\\src\\app\\api\\",
+            "color": "foldercolorizer.LightRed"
         }
     ]
 }

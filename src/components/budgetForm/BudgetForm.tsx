@@ -52,9 +52,7 @@ const BudgetForm = ({session} : {session: Session}) => {
       }
     })
   }
-
-  console.log(formData.budgetNameMonth)
-
+  
   const [state, formAction] = useFormState(createNewBudget, undefined)
 
   const router = useRouter();

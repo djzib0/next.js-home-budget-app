@@ -1,6 +1,7 @@
 import { ClothesExpense, DigitalServicesExpense, FoodExpense, HealthExpense, HobbyExpense, HomeExpense, OtherExpense, TransportExpense } from "./enums";
 
 export type BudgetType = {
+    _id: string;
     // budgetName is a combination of year and month
     // for example 2411 = budget for November 2024
     budgetName: string;
@@ -67,8 +68,16 @@ export type BudgetFormType = {
 }
 
 export type Expense = {
+    id: string;
     userId: string;
     budgetId: string;
     value: number;
     group: FoodExpense | HealthExpense | TransportExpense | ClothesExpense | HomeExpense | DigitalServicesExpense | HobbyExpense | OtherExpense
+}
+
+export type ExpenseFormType = {
+    userId: string;
+    budgetId: string;
+    value: number;
+    group: string;
 }
