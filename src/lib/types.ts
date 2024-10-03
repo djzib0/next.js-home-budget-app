@@ -72,12 +72,12 @@ export type Expense = {
     userId: string;
     budgetId: string;
     value: number;
-    group: FoodExpense | HealthExpense | TransportExpense | ClothesExpense | HomeExpense | DigitalServicesExpense | HobbyExpense | OtherExpense
+    group: string | FoodExpense | HealthExpense | TransportExpense | ClothesExpense | HomeExpense | DigitalServicesExpense | HobbyExpense | OtherExpense
 }
 
 export type ExpenseFormType = {
     userId: string;
     budgetId: string;
     value: number;
-    group: string;
+    group: string | FoodExpense | HealthExpense | TransportExpense | ClothesExpense | HomeExpense | DigitalServicesExpense | HobbyExpense | OtherExpense
 }

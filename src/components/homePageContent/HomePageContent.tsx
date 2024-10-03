@@ -16,7 +16,7 @@ const HomePageContent = ({currentBudget} : {currentBudget: BudgetType}) => {
         </Link>
       </div>
       }
-      <p>{currentBudget.budgetName}</p>
+      {currentBudget && <p>{currentBudget.budgetName}</p>}
       {/* <Plot
         data={[
           {

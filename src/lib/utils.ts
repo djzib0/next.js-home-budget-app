@@ -185,3 +185,4 @@ export const convertBudgetToAggregatedChartData = (budget: BudgetType) => {
       ]
     return data;
 }
+
