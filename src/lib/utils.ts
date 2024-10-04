@@ -186,3 +186,35 @@ export const convertBudgetToAggregatedChartData = (budget: BudgetType) => {
     return data;
 }
 
+export const sumBudget = (budget: BudgetType) => {
+    const sum = budget.groceriesBudget +
+                budget.eatingOutBudget +
+                budget.otherFoodAndDrinksBudget + 
+                budget.doctorsBudget + 
+                budget.drugsBudget + 
+                budget.otherMedicalBudget +
+                budget.fuelBudget +
+                budget.publicTransportBudget +
+                budget.otherTransportBudget +
+                budget.clothesHerBudget +
+                budget.clothesHisBudget +
+                budget.clothesKidsBudget +
+                budget.rentBudget +
+                budget.electricityBudget +
+                budget.waterSupplyAndSewageBudget +
+                budget.gasBudget +
+                budget.otherBillsBudget +
+                budget.internetBudget +
+                budget.phonesBudget +
+                budget.streamingServicesBudget + 
+                budget.otherDigitalServices +
+                budget.hobbyBudget +
+                budget.otherBudget 
+    return sum;
+
+}
+
+export const sumExpenses = () => {
+
+}
+

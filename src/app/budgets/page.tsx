@@ -27,8 +27,11 @@ const BudgetsPage = async () => {
 
   return (
     <div className={styles.container}>
-      <p>{session?.user?.id}</p>
-      {latestBudget && latestBudget.budgetName}
+      <Link
+        href={`/budgets/${latestBudget?.budgetName}`}
+      >
+        {latestBudget && latestBudget.budgetName}
+      </Link>
       <Link href={"/budgets/add"}>Add new budget</Link>
     </div>
   )
