@@ -246,15 +246,13 @@ export const addComment = async (prevState: any, formData: any) => {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const addExpense = async(prevState: any, formData: any) => {
-    console.log(formData, " formData")
-    const {userId, budgetId, value, group} = Object.fromEntries(formData);
-    console.log(userId, " in function add Expense")
-    console.log("test in addExpense")
+    const {userId, budgetId, name, value, group} = Object.fromEntries(formData);
     try {
         connectToDb();
         const newExpense = new Expense({
             userId: userId,
             budgetId: budgetId,
+            name: name,
             value: value,
             group: group,
         })

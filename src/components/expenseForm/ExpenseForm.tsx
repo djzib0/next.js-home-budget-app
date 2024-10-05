@@ -125,13 +125,22 @@ const ExpenseForm = ({userId, budgetId} : {userId: string, budgetId: string}) =>
     {
       userId: userId,
       budgetId: budgetId,
+      name: "",
       value: 0,
       group: "",
     }
   )
 
-  console.log(isExpenseFormOn.expenseGroup, " ", isExpenseFormOn.isOn, "isExpenseFormOn ")
-
+  const resetForm = () => {
+    const newData = {
+      userId: userId,
+      budgetId: budgetId,
+      name: "",
+      value: 0,
+      group: "",
+    }
+    setFormData(newData);
+  }
 
   // toggle form to add expense (when it's off it's hidden)
   const toggleAddExpenseForm = (expenseGroup: ExpenseGroup) => {
@@ -172,9 +181,10 @@ const ExpenseForm = ({userId, budgetId} : {userId: string, budgetId: string}) =>
   const router = useRouter();
 
   useEffect(() => {
+    resetForm();
     router.refresh();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state, router])
-
 
   return (
     <div>
@@ -230,24 +240,31 @@ const ExpenseForm = ({userId, budgetId} : {userId: string, budgetId: string}) =>
       </div>
       <form action={formAction}>
         <input 
-        type='hidden'
-        name='budgetId'
-        value={formData.budgetId}
-        onChange={handleChange}
+          type='hidden'
+          name='budgetId'
+          value={formData.budgetId}
+          onChange={handleChange}
         />
         <input 
-        type='hidden'
-        name='userId'
-        value={formData.userId}
-        onChange={handleChange}
+          type='hidden'
+          name='userId'
+          value={formData.userId}
+          onChange={handleChange}
         />
         <label htmlFor='value'>Value</label>
         <input 
-        type='number'
-        min={0}
-        name='value'
-        value={formData.value}
-        onChange={handleChange}
+          type='number'
+          min={0}
+          name='value'
+          value={formData.value}
+          onChange={handleChange}
+        />
+        <input 
+          type='text'
+          min={0}
+          name='name'
+          value={formData.name}
+          onChange={handleChange}
         />
         <label htmlFor='group'>Group</label>
         <select

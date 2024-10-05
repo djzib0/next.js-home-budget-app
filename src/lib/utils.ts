@@ -1,5 +1,5 @@
 import { MonthNameLength } from "./enums";
-import { BudgetType } from "./types";
+import { BudgetType, Expense } from "./types";
 
 export const findLatestBudgetName = (budgetsArr: BudgetType[]) => {
     const budgetNamesArr: string[] = [];
@@ -214,7 +214,7 @@ export const sumBudget = (budget: BudgetType) => {
 
 }
 
-export const sumExpenses = () => {
-
+export const sumAllExpenses = (expenses: Expense[]) : number => {
+    return expenses.reduce((n, {value}) => n + value, 0)
 }
 

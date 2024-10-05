@@ -82,6 +82,7 @@ const expenseSchema = new mongoose.Schema(
         userId: {type: String, required: true},
         budgetId: {type: String, required: true},
         value: {type: Number, required: true},
+        name: {type: String, required: true},
         group: {type: String, required: true}
     },
     {timestamps: true}
