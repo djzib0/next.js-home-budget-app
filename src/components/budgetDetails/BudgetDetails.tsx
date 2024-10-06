@@ -1,24 +1,27 @@
 import { BudgetType } from "@/lib/types";
 import { convertBudgetNameToDate, sumAllExpenses, sumBudget } from "@/lib/utils";
 import BudgetChart from "./budgetChart/BudgetChart";
-import BudgetProgressBar from "./budgetProgressBar/BudgetProgressBar";
+import ProgressBar from "../progressBar/ProgressBar";
 import ExpenseForm from "../expenseForm/ExpenseForm";
 import Expenses from "./expenses/Expenses";
 import { getAllExpensesByUserAndBudgetId } from "@/lib/actions";
+// styles import
+import styles from "./budgetDetails.module.css"
 
 const BudgetDetails = async ({budget, userId} : {budget: BudgetType, userId: string}) => {
 
   const expenses = await getAllExpensesByUserAndBudgetId(userId, budget._id)
 
+  const budgetSum = sumBudget(budget);
+  const expensesSum = sumAllExpenses(expenses);
+
   return (
-    <div>
-      {<p>Budget value {sumBudget(budget)}</p>}
-      {<p>Cost value {sumAllExpenses(expenses)}</p>}
+    <div className={styles.budgetDetailsContainer}>
       {budget &&
       <div>
         <p>Budget for {convertBudgetNameToDate(budget.budgetName, 'en-EN')}</p>
+          <ProgressBar currentProgress={expensesSum} maxValue={budgetSum} />
           <BudgetChart budget={budget}/>
-          <BudgetProgressBar />
           <ExpenseForm userId={userId} budgetId={budget._id} />
           <Expenses expenses={expenses} />
       </div>

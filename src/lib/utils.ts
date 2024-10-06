@@ -218,3 +218,10 @@ export const sumAllExpenses = (expenses: Expense[]) : number => {
     return expenses.reduce((n, {value}) => n + value, 0)
 }
 
+export const getProgressPercent = (a: number, b: number) => {
+    if ((a -b) > 100) {
+        return 100;
+    }
+    return Math.round((a / b) * 100);
+}
+
