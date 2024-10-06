@@ -225,3 +225,10 @@ export const getProgressPercent = (a: number, b: number) => {
     return Math.round((a / b) * 100);
 }
 
+export const getIsNumberInRange = (num: number, start: number, end: number) : boolean => {
+    if (num >= start && num <= end ) {
+        return true;
+    }
+    return false
+}
+

@@ -7,6 +7,7 @@ import Expenses from "./expenses/Expenses";
 import { getAllExpensesByUserAndBudgetId } from "@/lib/actions";
 // styles import
 import styles from "./budgetDetails.module.css"
+import BudgetSummary from "./budgetSummary/BudgetSummary";
 
 const BudgetDetails = async ({budget, userId} : {budget: BudgetType, userId: string}) => {
 
@@ -22,6 +23,7 @@ const BudgetDetails = async ({budget, userId} : {budget: BudgetType, userId: str
         <p>Budget for {convertBudgetNameToDate(budget.budgetName, 'en-EN')}</p>
           <ProgressBar currentProgress={expensesSum} maxValue={budgetSum} />
           <BudgetChart budget={budget}/>
+          <BudgetSummary budgetSum={budgetSum} expensesSum={expensesSum} />
           <ExpenseForm userId={userId} budgetId={budget._id} />
           <Expenses expenses={expenses} />
       </div>
