@@ -10,8 +10,6 @@ const ProgressBar = ({currentProgress, maxValue} : {currentProgress: number, max
   
   return (
     <div>
-      {<p>Budget value {currentProgress}</p>}
-      {<p>Cost value {maxValue}</p>}
       <div className={styles.progressBarContainer}>
         <p className={styles.percentageText}>0%</p>
         <div className={styles.progressBar}>

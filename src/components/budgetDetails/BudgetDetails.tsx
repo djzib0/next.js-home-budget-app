@@ -20,10 +20,12 @@ const BudgetDetails = async ({budget, userId} : {budget: BudgetType, userId: str
     <div className={styles.budgetDetailsContainer}>
       {budget &&
       <div>
-        <p>Budget for {convertBudgetNameToDate(budget.budgetName, 'en-EN')}</p>
+        <h1 id={styles.budgetTitle}>Budget for {convertBudgetNameToDate(budget.budgetName, 'en-EN')}</h1>
           <ProgressBar currentProgress={expensesSum} maxValue={budgetSum} />
-          <BudgetChart budget={budget}/>
-          <BudgetSummary budgetSum={budgetSum} expensesSum={expensesSum} />
+          <div className={styles.budgetChartAndSummaryContainer}>
+            <BudgetChart budget={budget}/>
+            <BudgetSummary budgetSum={budgetSum} expensesSum={expensesSum} />
+          </div>
           <ExpenseForm userId={userId} budgetId={budget._id} />
           <Expenses expenses={expenses} />
       </div>

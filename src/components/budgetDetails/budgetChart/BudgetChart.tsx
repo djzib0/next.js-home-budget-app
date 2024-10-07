@@ -37,17 +37,17 @@ const BudgetChart = ({budget} : {budget: BudgetType}) => {
     chartWidth = 450;
     chartHeight = 450;
   } else if (getIsNumberInRange(windowWidth, 651, 768)) {
-    chartWidth = 550;
-    chartHeight = 550;
+    chartWidth = 450;
+    chartHeight = 450;
   } else if (getIsNumberInRange(windowWidth, 769, 1024)) {
-    chartWidth = 600;
-    chartHeight = 600;
+    chartWidth = 450;
+    chartHeight = 450;
   } else if (getIsNumberInRange(windowWidth, 1025, 1201)) {
-    chartWidth = 700;
-    chartHeight = 700;
+    chartWidth = 450;
+    chartHeight = 450;
   } else {
-    chartWidth = 900;
-    chartHeight = 900;
+    chartWidth = 450;
+    chartHeight = 450;
   }
   
 

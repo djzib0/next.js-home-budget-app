@@ -186,9 +186,12 @@ const ExpenseForm = ({userId, budgetId} : {userId: string, budgetId: string}) =>
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state, router])
 
+  console.log(isExpenseFormOn.expenseGroup === 'health', " current group")
+
   return (
-    <div>
-      <div>
+    <div className={styles.expenseFormContainer}>
+      <p>Choose group to add a new expense.</p>
+      <div className={styles.expenseFormButtons}>
         <button 
           className={styles.toggleBtn}
           onClick={() => toggleAddExpenseForm(ExpenseGroup.Food)}
@@ -196,7 +199,7 @@ const ExpenseForm = ({userId, budgetId} : {userId: string, budgetId: string}) =>
           FOOD
         </button>
         <button 
-          className={styles.toggleBtn}
+          className={`${isExpenseFormOn.isOn && isExpenseFormOn.expenseGroup === 'health' ? styles.active : styles.toggleBtn}`}
           onClick={() => toggleAddExpenseForm(ExpenseGroup.Health)}
         >
           HEALTH
