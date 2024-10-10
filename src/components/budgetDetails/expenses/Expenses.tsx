@@ -1,7 +1,7 @@
 import { Expense } from '@/lib/types';
 import React from 'react';
 
-const Expenses = async ({expenses} : {expenses: Expense[]}) => {
+const Expenses = ({expenses} : {expenses: Expense[]}) => {
 
   const expensesArr = expenses.map((expense: Expense) => (
     <div key={expense.id}>

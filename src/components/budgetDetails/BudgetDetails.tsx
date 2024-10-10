@@ -2,12 +2,11 @@ import { BudgetType } from "@/lib/types";
 import { convertBudgetNameToDate, sumAllExpenses, sumBudget } from "@/lib/utils";
 import BudgetChart from "./budgetChart/BudgetChart";
 import ProgressBar from "../progressBar/ProgressBar";
-import ExpenseForm from "../expenseForm/ExpenseForm";
-import Expenses from "./expenses/Expenses";
 import { getAllExpensesByUserAndBudgetId } from "@/lib/actions";
 // styles import
 import styles from "./budgetDetails.module.css"
 import BudgetSummary from "./budgetSummary/BudgetSummary";
+import ExpensesContainer from "../expensesContainer/ExpensesContainer";
 
 const BudgetDetails = async ({budget, userId} : {budget: BudgetType, userId: string}) => {
 
@@ -26,8 +25,7 @@ const BudgetDetails = async ({budget, userId} : {budget: BudgetType, userId: str
             <BudgetChart budget={budget}/>
             <BudgetSummary budgetSum={budgetSum} expensesSum={expensesSum} />
           </div>
-          <ExpenseForm userId={userId} budgetId={budget._id} />
-          <Expenses expenses={expenses} />
+          <ExpensesContainer userId={userId} budget={budget} expenses={expenses} />
       </div>
       }
 
