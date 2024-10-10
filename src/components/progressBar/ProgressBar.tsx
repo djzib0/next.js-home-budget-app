@@ -4,7 +4,6 @@ import styles from './progressBar.module.css'
 
 const ProgressBar = ({currentProgress, maxValue} : {currentProgress: number, maxValue: number}) => {
 
-  console.log(currentProgress, maxValue)
   const completedProgressPercentage = getProgressPercent(currentProgress, maxValue)
   const notCompletedProgressPercentage = 100 - getProgressPercent(currentProgress, maxValue)
   

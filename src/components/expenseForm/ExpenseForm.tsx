@@ -113,13 +113,13 @@ type ExpenseForm = {
   expenseGroup: string;
 }
 
+// Component
 const ExpenseForm = ({userId, budgetId} : {userId: string, budgetId: string}) => {
 
   const [isExpenseFormOn, setIsExpenseFormOn] = useState<ExpenseForm>({
-    isOn: true,
+    isOn: false,
     expenseGroup: ""
   });
-
 
   const [formData, setFormData] = useState<ExpenseFormType>(
     {
@@ -186,14 +186,12 @@ const ExpenseForm = ({userId, budgetId} : {userId: string, budgetId: string}) =>
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state, router])
 
-  console.log(isExpenseFormOn.expenseGroup === 'health', " current group")
-
   return (
     <div className={styles.expenseFormContainer}>
       <p>Choose group to add a new expense.</p>
       <div className={styles.expenseFormButtons}>
         <button 
-          className={styles.toggleBtn}
+          className={`${isExpenseFormOn.isOn && isExpenseFormOn.expenseGroup === 'food' ? styles.active : styles.toggleBtn}`}
           onClick={() => toggleAddExpenseForm(ExpenseGroup.Food)}
         >
           FOOD
@@ -201,47 +199,51 @@ const ExpenseForm = ({userId, budgetId} : {userId: string, budgetId: string}) =>
         <button 
           className={`${isExpenseFormOn.isOn && isExpenseFormOn.expenseGroup === 'health' ? styles.active : styles.toggleBtn}`}
           onClick={() => toggleAddExpenseForm(ExpenseGroup.Health)}
-        >
+          >
           HEALTH
         </button>
         <button 
-          className={styles.toggleBtn}
+          className={`${isExpenseFormOn.isOn && isExpenseFormOn.expenseGroup === 'transport' ? styles.active : styles.toggleBtn}`}
           onClick={() => toggleAddExpenseForm(ExpenseGroup.Transport)}
-        >
+          >
           TRANSPORT
         </button>
         <button 
-          className={styles.toggleBtn}
+          className={`${isExpenseFormOn.isOn && isExpenseFormOn.expenseGroup === 'clothes' ? styles.active : styles.toggleBtn}`}
           onClick={() => toggleAddExpenseForm(ExpenseGroup.Clothes)}
-        >
+          >
           CLOTHES
         </button>
         <button 
-          className={styles.toggleBtn}
+          className={`${isExpenseFormOn.isOn && isExpenseFormOn.expenseGroup === 'home' ? styles.active : styles.toggleBtn}`}
           onClick={() => toggleAddExpenseForm(ExpenseGroup.Home)}
-        >
+          >
           HOME
         </button>
         <button 
-          className={styles.toggleBtn}
+          className={`${isExpenseFormOn.isOn && isExpenseFormOn.expenseGroup === 'digitalServices' ? styles.active : styles.toggleBtn}`}
           onClick={() => toggleAddExpenseForm(ExpenseGroup.DigitalServices)}
-        >
+          >
           DIGITAL
         </button>
         <button 
-          className={styles.toggleBtn}
+          className={`${isExpenseFormOn.isOn && isExpenseFormOn.expenseGroup === 'hobby' ? styles.active : styles.toggleBtn}`}
           onClick={() => toggleAddExpenseForm(ExpenseGroup.Hobby)}
-        >
+          >
           HOBBY
         </button>
         <button 
-          className={styles.toggleBtn}
+          className={`${isExpenseFormOn.isOn && isExpenseFormOn.expenseGroup === 'other' ? styles.active : styles.toggleBtn}`}
           onClick={() => toggleAddExpenseForm(ExpenseGroup.Other)}
         >
           OTHER
         </button>
       </div>
-      <form action={formAction}>
+      {isExpenseFormOn.isOn && 
+      <form 
+        action={formAction}
+        className={isExpenseFormOn.isOn && styles.expenseForm}
+      >
         <input 
           type='hidden'
           name='budgetId'
@@ -262,6 +264,7 @@ const ExpenseForm = ({userId, budgetId} : {userId: string, budgetId: string}) =>
           value={formData.value}
           onChange={handleChange}
         />
+        <label htmlFor='name'>Name</label>
         <input 
           type='text'
           min={0}
@@ -287,7 +290,7 @@ const ExpenseForm = ({userId, budgetId} : {userId: string, budgetId: string}) =>
         </select>
         <br/>
         {formData.group && formData.value > 0 && <button>Add new Expense</button>}
-      </form>
+      </form>}
     </div>
   )
 }

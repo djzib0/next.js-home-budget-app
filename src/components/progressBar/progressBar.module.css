@@ -12,7 +12,7 @@
     display: inline-block;
     margin: 0;
     padding: 0;
-    margin: 0 .5rem;
+    margin: 0;
     font-size: 1.2em;
     font-weight: 700;
     color: #4395ae;
@@ -36,6 +36,7 @@
     height: var(--size-32-px);
     border: 3px solid #4395ae;
     border-radius: 16px;
+    margin: 0 .5rem;
 }
 
 .progressBarLeft {
