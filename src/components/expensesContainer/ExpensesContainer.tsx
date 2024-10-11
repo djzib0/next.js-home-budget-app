@@ -7,17 +7,18 @@ import { BudgetType, Expense } from '@/lib/types'
 
 const ExpensesContainer = ({budget, userId, expenses} : {budget: BudgetType, userId: string, expenses: Expense[]}) => {
 
-  const [showDetails, setShowDetails] = useState(true);
+  const [isShowDetailsOn, setIsShowDetailsOn] = useState(true);
 
   const toggleShowDetails = () => {
-    setShowDetails(prevState => !prevState)
+    setIsShowDetailsOn(prevState => !prevState)
   }
 
   return (
     <div>
-      <button onClick={toggleShowDetails}>showdetails</button>
-      {!showDetails && <ExpenseForm userId={userId} budgetId={budget._id} />}
-      {showDetails && <Expenses expenses={expenses} />}
+      {isShowDetailsOn && <button onClick={toggleShowDetails}>Add new expense</button>}
+      {!isShowDetailsOn && <button onClick={toggleShowDetails}>Display expenses</button>}
+      {!isShowDetailsOn && <ExpenseForm userId={userId} budgetId={budget._id} />}
+      {isShowDetailsOn && <Expenses expenses={expenses} />}
     </div>
   )
 }
