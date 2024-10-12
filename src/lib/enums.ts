@@ -46,6 +46,17 @@ export enum OtherExpense {
     OtherExpense = "Other expense"
 }
 
+export enum ExpenseGroup {
+    Food = 'food',
+    Health = 'health',
+    Transport = 'transport',
+    Clothes = 'clothes',
+    Home = 'home',
+    DigitalServices = 'digitalServices',
+    Hobby = 'hobby',
+    Other = 'other',
+}
+
 export enum MonthNameLength {
     Short = 'short',
     Long = 'long',

@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { useFormState } from 'react-dom'
 import { ExpenseFormType } from '@/lib/types'
-import { ClothesExpense, DigitalServicesExpense, FoodExpense, HealthExpense, HobbyExpense, HomeExpense, OtherExpense, TransportExpense } from '@/lib/enums';
+import { ClothesExpense, DigitalServicesExpense, ExpenseGroup, FoodExpense, HealthExpense, HobbyExpense, HomeExpense, OtherExpense, TransportExpense } from '@/lib/enums';
 import styles from './expenseForm.module.css'
 
 // create an option list from Expense enum
@@ -97,16 +97,7 @@ const otherExpensesOptionsArr = Object.keys(OtherExpense).map((expense, index) =
   )
 })
 
-enum ExpenseGroup {
-  Food = 'food',
-  Health = 'health',
-  Transport = 'transport',
-  Clothes = 'clothes',
-  Home = 'home',
-  DigitalServices = 'digitalServices',
-  Hobby = 'hobby',
-  Other = 'other',
-}
+
 
 type ExpenseForm = {
   isOn: boolean;

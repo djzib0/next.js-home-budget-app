@@ -1,30 +1,56 @@
-import { Expense } from '@/lib/types';
-import React, { useState } from 'react';
+'use client'
+import { Expense, ExpenseDetails } from '@/lib/types';
+import React, {useState } from 'react';
 import styles from "./expenses.module.css"
-import { ClothesExpense, DigitalServicesExpense, FoodExpense, HealthExpense, HobbyExpense, HomeExpense, OtherExpense, TransportExpense } from '@/lib/enums';
+import { setExpenseGroup } from '@/lib/utils';
+import { ExpenseGroup } from '@/lib/enums';
+import useModal from '@/customHooks/useModal';
+import Modal from '@/components/modal/Modal';
 
-type ExpenseDetails = {
-  isOn: boolean;
-  expenseGroup: string[];
-}
 
 const Expenses = ({expenses} : {expenses: Expense[]}) => {
 
+  // utilize useModal custom hook
+  const {
+    setModalData,
+    modalData,
+  } = useModal();
 
+  // state variables
   const [isDetailsOn, setIsDetailsOn] = useState<ExpenseDetails>({
     isOn: false,
-    expenseGroup: [],
+    expenseGroup: "",
   })
 
-  const toggleShowDetails = (expenseGroup: string[]) => {
+  const expensesWithMainGroup = expenses && expenses.map((expense: Expense) => setExpenseGroup(expense))
+
+  const expensesArr = expensesWithMainGroup && expensesWithMainGroup
+  .filter((expense) => {
+    if (expense) return expense.mainGroup === isDetailsOn.expenseGroup
+  })
+  .map((expense) => {
+    if (expense)
+    return (
+      <div key={expense.id}>
+        {expense?.name} - {expense?.mainGroup}
+        <button onClick={() => setModalData({
+          ...modalData,
+          isActive: true,
+          handleFunction: () => console.log("working here man")
+        })}>Click me</button>
+      </div>
+    )
+  })
+
+  const toggleAddExpenseForm = (expenseGroup: ExpenseGroup) => {
     if (!isDetailsOn.isOn) {
-      const newState: ExpenseDetails = {
+      const newState: {isOn: boolean, expenseGroup: string} = {
         isOn: true,
         expenseGroup: expenseGroup,
       }
       setIsDetailsOn(newState);
     } else if (isDetailsOn.isOn && isDetailsOn.expenseGroup != expenseGroup) {
-      const newState: ExpenseDetails = {
+      const newState: {isOn: boolean, expenseGroup: string} = {
         isOn: true,
         expenseGroup: expenseGroup,
       } 
@@ -43,57 +69,68 @@ const Expenses = ({expenses} : {expenses: Expense[]}) => {
     <div>
       <div className={styles.expenseFormButtons}>
         <button 
-          className={`${isDetailsOn.isOn && isDetailsOn.expenseGroup.includes === 'food' ? styles.active : styles.toggleBtn}`}
-          onClick={() => toggleShowDetails(Object.keys(FoodExpense))}
+          className={`${isDetailsOn.isOn && isDetailsOn.expenseGroup === 'food' ? styles.active : styles.toggleBtn}`}
+          onClick={() => toggleAddExpenseForm(ExpenseGroup.Food)}
         >
           FOOD
         </button>
         <button 
           className={`${isDetailsOn.isOn && isDetailsOn.expenseGroup === 'health' ? styles.active : styles.toggleBtn}`}
-          onClick={() => toggleShowDetails(ExpenseGroup.Health)}
+          onClick={() => toggleAddExpenseForm(ExpenseGroup.Health)}
           >
           HEALTH
         </button>
         <button 
           className={`${isDetailsOn.isOn && isDetailsOn.expenseGroup === 'transport' ? styles.active : styles.toggleBtn}`}
-          onClick={() => toggleShowDetails(ExpenseGroup.Transport)}
+          onClick={() => toggleAddExpenseForm(ExpenseGroup.Transport)}
           >
           TRANSPORT
         </button>
         <button 
           className={`${isDetailsOn.isOn && isDetailsOn.expenseGroup === 'clothes' ? styles.active : styles.toggleBtn}`}
-          onClick={() => toggleShowDetails(ExpenseGroup.Clothes)}
+          onClick={() => toggleAddExpenseForm(ExpenseGroup.Clothes)}
           >
           CLOTHES
         </button>
         <button 
           className={`${isDetailsOn.isOn && isDetailsOn.expenseGroup === 'home' ? styles.active : styles.toggleBtn}`}
-          onClick={() => toggleShowDetails(ExpenseGroup.Home)}
+          onClick={() => toggleAddExpenseForm(ExpenseGroup.Home)}
           >
           HOME
         </button>
         <button 
           className={`${isDetailsOn.isOn && isDetailsOn.expenseGroup === 'digitalServices' ? styles.active : styles.toggleBtn}`}
-          onClick={() => toggleShowDetails(ExpenseGroup.DigitalServices)}
+          onClick={() => toggleAddExpenseForm(ExpenseGroup.DigitalServices)}
           >
           DIGITAL
         </button>
         <button 
           className={`${isDetailsOn.isOn && isDetailsOn.expenseGroup === 'hobby' ? styles.active : styles.toggleBtn}`}
-          onClick={() => toggleShowDetails(ExpenseGroup.Hobby)}
+          onClick={() => toggleAddExpenseForm(ExpenseGroup.Hobby)}
           >
           HOBBY
         </button>
         <button 
           className={`${isDetailsOn.isOn && isDetailsOn.expenseGroup === 'other' ? styles.active : styles.toggleBtn}`}
-          onClick={() => toggleShowDetails(ExpenseGroup.Other)}
+          onClick={() => toggleAddExpenseForm(ExpenseGroup.Other)}
         >
           OTHER
         </button>
       </div>
-      {expenses && 
-      expenses.filter((item) => item.group === 'Fuel')
-      .map((expense) => <p>{expense.group}</p>)}
+      {expenses && isDetailsOn.isOn && expensesArr}
+      {modalData.isActive && 
+        <Modal 
+          isActive={modalData.isActive}
+          modalType={modalData.modalType}
+          messageTitle={modalData.messageTitle}
+          messageText={modalData.messageText}
+          errorText={modalData.errorText}
+          handleFunction={modalData.handleFunction}
+          form={<form></form>}
+          refreshFunc={() => {}}
+
+        />
+      }
     </div>
   )
 }

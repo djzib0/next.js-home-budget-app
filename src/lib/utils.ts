@@ -1,4 +1,4 @@
-import { MonthNameLength } from "./enums";
+import { ClothesExpense, DigitalServicesExpense, ExpenseGroup, FoodExpense, HealthExpense, HobbyExpense, HomeExpense, MonthNameLength, OtherExpense, TransportExpense } from "./enums";
 import { BudgetType, Expense } from "./types";
 
 export const findLatestBudgetName = (budgetsArr: BudgetType[]) => {
@@ -230,5 +230,67 @@ export const getIsNumberInRange = (num: number, start: number, end: number) : bo
         return true;
     }
     return false
+}
+
+export const setExpenseGroup = (expense: Expense) => {
+    const foodValuesArr: string[] = Object.values(FoodExpense)
+    const healthValuesArr: string[] = Object.values(HealthExpense)
+    const transportValuesArr: string[] = Object.values(TransportExpense)
+    const clothesValuesArr: string[] = Object.values(ClothesExpense)
+    const homeValuesArr: string[] = Object.values(HomeExpense)
+    const digitalServicesValuesArr: string[] = Object.values(DigitalServicesExpense)
+    const hobbyValuesArr: string[] = Object.values(HobbyExpense)
+    const otherValuesArr: string[] = Object.values(OtherExpense)
+    if (foodValuesArr.includes(expense.group)) {
+        return ({
+            ...expense,
+            mainGroup: ExpenseGroup.Food
+        })
+    }
+
+    if (healthValuesArr.includes(expense.group)) {
+        return ({
+            ...expense,
+            mainGroup: ExpenseGroup.Health
+        })
+    }        
+
+    if (transportValuesArr.includes(expense.group)) {
+        return ({
+            ...expense,
+            mainGroup: ExpenseGroup.Transport
+        })
+    }        
+
+    if (clothesValuesArr.includes(expense.group)) {
+        return ({
+            ...expense,
+            mainGroup: ExpenseGroup.Clothes
+        })
+    }        
+    if (homeValuesArr.includes(expense.group)) {
+        return ({
+            ...expense,
+            mainGroup: ExpenseGroup.Home
+        })
+    }        
+    if (digitalServicesValuesArr.includes(expense.group)) {
+        return ({
+            ...expense,
+            mainGroup: ExpenseGroup.DigitalServices
+        })
+    }        
+    if (hobbyValuesArr.includes(expense.group)) {
+        return ({
+            ...expense,
+            mainGroup: ExpenseGroup.Hobby
+        })
+    }        
+    if (otherValuesArr.includes(expense.group)) {
+        return ({
+            ...expense,
+            mainGroup: ExpenseGroup.Other
+        })        
+    }
 }
 
