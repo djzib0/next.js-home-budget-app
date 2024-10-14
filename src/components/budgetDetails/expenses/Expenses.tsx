@@ -1,11 +1,12 @@
 'use client'
 import { Expense, ExpenseDetails } from '@/lib/types';
-import React, {useState } from 'react';
+import React, { useState } from 'react';
 import styles from "./expenses.module.css"
 import { setExpenseGroup } from '@/lib/utils';
-import { ExpenseGroup } from '@/lib/enums';
+import { ExpenseGroup, ModalEnumType } from '@/lib/enums';
 import useModal from '@/customHooks/useModal';
 import Modal from '@/components/modal/Modal';
+import { deleteExpenseById } from '@/lib/actions';
 
 
 const Expenses = ({expenses} : {expenses: Expense[]}) => {
@@ -31,13 +32,16 @@ const Expenses = ({expenses} : {expenses: Expense[]}) => {
   .map((expense) => {
     if (expense)
     return (
-      <div key={expense.id}>
+      <div key={expense._id}>
         {expense?.name} - {expense?.mainGroup}
         <button onClick={() => setModalData({
           ...modalData,
           isActive: true,
-          handleFunction: () => console.log("working here man")
+          modalType: ModalEnumType.Warning,
+          messageText: `Do you want to do delete an expense ${expense.name}?`,
+          handleFunction: () => deleteExpenseById(expense._id),
         })}>Click me</button>
+        
       </div>
     )
   })
@@ -118,7 +122,7 @@ const Expenses = ({expenses} : {expenses: Expense[]}) => {
         </button>
       </div>
       {expenses && isDetailsOn.isOn && expensesArr}
-      {modalData.isActive && 
+      {/* {modalData.isActive &&  */}
         <Modal 
           isActive={modalData.isActive}
           modalType={modalData.modalType}
@@ -128,9 +132,9 @@ const Expenses = ({expenses} : {expenses: Expense[]}) => {
           handleFunction={modalData.handleFunction}
           form={<form></form>}
           refreshFunc={() => {}}
-
+          closeFunction={modalData.closeFunction}
         />
-      }
+      {/* } */}
     </div>
   )
 }

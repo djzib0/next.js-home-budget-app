@@ -1,33 +1,39 @@
-import useModal from "@/customHooks/useModal"
 import { ModalType } from "@/lib/types";
-
+// import styles
+import styles from './modal.module.css'
+import ModalIcon from "./modalIcon/ModalIcon";
 
 const Modal = (props: ModalType) => {
 
   // destructuring props
   const {
-    isActive,
+    // isActive,
     modalType,
     messageText,
     messageTitle,
-    errorText,
+    // errorText,
+    // form,
+    // refreshFunc,
     handleFunction,
-    form,
-    refreshFunc,
+    closeFunction
   } = props;
 
-  // utilize useModal custom hook
-  const {
-    modalData,
-    closeModal,
-  } = useModal();
+  const handleClick = () => {
+    handleFunction();
+    closeFunction();
+  }
 
+
+  console.log(typeof modalType)
   return (
-    <div>
-      {modalData.messageTitle}
-      {modalData.messageText}
-      <button onClick={handleFunction}>OK</button>
-      <button onClick={closeModal}>Cancel</button>
+    <div className={styles.modalContainer}>
+      <div className={styles[`modalBody--${modalType}`]}>
+        <ModalIcon modalType={modalType} />
+        {messageTitle}
+        {messageText}
+        <button onClick={handleClick}>OK</button>
+        <button className={styles[`closeBtn--${modalType}`]} onClick={closeFunction}>X</button>
+      </div>
     </div>
   )
 }

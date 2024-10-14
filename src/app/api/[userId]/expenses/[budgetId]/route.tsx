@@ -3,8 +3,7 @@ import { connectToDb } from "@/lib/mongooseUtils";
 import { NextResponse } from "next/server";
 import { unstable_noStore as noStore } from "next/cache";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
-export const GET = async (request: never, {params}: {params: any}) => {
+export const GET = async (request: never, {params}: {params: {userId: string; budgetId: string}}) => {
     const {userId, budgetId} = params;
     noStore();
     try {

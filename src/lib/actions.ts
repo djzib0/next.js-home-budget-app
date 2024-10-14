@@ -269,8 +269,31 @@ export const getAllExpensesByUserAndBudgetId = async (userId: string, budgetId: 
     if (userId && budgetId) {
         const res = await fetch(`http://localhost:3000/api/${userId}/expenses/${budgetId}`);
         if (!res.ok) {
-            throw new Error("Something went wrong while fetching all expenses")
+            throw new Error("Something went wrong while fetching all expenses.")
         }
+        return res.json();
+    }
+}
+
+export const getExpenseById = async (expenseId: string) => {
+    if (expenseId) {
+        const res = await fetch(`http://localhost:3000/api/expenses/${expenseId}`);
+        if (!res.ok) {
+            throw new Error("Something went wrong while fetching expense.")
+        }
+        return res.json();
+    }
+}
+
+export const deleteExpenseById = async (expenseId: string) => {
+    if (expenseId) {
+        const res = await fetch(`http://localhost:3000/api/expenses/${expenseId}`, {
+            method: "DELETE",
+        });
+        if (!res.ok) {
+            throw new Error("Something went wrong while fetching expense.")
+        }
+        revalidatePath("/budgets")
         return res.json();
     }
 }

@@ -251,6 +251,7 @@ const ExpenseForm = ({userId, budgetId} : {userId: string, budgetId: string}) =>
         <input 
           type='number'
           min={0}
+          step={0.01}
           name='value'
           value={formData.value}
           onChange={handleChange}

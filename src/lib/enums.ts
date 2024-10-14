@@ -64,3 +64,11 @@ export enum MonthNameLength {
     Narrow = 'narrow',
     Numeric = 'numeric'
 }
+
+export enum ModalEnumType {
+    Info = 'information',
+    Confirm = 'confirm',
+    Edit = 'edit',
+    Warning = 'warning',
+    Error = 'error'
+}

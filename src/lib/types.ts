@@ -1,4 +1,4 @@
-import { ClothesExpense, DigitalServicesExpense, ExpenseGroup, FoodExpense, HealthExpense, HobbyExpense, HomeExpense, OtherExpense, TransportExpense } from "./enums";
+import { ClothesExpense, DigitalServicesExpense, ExpenseGroup, FoodExpense, HealthExpense, HobbyExpense, HomeExpense, ModalEnumType, OtherExpense, TransportExpense } from "./enums";
 
 export type BudgetType = {
     _id: string;
@@ -68,7 +68,7 @@ export type BudgetFormType = {
 }
 
 export type Expense = {
-    id: string;
+    _id: string;
     userId: string;
     budgetId: string;
     value: number;
@@ -92,12 +92,13 @@ export type ExpenseDetails = {
 
 export type ModalType = {
     isActive: boolean;
-    modalType: string // convert to enum type later
+    modalType: ModalEnumType;
     messageTitle: string;
     messageText: string;
     errorText: string;
     handleFunction: () => void;
     form: React.ReactElement;
     refreshFunc: () => void;
+    closeFunction: () => void;
     obj?: unknown;
   }

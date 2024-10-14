@@ -1,0 +1,19 @@
+.modalIconContainer {
+    display: flex;
+    margin: 0 auto;
+}
+
+.modalIcon--information,
+.modalIcon--edit,
+.modalIcon--warning,
+.modalIcon--error,
+.modalIcon--confirm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0 auto .5em auto;
+    font-size: 2em;
+    height: fit-content;
+
+}

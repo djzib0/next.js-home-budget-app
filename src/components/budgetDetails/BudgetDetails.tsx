@@ -11,7 +11,6 @@ import ExpensesContainer from "../expensesContainer/ExpensesContainer";
 const BudgetDetails = async ({budget, userId} : {budget: BudgetType, userId: string}) => {
 
   const expenses = await getAllExpensesByUserAndBudgetId(userId, budget._id)
-
   const budgetSum = sumBudget(budget);
   const expensesSum = sumAllExpenses(expenses);
 
@@ -28,7 +27,6 @@ const BudgetDetails = async ({budget, userId} : {budget: BudgetType, userId: str
           <ExpensesContainer userId={userId} budget={budget} expenses={expenses} />
       </div>
       }
-
     </div>
   )
 }

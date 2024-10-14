@@ -1,25 +1,28 @@
+import { ModalEnumType } from "@/lib/enums"
 import { ModalType } from "@/lib/types"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 const useModal = () => {
 
   // set initial data to easily reset modal
   const initialModalData: ModalType = {
-    isActive: false,
-    modalType: "",
-    messageTitle: "",
-    messageText: "",
-    errorText: "",
+    isActive: true,
+    modalType: ModalEnumType.Warning,
+    messageTitle: "This is a test message title.",
+    messageText: "This is a test message text, to be delete from modal",
+    errorText: "This is a test error text",
     handleFunction: () => {},
     form: <p></p>,
-    refreshFunc: () => {}
+    refreshFunc: () => {},
+    closeFunction: () => closeModal(),
   }
 
   // state variables
   const [modalData, setModalData] = useState<ModalType>(initialModalData)
 
-  useEffect(() => {
-  },[modalData])
+  // probably can be removed 
+  // useEffect(() => {
+  // },[modalData])
 
   const openModal = () => {
     setModalData(prevData => {
