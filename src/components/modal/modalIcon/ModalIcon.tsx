@@ -8,14 +8,19 @@ const ModalIcon = ({modalType}: {modalType: ModalEnumType}) => {
 
   return (
     <div>
-      {modalType === 'information' && 
+      {
+      (modalType === 'information' ||
+      modalType === 'edit' ||
+      modalType === 'confirm') && 
         <div className={styles[`modalIcon--${modalType}`]}>
           <BsFillInfoCircleFill /> 
         </div>
       }
-      {modalType === 'warning' && 
+      {
+      (modalType === 'warning' ||
+      modalType === 'error') && 
         <div className={styles[`modalIcon--${modalType}`]}>
-          <BsFillInfoCircleFill />
+          <BsExclamationOctagonFill />
         </div>
       }
     </div>

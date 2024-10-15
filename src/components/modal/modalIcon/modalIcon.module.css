@@ -5,9 +5,9 @@
 
 .modalIcon--information,
 .modalIcon--edit,
+.modalIcon--confirm,
 .modalIcon--warning,
-.modalIcon--error,
-.modalIcon--confirm {
+.modalIcon--error {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,5 +15,11 @@
     margin: 0 auto .5em auto;
     font-size: 2em;
     height: fit-content;
-
+    /* font-size: 1.5em; */
 }
+
+.modalIcon--warning,
+.modalIcon--error {
+    color: #ff0000;
+}
+
