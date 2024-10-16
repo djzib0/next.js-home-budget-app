@@ -101,4 +101,4 @@ export type ModalType = {
     refreshFunc: () => void;
     closeFunction: () => void;
     obj?: unknown;
-  }
+}

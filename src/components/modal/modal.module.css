@@ -25,7 +25,7 @@
 .modalBody--information,
 .modalBody--edit,
 .modalBody--confirm {
-    background-color: #d5f4ff;
+    background-color: #e3f2fd;
     border: 2px solid #1d7a9b;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }

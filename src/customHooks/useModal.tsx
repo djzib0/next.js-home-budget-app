@@ -6,11 +6,11 @@ const useModal = () => {
 
   // set initial data to easily reset modal
   const initialModalData: ModalType = {
-    isActive: true,
-    modalType: ModalEnumType.Warning,
-    messageTitle: "This is a test message title.",
-    messageText: "This is a test message text, to be delete from modal",
-    errorText: "This is a test error text",
+    isActive: false,
+    modalType: ModalEnumType.Confirm,
+    messageTitle: "",
+    messageText: "",
+    errorText: "",
     handleFunction: () => {},
     form: <p></p>,
     refreshFunc: () => {},

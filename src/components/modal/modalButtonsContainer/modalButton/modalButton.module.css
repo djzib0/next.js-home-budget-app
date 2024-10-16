@@ -1,0 +1,44 @@
+.btn--warningCancel,
+.btn--warningConfirm,
+.btn--confirm {
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 13px 23px;
+    border: none;
+    width: 150px;
+    scale: 90%;
+}
+
+.btn--warningConfirm {
+    background: #e61e1e;
+    color: #fff;
+}
+
+.btn--warningCancel {
+    border: 1px solid #222222;
+    background: #fff;
+    color: #222222;
+}
+
+.btn--confirm {
+    border: 1px solid #386641;
+    background-color: #a7c957;
+}
+
+@media screen and (min-width: 481px) {
+    .btn--warningCancel:hover {
+        border-color: #000000;
+        background: #f7f7f7;
+    }
+
+    .btn--warningCancel,
+    .btn--warningConfirm {
+        scale: 100%;
+    }
+}
+

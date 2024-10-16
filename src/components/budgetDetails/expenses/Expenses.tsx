@@ -38,7 +38,8 @@ const Expenses = ({expenses} : {expenses: Expense[]}) => {
           ...modalData,
           isActive: true,
           modalType: ModalEnumType.Warning,
-          messageText: `Do you want to do delete an expense ${expense.name}?`,
+          messageText: `Do you want to do delete an expense - "${expense.name}"?`,
+          // handleFunction: () => console.log("deleting item"),
           handleFunction: () => deleteExpenseById(expense._id),
         })}>Click me</button>
         
@@ -122,7 +123,7 @@ const Expenses = ({expenses} : {expenses: Expense[]}) => {
         </button>
       </div>
       {expenses && isDetailsOn.isOn && expensesArr}
-      {/* {modalData.isActive &&  */}
+      {modalData.isActive && 
         <Modal 
           isActive={modalData.isActive}
           modalType={modalData.modalType}
@@ -134,7 +135,7 @@ const Expenses = ({expenses} : {expenses: Expense[]}) => {
           refreshFunc={() => {}}
           closeFunction={modalData.closeFunction}
         />
-      {/* } */}
+      }
     </div>
   )
 }

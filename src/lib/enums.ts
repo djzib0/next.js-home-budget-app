@@ -72,3 +72,10 @@ export enum ModalEnumType {
     Warning = 'warning',
     Error = 'error'
 }
+
+export enum ButtonEnumType {
+    Confirm = 'confirm',
+    WarningConfirm = 'warningConfirm',
+    Cancel = 'cancel',
+    WarningCancel = 'warningCancel',
+}
