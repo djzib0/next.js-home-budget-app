@@ -18,7 +18,7 @@ const BudgetSummary = ({budgetSum, expensesSum} : {budgetSum: number, expensesSu
         <p className={styles.budgetSummaryText}>=</p>
         {budgetSum - expensesSum >= 0 ?
           <p className={styles.positive}>{budgetSum - expensesSum}</p>:
-          <p className={styles.negative} id="negative">{budgetSum - 4701}</p>
+          <p className={styles.negative} id="negative">{budgetSum - expensesSum}</p>
         }
       </div>
       <div className={styles.summaryIcon}>

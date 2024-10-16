@@ -6,6 +6,10 @@ const ProgressBar = ({currentProgress, maxValue} : {currentProgress: number, max
 
   const completedProgressPercentage = getProgressPercent(currentProgress, maxValue)
   const notCompletedProgressPercentage = 100 - getProgressPercent(currentProgress, maxValue)
+
+  console.log(completedProgressPercentage, "% completed ")
+  const currentProgressTextPosition = completedProgressPercentage < 20 ? 'right' : 'left';
+
   
   return (
     <div>
@@ -16,7 +20,8 @@ const ProgressBar = ({currentProgress, maxValue} : {currentProgress: number, max
             className={styles.progressBarLeft}
             style={{width: `${completedProgressPercentage}%`}}
             >
-            <p className={styles.currentProgressText}>{completedProgressPercentage}%</p>
+            <p className={styles[`currentProgressText--${currentProgressTextPosition}`]
+              }>{completedProgressPercentage}%</p>
             <p 
               className={styles.progressBarLeftTop}>
             &nbsp;</p>
