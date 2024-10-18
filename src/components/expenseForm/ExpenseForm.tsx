@@ -7,7 +7,15 @@ import { ExpenseFormType } from '@/lib/types'
 import { ClothesExpense, DigitalServicesExpense, ExpenseGroup, FoodExpense, HealthExpense, HobbyExpense, HomeExpense, OtherExpense, TransportExpense } from '@/lib/enums';
 import styles from './expenseForm.module.css'
 
-// create an option list from Expense enum
+type ExpenseForm = {
+  isOn: boolean;
+  expenseGroup: string;
+}
+
+// Component
+const ExpenseForm = ({userId, budgetId, defaultValues} : {userId: string, budgetId: string, defaultValues: ExpenseFormType}) => {
+
+  // create an option list from Expense enum
 const foodExpensesOptionsArr = Object.keys(FoodExpense).map((expense, index) => {
   return (
     <option
@@ -98,27 +106,20 @@ const otherExpensesOptionsArr = Object.keys(OtherExpense).map((expense, index) =
 })
 
 
-
-type ExpenseForm = {
-  isOn: boolean;
-  expenseGroup: string;
-}
-
-// Component
-const ExpenseForm = ({userId, budgetId} : {userId: string, budgetId: string}) => {
-
   const [isExpenseFormOn, setIsExpenseFormOn] = useState<ExpenseForm>({
     isOn: false,
-    expenseGroup: ""
+    expenseGroup: "",
   });
 
+  console.log(defaultValues.group, " group ")
+  console.log(defaultValues.group, " formData group")
   const [formData, setFormData] = useState<ExpenseFormType>(
     {
       userId: userId,
       budgetId: budgetId,
-      name: "",
-      value: 0,
-      group: "",
+      name: defaultValues ? defaultValues.name : "",
+      value: defaultValues ? defaultValues.value : 0,
+      group: defaultValues ? defaultValues.group : "",
     }
   )
 
@@ -126,9 +127,9 @@ const ExpenseForm = ({userId, budgetId} : {userId: string, budgetId: string}) =>
     const newData = {
       userId: userId,
       budgetId: budgetId,
-      name: "",
-      value: 0,
-      group: "",
+      name: defaultValues ? defaultValues.name : "",
+      value: defaultValues ? defaultValues.value : 0,
+      group: defaultValues ? defaultValues.group : "",
     }
     setFormData(newData);
   }
@@ -279,6 +280,14 @@ const ExpenseForm = ({userId, budgetId} : {userId: string, budgetId: string}) =>
         {isExpenseFormOn.isOn && isExpenseFormOn.expenseGroup === ExpenseGroup.DigitalServices && digitalServicesExpenseOptionsArr}
         {isExpenseFormOn.isOn && isExpenseFormOn.expenseGroup === ExpenseGroup.Hobby && hobbyExpensesOptionsArr}
         {isExpenseFormOn.isOn && isExpenseFormOn.expenseGroup === ExpenseGroup.Other && otherExpensesOptionsArr}
+        {foodExpensesOptionsArr}
+        {healthExpensesOptionsArr}
+        {transportExpensesOptionsArr}
+        {clothesExpensesOptionsArr}
+        {homeExpensesOptionsArr}
+        {digitalServicesExpenseOptionsArr}
+        {hobbyExpensesOptionsArr}
+        {otherExpensesOptionsArr}
         </select>
         <br/>
         {formData.group && formData.value > 0 && <button>Add new Expense</button>}

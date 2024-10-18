@@ -7,9 +7,10 @@ import { ExpenseGroup, ModalEnumType } from '@/lib/enums';
 import useModal from '@/customHooks/useModal';
 import Modal from '@/components/modal/Modal';
 import { deleteExpenseById } from '@/lib/actions';
+import ExpenseForm from '@/components/expenseForm/ExpenseForm';
 
 
-const Expenses = ({expenses} : {expenses: Expense[]}) => {
+const Expenses = ({expenses, budgetId, userId} : {expenses: Expense[]; budgetId: string, userId: string}) => {
 
   // utilize useModal custom hook
   const {
@@ -37,11 +38,23 @@ const Expenses = ({expenses} : {expenses: Expense[]}) => {
         <button onClick={() => setModalData({
           ...modalData,
           isActive: true,
+          modalType: ModalEnumType.Edit,
+          messageTitle: "Edit expense",
+          form: 
+            <ExpenseForm
+              budgetId={budgetId}
+              userId={userId}
+              defaultValues={expense}
+            />
+        })}>Edit</button>
+        <button onClick={() => setModalData({
+          ...modalData,
+          isActive: true,
           modalType: ModalEnumType.Warning,
           messageText: `Do you want to do delete an expense - "${expense.name}"?`,
           // handleFunction: () => console.log("deleting item"),
           handleFunction: () => deleteExpenseById(expense._id),
-        })}>Click me</button>
+        })}>Delete</button>
         
       </div>
     )
@@ -131,7 +144,7 @@ const Expenses = ({expenses} : {expenses: Expense[]}) => {
           messageText={modalData.messageText}
           errorText={modalData.errorText}
           handleFunction={modalData.handleFunction}
-          form={<form></form>}
+          form={modalData.form}
           refreshFunc={() => {}}
           closeFunction={modalData.closeFunction}
         />

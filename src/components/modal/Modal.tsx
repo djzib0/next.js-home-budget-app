@@ -15,7 +15,7 @@ const Modal = (props: ModalType) => {
     messageText,
     messageTitle,
     // errorText,
-    // form,
+    form,
     // refreshFunc,
     handleFunction,
     closeFunction
@@ -27,7 +27,6 @@ const Modal = (props: ModalType) => {
   }
 
 
-  console.log(modalType)
   return (
     <div className={styles.modalContainer}>
       <div className={styles[`modalBody--${modalType}`]}>
@@ -39,7 +38,7 @@ const Modal = (props: ModalType) => {
           handleClick={handleClick} 
           closeFunction={closeFunction}
         />
-  
+        {modalType === 'edit' && form}
         <button className={styles[`closeBtn--${modalType}`]} onClick={closeFunction}>X</button>
       </div>
     </div>
