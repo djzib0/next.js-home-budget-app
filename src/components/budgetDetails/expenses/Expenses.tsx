@@ -52,7 +52,6 @@ const Expenses = ({expenses, budgetId, userId} : {expenses: Expense[]; budgetId:
           isActive: true,
           modalType: ModalEnumType.Warning,
           messageText: `Do you want to do delete an expense - "${expense.name}"?`,
-          // handleFunction: () => console.log("deleting item"),
           handleFunction: () => deleteExpenseById(expense._id),
         })}>Delete</button>
         

@@ -78,6 +78,7 @@ export type Expense = {
 }
 
 export type ExpenseFormType = {
+    _id?: string,
     userId: string;
     budgetId: string;
     name: string;

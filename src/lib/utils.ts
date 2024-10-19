@@ -1,5 +1,5 @@
 import { ClothesExpense, DigitalServicesExpense, ExpenseGroup, FoodExpense, HealthExpense, HobbyExpense, HomeExpense, MonthNameLength, OtherExpense, TransportExpense } from "./enums";
-import { BudgetType, Expense } from "./types";
+import { BudgetType, Expense, ExpenseFormType } from "./types";
 
 export const findLatestBudgetName = (budgetsArr: BudgetType[]) => {
     const budgetNamesArr: string[] = [];
@@ -232,7 +232,8 @@ export const getIsNumberInRange = (num: number, start: number, end: number) : bo
     return false
 }
 
-export const setExpenseGroup = (expense: Expense) => {
+
+export const setExpenseGroup = (expense: Expense | ExpenseFormType) => {
     const foodValuesArr: string[] = Object.values(FoodExpense)
     const healthValuesArr: string[] = Object.values(HealthExpense)
     const transportValuesArr: string[] = Object.values(TransportExpense)
@@ -293,4 +294,3 @@ export const setExpenseGroup = (expense: Expense) => {
         })        
     }
 }
-

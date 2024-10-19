@@ -245,7 +245,7 @@ export const addComment = async (prevState: any, formData: any) => {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const addExpense = async(prevState: any, formData: any) => {
+export const addExpense = async (prevState: any, formData: any) => {
     const {userId, budgetId, name, value, group} = Object.fromEntries(formData);
     try {
         connectToDb();
@@ -285,7 +285,7 @@ export const getExpenseById = async (expenseId: string) => {
     }
 }
 
-export const deleteExpenseById = async (expenseId: string) => {
+export const deleteExpenseById = async (expenseId: string | undefined) => {
     if (expenseId) {
         const res = await fetch(`http://localhost:3000/api/expenses/${expenseId}`, {
             method: "DELETE",
@@ -295,5 +295,26 @@ export const deleteExpenseById = async (expenseId: string) => {
         }
         revalidatePath("/budgets")
         return res.json();
+    }
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const editExpense = async (prevState: any, formData: any) => {
+    const {expenseId, userId, budgetId, name, value, group} = Object.fromEntries(formData);
+    console.log(formData, "editing expense")
+    try {
+        connectToDb();
+        const editedExpense = {
+            userId: userId,
+            budgetId: budgetId,
+            name: name,
+            value: value,
+            group: group,
+        }
+        await Expense.findOneAndUpdate({_id: expenseId}, editedExpense, {new: true});
+        revalidatePath("/budgets")
+    } catch (error) {
+        console.log(error)
+        return {error: "Something went wrong while saving a new expense"}
     }
 }
