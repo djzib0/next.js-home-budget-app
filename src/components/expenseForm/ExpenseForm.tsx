@@ -22,6 +22,8 @@ const ExpenseForm = ({userId, budgetId, defaultValues} : {userId: string, budget
     expenseGroup: "",
   });
 
+  console.log(isExpenseFormOn.isOn)
+
 
   const [formData, setFormData] = useState<ExpenseFormType>(
     {
@@ -202,7 +204,7 @@ const ExpenseForm = ({userId, budgetId, defaultValues} : {userId: string, budget
   const router = useRouter();
 
   useEffect(() => {
-    resetForm();
+    if (!defaultValues) resetForm();
     router.refresh();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state, router])
@@ -318,7 +320,7 @@ const ExpenseForm = ({userId, budgetId, defaultValues} : {userId: string, budget
         {isExpenseFormOn.isOn && isExpenseFormOn.expenseGroup === ExpenseGroup.Other && otherExpensesOptionsArr}
         </select>
         <br/>
-        {formData.group && formData.value > 0 && <button>Add new Expense</button>}
+        {formData.group && formData.value > 0 && !defaultValues && <button>Add new Expense</button>}
       </form>}
     </div>
   )
