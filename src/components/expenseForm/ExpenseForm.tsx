@@ -14,16 +14,13 @@ type ExpenseForm = {
 }
 
 // Component
-const ExpenseForm = ({userId, budgetId, defaultValues} : {userId: string, budgetId: string, defaultValues?: ExpenseFormType}) => {
+const ExpenseForm = ({userId, budgetId, defaultValues, closeFunction} : {userId: string, budgetId: string, defaultValues?: ExpenseFormType, closeFunction: () => void;}) => {
 
   // state variables
   const [isExpenseFormOn, setIsExpenseFormOn] = useState<ExpenseForm>({
     isOn: false,
     expenseGroup: "",
   });
-
-  console.log(isExpenseFormOn.isOn)
-
 
   const [formData, setFormData] = useState<ExpenseFormType>(
     {
@@ -192,6 +189,7 @@ const ExpenseForm = ({userId, budgetId, defaultValues} : {userId: string, budget
     if (defaultValues) {
       editExpense(prevState, formData);
       resetForm();
+      closeFunction();
     } else {
       addExpense(prevState, formData);
       resetForm()
@@ -321,6 +319,8 @@ const ExpenseForm = ({userId, budgetId, defaultValues} : {userId: string, budget
         </select>
         <br/>
         {formData.group && formData.value > 0 && !defaultValues && <button>Add new Expense</button>}
+        {defaultValues?.budgetId && defaultValues?.userId && <button>Confirm edit</button>}
+        {defaultValues?.budgetId && defaultValues?.userId && <button type='button' onClick={closeFunction}>Cancel</button>}
       </form>}
     </div>
   )

@@ -10,12 +10,13 @@ import { deleteExpenseById } from '@/lib/actions';
 import ExpenseForm from '@/components/expenseForm/ExpenseForm';
 
 
-const Expenses = ({expenses, budgetId, userId} : {expenses: Expense[]; budgetId: string, userId: string}) => {
+const Expenses = ({expenses} : {expenses: Expense[]}) => {
 
   // utilize useModal custom hook
   const {
     setModalData,
     modalData,
+    closeModal,
   } = useModal();
 
   // state variables
@@ -42,9 +43,10 @@ const Expenses = ({expenses, budgetId, userId} : {expenses: Expense[]; budgetId:
           messageTitle: "Edit expense",
           form: 
             <ExpenseForm
-              budgetId={budgetId}
-              userId={userId}
+              budgetId={expense.budgetId}
+              userId={expense.userId}
               defaultValues={expense}
+              closeFunction={closeModal}
             />
         })}>Edit</button>
         <button onClick={() => setModalData({

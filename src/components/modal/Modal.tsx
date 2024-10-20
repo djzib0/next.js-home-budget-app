@@ -33,12 +33,12 @@ const Modal = (props: ModalType) => {
         <ModalIcon modalType={modalType} />
         <ModalTitle modalTitle={messageTitle} />
         <ModalMessageText messageText={messageText} />
+        {modalType === 'edit' && form}
         <ModalButtonsContainer 
           modalType={modalType} 
           handleClick={handleClick} 
           closeFunction={closeFunction}
         />
-        {modalType === 'edit' && form}
         <button className={styles[`closeBtn--${modalType}`]} onClick={closeFunction}>X</button>
       </div>
     </div>

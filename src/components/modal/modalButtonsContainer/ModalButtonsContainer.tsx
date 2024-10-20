@@ -23,7 +23,7 @@ const ModalButtonsContainer = ({modalType, handleClick, closeFunction} : {modalT
       </>
       }
       {
-      modalType === ModalEnumType.Confirm && 
+      modalType === ModalEnumType.Confirm &&
       <>
         <ModalButton 
           btnType={ButtonEnumType.Confirm}
