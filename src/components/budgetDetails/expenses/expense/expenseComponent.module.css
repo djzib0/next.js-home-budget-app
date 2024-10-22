@@ -1,0 +1,6 @@
+.expenseComponentContainer {
+    background-color: slategray;
+    display: flex;
+    flex-direction: row;
+    
+}

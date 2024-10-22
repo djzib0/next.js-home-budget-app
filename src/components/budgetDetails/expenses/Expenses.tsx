@@ -8,6 +8,7 @@ import useModal from '@/customHooks/useModal';
 import Modal from '@/components/modal/Modal';
 import { deleteExpenseById } from '@/lib/actions';
 import ExpenseForm from '@/components/expenseForm/ExpenseForm';
+import ExpenseComponent from './expense/ExpenseComponent';
 
 
 const Expenses = ({expenses} : {expenses: Expense[]}) => {
@@ -21,8 +22,8 @@ const Expenses = ({expenses} : {expenses: Expense[]}) => {
 
   // state variables
   const [isDetailsOn, setIsDetailsOn] = useState<ExpenseDetails>({
-    isOn: false,
-    expenseGroup: "",
+    isOn: false, // TODO: true is only for test, change to false afterwards
+    expenseGroup: "", // TODO: food is only for test, change to "" afterwards
   })
 
   const expensesWithMainGroup = expenses && expenses.map((expense: Expense) => setExpenseGroup(expense))
@@ -34,30 +35,36 @@ const Expenses = ({expenses} : {expenses: Expense[]}) => {
   .map((expense) => {
     if (expense)
     return (
-      <div key={expense._id}>
-        {expense?.name} - {expense?.mainGroup}
-        <button onClick={() => setModalData({
-          ...modalData,
-          isActive: true,
-          modalType: ModalEnumType.Edit,
-          messageTitle: "Edit expense",
-          form: 
-            <ExpenseForm
-              budgetId={expense.budgetId}
-              userId={expense.userId}
-              defaultValues={expense}
-              closeFunction={closeModal}
-            />
-        })}>Edit</button>
-        <button onClick={() => setModalData({
-          ...modalData,
-          isActive: true,
-          modalType: ModalEnumType.Warning,
-          messageText: `Do you want to do delete an expense - "${expense.name}"?`,
-          handleFunction: () => deleteExpenseById(expense._id),
-        })}>Delete</button>
-        
-      </div>
+      <tr key={expense._id}>
+        <ExpenseComponent
+          name={expense.name}
+          group={expense.group}
+        />
+        <td>
+          <button onClick={() => setModalData({
+            ...modalData,
+            isActive: true,
+            modalType: ModalEnumType.Edit,
+            messageTitle: "Edit expense",
+            form: 
+              <ExpenseForm
+                budgetId={expense.budgetId}
+                userId={expense.userId}
+                defaultValues={expense}
+                closeFunction={closeModal}
+              />
+          })}>Edit</button>
+        </td>
+        <td>
+          <button onClick={() => setModalData({
+            ...modalData,
+            isActive: true,
+            modalType: ModalEnumType.Warning,
+            messageText: `Do you want to do delete an expense - "${expense.name}"?`,
+            handleFunction: () => deleteExpenseById(expense._id),
+          })}>Delete</button>
+        </td>
+      </tr>
     )
   })
 
@@ -136,7 +143,20 @@ const Expenses = ({expenses} : {expenses: Expense[]}) => {
           OTHER
         </button>
       </div>
-      {expenses && isDetailsOn.isOn && expensesArr}
+      {isDetailsOn.isOn && expensesArr.length > 0 && <table className={styles.expensesTable}>
+        <thead>
+          <tr>
+              <th>Name</th>
+              <th>Group</th>
+              <th></th>
+              <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {expensesArr}
+        </tbody>
+      </table>}
+      {isDetailsOn.isOn && expensesArr.length === 0 && <p>There are no expenses in this group.</p>}
       {modalData.isActive && 
         <Modal 
           isActive={modalData.isActive}
