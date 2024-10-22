@@ -14,7 +14,7 @@ type ExpenseForm = {
 }
 
 // Component
-const ExpenseForm = ({userId, budgetId, defaultValues, closeFunction} : {userId: string, budgetId: string, defaultValues?: ExpenseFormType, closeFunction: () => void;}) => {
+const ExpenseForm = ({userId, budgetId, defaultValues, closeFunction} : {userId: string, budgetId: string, defaultValues?: ExpenseFormType, closeFunction?: () => void;}) => {
 
   // state variables
   const [isExpenseFormOn, setIsExpenseFormOn] = useState<ExpenseForm>({
@@ -189,7 +189,7 @@ const ExpenseForm = ({userId, budgetId, defaultValues, closeFunction} : {userId:
     if (defaultValues) {
       editExpense(prevState, formData);
       resetForm();
-      closeFunction();
+      if (closeFunction) closeFunction();
     } else {
       addExpense(prevState, formData);
       resetForm()
