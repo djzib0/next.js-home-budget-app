@@ -9,6 +9,12 @@ import Modal from '@/components/modal/Modal';
 import { deleteExpenseById } from '@/lib/actions';
 import ExpenseForm from '@/components/expenseForm/ExpenseForm';
 import ExpenseComponent from './expense/ExpenseComponent';
+// icons import
+import { FaEdit } from "react-icons/fa";
+import { IoTrashOutline } from "react-icons/io5";
+
+
+
 
 
 const Expenses = ({expenses} : {expenses: Expense[]}) => {
@@ -40,7 +46,7 @@ const Expenses = ({expenses} : {expenses: Expense[]}) => {
           name={expense.name}
           group={expense.group}
         />
-        <td>
+        <td className={styles.ctaTd}>
           <button onClick={() => setModalData({
             ...modalData,
             isActive: true,
@@ -53,16 +59,16 @@ const Expenses = ({expenses} : {expenses: Expense[]}) => {
                 defaultValues={expense}
                 closeFunction={closeModal}
               />
-          })}>Edit</button>
+          })}><FaEdit /></button>
         </td>
-        <td>
+        <td className={styles.ctaTd}>
           <button onClick={() => setModalData({
             ...modalData,
             isActive: true,
             modalType: ModalEnumType.Warning,
             messageText: `Do you want to do delete an expense - "${expense.name}"?`,
             handleFunction: () => deleteExpenseById(expense._id),
-          })}>Delete</button>
+          })}><IoTrashOutline /></button>
         </td>
       </tr>
     )
@@ -93,6 +99,7 @@ const Expenses = ({expenses} : {expenses: Expense[]}) => {
 
   return (
     <div>
+      <h4>Choose group to display expenses</h4>
       <div className={styles.expenseFormButtons}>
         <button 
           className={`${isDetailsOn.isOn && isDetailsOn.expenseGroup === 'food' ? styles.active : styles.toggleBtn}`}
@@ -143,20 +150,24 @@ const Expenses = ({expenses} : {expenses: Expense[]}) => {
           OTHER
         </button>
       </div>
-      {isDetailsOn.isOn && expensesArr.length > 0 && <table className={styles.expensesTable}>
-        <thead>
-          <tr>
+      {isDetailsOn.isOn && expensesArr.length > 0 && 
+        <table className={styles.expensesTable}>
+          <thead>
+            <tr>
               <th>Name</th>
-              <th>Group</th>
+              <th className={styles.groupTh}>Group</th>
               <th></th>
               <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {expensesArr}
-        </tbody>
-      </table>}
-      {isDetailsOn.isOn && expensesArr.length === 0 && <p>There are no expenses in this group.</p>}
+            </tr>
+          </thead>
+          <tbody>
+            {expensesArr}
+          </tbody>
+        </table>
+      }
+      {isDetailsOn.isOn && expensesArr.length === 0 && 
+        <h5>There are no expenses in this group.</h5>
+      }
       {modalData.isActive && 
         <Modal 
           isActive={modalData.isActive}

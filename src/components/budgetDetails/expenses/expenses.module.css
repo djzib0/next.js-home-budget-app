@@ -35,33 +35,13 @@
     background-color: #f5ffca;
 }
 
-@media screen and (min-width: 481px) {
-    .expenseFormButtons {
-        display: grid;
-        grid-template-columns: repeat(4, .8fr);
-        gap: .2rem;
-    }
-}
-
-@media screen and (min-width: 769px) {
-    .toggleBtn:hover {
-        background: #f6f6f7;
-        outline: 1px solid transparent;
-    }
-}
-@media screen and (min-width: 769px) {
-    .toggleBtn:hover {
-        background: #f6f6f7;
-        outline: 1px solid transparent;
-    }
-}
-
 .expensesTable {
     border-collapse: collapse;
     margin: 25px 0;
     font-size: 0.9em;
     font-family: sans-serif;
-    min-width: 400px;
+    min-width: 320px;
+    width: 100%;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
@@ -86,4 +66,34 @@
 
 .expensesTable tbody tr:last-of-type {
     border-bottom: 2px solid #009879;
+}
+
+.ctaTd {
+    width: 10%;
+    font-size: 1.2rem;
+}
+
+.groupTh {
+    width: 30%;
+}
+
+@media screen and (min-width: 481px) {
+    .expenseFormButtons {
+        display: grid;
+        grid-template-columns: repeat(4, .8fr);
+        gap: .2rem;
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .toggleBtn:hover {
+        background: #f6f6f7;
+        outline: 1px solid transparent;
+    }
+}
+@media screen and (min-width: 769px) {
+    .toggleBtn:hover {
+        background: #f6f6f7;
+        outline: 1px solid transparent;
+    }
 }

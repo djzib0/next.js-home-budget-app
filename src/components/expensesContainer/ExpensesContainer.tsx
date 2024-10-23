@@ -25,7 +25,6 @@ const ExpensesContainer = ({budget, userId, expenses} : {budget: BudgetType, use
         handleClick={() => toggleShowDetails()}
       />
       }
-      {/* <button onClick={toggleShowDetails}>Add new expense</button>} */}
       {!isShowDetailsOn &&
       <Button 
         btnHtmlType={'button'}

@@ -209,7 +209,7 @@ const ExpenseForm = ({userId, budgetId, defaultValues, closeFunction} : {userId:
 
   return (
     <div className={styles.expenseFormContainer}>
-      <p>Choose group to add a new expense.</p>
+      <h4>Choose group to add a new expense.</h4>
       <div className={styles.expenseFormButtons}>
         <button 
           className={`${isExpenseFormOn.isOn && isExpenseFormOn.expenseGroup === 'food' ? styles.active : styles.toggleBtn}`}
