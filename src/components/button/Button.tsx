@@ -11,7 +11,6 @@ type ButtonPropsType = {
 
 
 const Button = ({btnHtmlType, btnType, btnText, btnSize, handleClick}: ButtonPropsType) => {
-  console.log(styles[btnType])
   return (
     <button
       type={btnHtmlType}

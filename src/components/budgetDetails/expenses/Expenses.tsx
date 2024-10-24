@@ -12,6 +12,7 @@ import ExpenseComponent from './expense/ExpenseComponent';
 // icons import
 import { FaEdit } from "react-icons/fa";
 import { IoTrashOutline } from "react-icons/io5";
+import ExpenseGroupButton from './expenseGroupButton/ExpenseGroupButton';
 
 
 
@@ -32,7 +33,26 @@ const Expenses = ({expenses} : {expenses: Expense[]}) => {
     expenseGroup: "", // TODO: food is only for test, change to "" afterwards
   })
 
+  const expensesStats = {
+    'food' : {counter: 0, value: 0},
+    'health' : {counter: 0, value: 0},
+    'transport' : {counter: 0, value: 0},
+    'clothes' : {counter: 0, value: 0},
+    'home' : {counter: 0, value: 0},
+    'digitalServices' : {counter: 0, value: 0},
+    'hobby' : {counter: 0, value: 0},
+    'other' : {counter: 0, value: 0},
+  }
+  
   const expensesWithMainGroup = expenses && expenses.map((expense: Expense) => setExpenseGroup(expense))
+
+  // update expenses stats
+  expensesWithMainGroup.forEach((expense) => {
+    if (expense && expensesStats[expense?.mainGroup]) {
+      expensesStats[expense.mainGroup].counter += 1
+      expensesStats[expense.mainGroup].value += expense.value
+    }
+  })
 
   const expensesArr = expensesWithMainGroup && expensesWithMainGroup
   .filter((expense) => {
@@ -45,6 +65,7 @@ const Expenses = ({expenses} : {expenses: Expense[]}) => {
         <ExpenseComponent
           name={expense.name}
           group={expense.group}
+          value={expense.value}
         />
         <td className={styles.ctaTd}>
           <button onClick={() => setModalData({
@@ -99,8 +120,16 @@ const Expenses = ({expenses} : {expenses: Expense[]}) => {
 
   return (
     <div>
-      <h4>Choose group to display expenses</h4>
       <div className={styles.expenseFormButtons}>
+        <ExpenseGroupButton 
+          title={'FOOD'}
+          groupName='food'
+          expenseGroup={ExpenseGroup.Food}
+          isOn={isDetailsOn.isOn}
+          entriesNumber={expensesStats.food.counter}
+          value={expensesStats.food.value}
+          handleClick={() => toggleAddExpenseForm(ExpenseGroup.Food)}
+        />
         <button 
           className={`${isDetailsOn.isOn && isDetailsOn.expenseGroup === 'food' ? styles.active : styles.toggleBtn}`}
           onClick={() => toggleAddExpenseForm(ExpenseGroup.Food)}
@@ -156,6 +185,7 @@ const Expenses = ({expenses} : {expenses: Expense[]}) => {
             <tr>
               <th>Name</th>
               <th className={styles.groupTh}>Group</th>
+              <th>Value</th>
               <th></th>
               <th></th>
             </tr>

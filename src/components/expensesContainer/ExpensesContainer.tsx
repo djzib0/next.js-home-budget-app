@@ -33,7 +33,10 @@ const ExpensesContainer = ({budget, userId, expenses} : {budget: BudgetType, use
         btnText={'Show expenses'}
         handleClick={() => toggleShowDetails()}
       />
+      
       }
+      {!isShowDetailsOn && <h4>Choose group to add a new expense.</h4>}
+      {isShowDetailsOn && <h4>Choose group to display expense.</h4>}
       {/* <button onClick={toggleShowDetails}>Show expenses</button>} */}
       {!isShowDetailsOn && <ExpenseForm userId={userId} budgetId={budget._id} />}
       {isShowDetailsOn && <Expenses expenses={expenses} />}

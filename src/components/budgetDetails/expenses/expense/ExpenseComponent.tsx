@@ -3,13 +3,15 @@
 type ExpenseComponentPropsType = {
   name: string;
   group: string;
+  value: number;
 }
 
-const ExpenseComponent = ({name, group} : ExpenseComponentPropsType) => {
+const ExpenseComponent = ({name, group, value} : ExpenseComponentPropsType) => {
   return (
     <>
       <td>{name}</td>
       <td>{group}</td>
+      <td>{value}</td>
     </>
   )
 }
