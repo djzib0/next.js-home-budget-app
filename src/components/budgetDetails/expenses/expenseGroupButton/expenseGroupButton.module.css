@@ -2,15 +2,15 @@
 .active {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     outline: 0;
     cursor: pointer;
     text-align: center;
     border: 1px solid #babfc3;
-    padding: 8px 16px;
     min-height: 36px;
     min-width: 36px;
+    padding: .5rem 5px;
     width: 100%;
     color: #202223;
     background: #ffffff;
@@ -24,33 +24,52 @@
 .active {
     border: 2px solid #bedd3d;
     background-color: #f5ffca;
+    font-size: 40px;
+}
+
+.buttonTitle {
+    width: 40%;
 }
 
 .stats {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align: left;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     font-size: .6rem;
-    text-align: left;
     gap: .8em;
 }
 
-.statsTitle {
-    display: none;
+.statsEntries,
+.statsValue {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    justify-content: space-evenly;
 }
 
+.statsEntries {
+    background-color: green;
+}
+
+
 .entriesCounter {
-    height: 15px;
-    width: 15px;
-    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0;
+    height: 20px;
+    width: fit-content;
+    min-width: 20px;
+    border-radius: 50%;
+    border: 2px solid #6e8594;
+    background-color: #d9ed92;
+    color: #1b4965;
+    padding: 5px;
     margin: 0;
-    background-color: #f5ffcd;
-    color: rgba(36, 36, 36, 0.443)
+    /* color: rgba(36, 36, 36, 0.443) */
 }
 
 @media  screen and (min-width: 720px) {

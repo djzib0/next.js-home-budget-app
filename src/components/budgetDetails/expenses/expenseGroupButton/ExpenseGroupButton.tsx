@@ -1,11 +1,10 @@
 // styles import
-import { ExpenseGroup } from "@/lib/enums";
 import styles from "./expenseGroupButton.module.css";
 
 type ExpenseGroupButtonPropsType = {
   title: string;
   groupName: string;
-  expenseGroup: ExpenseGroup
+  expenseGroup: string;
   isOn: boolean;
   entriesNumber: number;
   value: number;
@@ -14,24 +13,21 @@ type ExpenseGroupButtonPropsType = {
 
 const ExpenseGroupButton = ({title, groupName, expenseGroup, isOn, entriesNumber, value, handleClick} : ExpenseGroupButtonPropsType) => {
 
+  groupName === expenseGroup && console.log(styles['active'])
   return (
     <button className={
       `${isOn && groupName === expenseGroup ? styles.active : styles.toggleBtn}`
     }
     onClick={handleClick}
     >
-      <div>
-        {title}
+      <div className={styles.buttonTitle}>
+        {title.toUpperCase()}
       </div>
       <div className={styles.stats}>
-        <div>
           <p className={styles.statsTitle}>Entries:</p>
-          <p className={styles.statsTitle}>Value:</p>
-        </div>
-        <div>
           <p className={styles.entriesCounter}>{entriesNumber}</p>
+          <p className={styles.statsTitle}>Value:</p>
           <p className={styles.value}>{value}$</p>
-        </div>
       </div>
     </button>
   )

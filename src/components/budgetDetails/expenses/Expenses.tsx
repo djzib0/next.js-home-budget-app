@@ -54,6 +54,10 @@ const Expenses = ({expenses} : {expenses: Expense[]}) => {
     }
   })
 
+  console.log(expensesStats.digitalServices.value)
+
+  console.log(expensesWithMainGroup)
+
   const expensesArr = expensesWithMainGroup && expensesWithMainGroup
   .filter((expense) => {
     if (expense) return expense.mainGroup === isDetailsOn.expenseGroup
@@ -122,62 +126,78 @@ const Expenses = ({expenses} : {expenses: Expense[]}) => {
     <div>
       <div className={styles.expenseFormButtons}>
         <ExpenseGroupButton 
-          title={'FOOD'}
-          groupName='food'
-          expenseGroup={ExpenseGroup.Food}
+          title={'food'}
+          groupName={'food'}
+          expenseGroup={isDetailsOn.expenseGroup}
           isOn={isDetailsOn.isOn}
           entriesNumber={expensesStats.food.counter}
           value={expensesStats.food.value}
           handleClick={() => toggleAddExpenseForm(ExpenseGroup.Food)}
         />
-        <button 
-          className={`${isDetailsOn.isOn && isDetailsOn.expenseGroup === 'food' ? styles.active : styles.toggleBtn}`}
-          onClick={() => toggleAddExpenseForm(ExpenseGroup.Food)}
-        >
-          FOOD
-        </button>
-        <button 
-          className={`${isDetailsOn.isOn && isDetailsOn.expenseGroup === 'health' ? styles.active : styles.toggleBtn}`}
-          onClick={() => toggleAddExpenseForm(ExpenseGroup.Health)}
-          >
-          HEALTH
-        </button>
-        <button 
-          className={`${isDetailsOn.isOn && isDetailsOn.expenseGroup === 'transport' ? styles.active : styles.toggleBtn}`}
-          onClick={() => toggleAddExpenseForm(ExpenseGroup.Transport)}
-          >
-          TRANSPORT
-        </button>
-        <button 
-          className={`${isDetailsOn.isOn && isDetailsOn.expenseGroup === 'clothes' ? styles.active : styles.toggleBtn}`}
-          onClick={() => toggleAddExpenseForm(ExpenseGroup.Clothes)}
-          >
-          CLOTHES
-        </button>
-        <button 
-          className={`${isDetailsOn.isOn && isDetailsOn.expenseGroup === 'home' ? styles.active : styles.toggleBtn}`}
-          onClick={() => toggleAddExpenseForm(ExpenseGroup.Home)}
-          >
-          HOME
-        </button>
-        <button 
-          className={`${isDetailsOn.isOn && isDetailsOn.expenseGroup === 'digitalServices' ? styles.active : styles.toggleBtn}`}
-          onClick={() => toggleAddExpenseForm(ExpenseGroup.DigitalServices)}
-          >
-          DIGITAL
-        </button>
-        <button 
-          className={`${isDetailsOn.isOn && isDetailsOn.expenseGroup === 'hobby' ? styles.active : styles.toggleBtn}`}
-          onClick={() => toggleAddExpenseForm(ExpenseGroup.Hobby)}
-          >
-          HOBBY
-        </button>
-        <button 
-          className={`${isDetailsOn.isOn && isDetailsOn.expenseGroup === 'other' ? styles.active : styles.toggleBtn}`}
-          onClick={() => toggleAddExpenseForm(ExpenseGroup.Other)}
-        >
-          OTHER
-        </button>
+        <ExpenseGroupButton 
+          title={'health'}
+          groupName={'health'}
+          expenseGroup={isDetailsOn.expenseGroup}
+          isOn={isDetailsOn.isOn}
+          entriesNumber={expensesStats.health.counter}
+          value={expensesStats.health.value}
+          handleClick={() => toggleAddExpenseForm(ExpenseGroup.Health)}
+        />
+        <ExpenseGroupButton 
+          title={'transport'}
+          groupName={'transport'}
+          expenseGroup={isDetailsOn.expenseGroup}
+          isOn={isDetailsOn.isOn}
+          entriesNumber={expensesStats.transport.counter}
+          value={expensesStats.transport.value}
+          handleClick={() => toggleAddExpenseForm(ExpenseGroup.Transport)}
+        />
+        <ExpenseGroupButton 
+          title={'clothes'}
+          groupName={'clothes'}
+          expenseGroup={isDetailsOn.expenseGroup}
+          isOn={isDetailsOn.isOn}
+          entriesNumber={expensesStats.clothes.counter}
+          value={expensesStats.clothes.value}
+          handleClick={() => toggleAddExpenseForm(ExpenseGroup.Clothes)}
+        />
+        <ExpenseGroupButton 
+          title={'home'}
+          groupName={'home'}
+          expenseGroup={isDetailsOn.expenseGroup}
+          isOn={isDetailsOn.isOn}
+          entriesNumber={expensesStats.home.counter}
+          value={expensesStats.home.value}
+          handleClick={() => toggleAddExpenseForm(ExpenseGroup.Home)}
+        />
+        <ExpenseGroupButton 
+          title={'digital'}
+          groupName={'digitalServices'}
+          expenseGroup={isDetailsOn.expenseGroup}
+          isOn={isDetailsOn.isOn}
+          entriesNumber={expensesStats.digitalServices.counter}
+          value={expensesStats.digitalServices.value}
+          handleClick={() => toggleAddExpenseForm(ExpenseGroup.DigitalServices)}
+        />
+        <ExpenseGroupButton 
+          title={'hobby'}
+          groupName={'hobby'}
+          expenseGroup={isDetailsOn.expenseGroup}
+          isOn={isDetailsOn.isOn}
+          entriesNumber={expensesStats.hobby.counter}
+          value={expensesStats.hobby.value}
+          handleClick={() => toggleAddExpenseForm(ExpenseGroup.Hobby)}
+        />
+        <ExpenseGroupButton 
+          title={'other'}
+          groupName={'other'}
+          expenseGroup={isDetailsOn.expenseGroup}
+          isOn={isDetailsOn.isOn}
+          entriesNumber={expensesStats.other.counter}
+          value={expensesStats.home.value}
+          handleClick={() => toggleAddExpenseForm(ExpenseGroup.Other)}
+        />
+
       </div>
       {isDetailsOn.isOn && expensesArr.length > 0 && 
         <table className={styles.expensesTable}>
