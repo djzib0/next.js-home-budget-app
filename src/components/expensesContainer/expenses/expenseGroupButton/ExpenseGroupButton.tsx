@@ -8,11 +8,15 @@ type ExpenseGroupButtonPropsType = {
   isOn: boolean;
   entriesNumber: number;
   value: number;
+  budgetLimit: number;
   handleClick: () => void;
 }
 
-const ExpenseGroupButton = ({title, groupName, expenseGroup, isOn, entriesNumber, value, handleClick} : ExpenseGroupButtonPropsType) => {
+const ExpenseGroupButton = ({title, groupName, expenseGroup, isOn, entriesNumber, value, budgetLimit, handleClick} : ExpenseGroupButtonPropsType) => {
 
+  if (groupName === 'food') {
+    console.log( budgetLimit)
+  }
   return (
     <button className={
       `${isOn && groupName === expenseGroup ? styles.active : styles.toggleBtn}`
@@ -26,7 +30,11 @@ const ExpenseGroupButton = ({title, groupName, expenseGroup, isOn, entriesNumber
           <p className={styles.statsTitle}>Entries:</p>
           <p className={styles.entriesCounter}>{entriesNumber}</p>
           <p className={styles.statsTitle}>Value:</p>
-          <p className={styles.value}>{value}$</p>
+          <p 
+            className={value <= budgetLimit ? styles.value : styles.valueExceeded}
+          >
+            {value}$
+          </p>
       </div>
     </button>
   )

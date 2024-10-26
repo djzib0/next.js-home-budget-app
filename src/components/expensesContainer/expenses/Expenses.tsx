@@ -1,25 +1,22 @@
 'use client'
-import { Expense, ExpenseDetails } from '@/lib/types';
+import { BudgetType, Expense, ExpenseDetails } from '@/lib/types';
 import React, { useState } from 'react';
 import styles from "./expenses.module.css"
-import { setExpenseGroup } from '@/lib/utils';
+import { convertBudgetToAggregatedChartData, setExpenseGroup, sumBudgetForMainGroup } from '@/lib/utils';
 import { ExpenseGroup, ModalEnumType } from '@/lib/enums';
 import useModal from '@/customHooks/useModal';
 import Modal from '@/components/modal/Modal';
 import { deleteExpenseById } from '@/lib/actions';
-import ExpenseForm from '@/components/expenseForm/ExpenseForm';
+import ExpenseForm from '@/components/expensesContainer/expenseForm/ExpenseForm';
 import ExpenseComponent from './expense/ExpenseComponent';
 // icons import
 import { FaEdit } from "react-icons/fa";
 import { IoTrashOutline } from "react-icons/io5";
 import ExpenseGroupButton from './expenseGroupButton/ExpenseGroupButton';
 
+const Expenses = ({expenses, budget} : {expenses: Expense[]; budget: BudgetType}) => {
 
-
-
-
-const Expenses = ({expenses} : {expenses: Expense[]}) => {
-
+  console.log(convertBudgetToAggregatedChartData(budget)[0].values)
   // utilize useModal custom hook
   const {
     setModalData,
@@ -43,6 +40,8 @@ const Expenses = ({expenses} : {expenses: Expense[]}) => {
     'hobby' : {counter: 0, value: 0},
     'other' : {counter: 0, value: 0},
   }
+
+  const groupBudgets = budget && sumBudgetForMainGroup(budget);
   
   const expensesWithMainGroup = expenses && expenses.map((expense: Expense) => setExpenseGroup(expense))
 
@@ -128,6 +127,7 @@ const Expenses = ({expenses} : {expenses: Expense[]}) => {
           isOn={isDetailsOn.isOn}
           entriesNumber={expensesStats.food.counter}
           value={expensesStats.food.value}
+          budgetLimit={groupBudgets.foodBudget}
           handleClick={() => toggleAddExpenseForm(ExpenseGroup.Food)}
         />
         <ExpenseGroupButton 
@@ -137,6 +137,7 @@ const Expenses = ({expenses} : {expenses: Expense[]}) => {
           isOn={isDetailsOn.isOn}
           entriesNumber={expensesStats.health.counter}
           value={expensesStats.health.value}
+          budgetLimit={groupBudgets.healthBudget}
           handleClick={() => toggleAddExpenseForm(ExpenseGroup.Health)}
         />
         <ExpenseGroupButton 
@@ -146,6 +147,7 @@ const Expenses = ({expenses} : {expenses: Expense[]}) => {
           isOn={isDetailsOn.isOn}
           entriesNumber={expensesStats.transport.counter}
           value={expensesStats.transport.value}
+          budgetLimit={groupBudgets.transportBudget}
           handleClick={() => toggleAddExpenseForm(ExpenseGroup.Transport)}
         />
         <ExpenseGroupButton 
@@ -155,6 +157,7 @@ const Expenses = ({expenses} : {expenses: Expense[]}) => {
           isOn={isDetailsOn.isOn}
           entriesNumber={expensesStats.clothes.counter}
           value={expensesStats.clothes.value}
+          budgetLimit={groupBudgets.clothesBudget}
           handleClick={() => toggleAddExpenseForm(ExpenseGroup.Clothes)}
         />
         <ExpenseGroupButton 
@@ -164,6 +167,7 @@ const Expenses = ({expenses} : {expenses: Expense[]}) => {
           isOn={isDetailsOn.isOn}
           entriesNumber={expensesStats.home.counter}
           value={expensesStats.home.value}
+          budgetLimit={groupBudgets.homeBudget}
           handleClick={() => toggleAddExpenseForm(ExpenseGroup.Home)}
         />
         <ExpenseGroupButton 
@@ -173,6 +177,7 @@ const Expenses = ({expenses} : {expenses: Expense[]}) => {
           isOn={isDetailsOn.isOn}
           entriesNumber={expensesStats.digitalServices.counter}
           value={expensesStats.digitalServices.value}
+          budgetLimit={groupBudgets.digitalServices}
           handleClick={() => toggleAddExpenseForm(ExpenseGroup.DigitalServices)}
         />
         <ExpenseGroupButton 
@@ -182,6 +187,7 @@ const Expenses = ({expenses} : {expenses: Expense[]}) => {
           isOn={isDetailsOn.isOn}
           entriesNumber={expensesStats.hobby.counter}
           value={expensesStats.hobby.value}
+          budgetLimit={groupBudgets.hobbyBudget}
           handleClick={() => toggleAddExpenseForm(ExpenseGroup.Hobby)}
         />
         <ExpenseGroupButton 
@@ -191,6 +197,7 @@ const Expenses = ({expenses} : {expenses: Expense[]}) => {
           isOn={isDetailsOn.isOn}
           entriesNumber={expensesStats.other.counter}
           value={expensesStats.home.value}
+          budgetLimit={groupBudgets.otherBudget}
           handleClick={() => toggleAddExpenseForm(ExpenseGroup.Other)}
         />
 

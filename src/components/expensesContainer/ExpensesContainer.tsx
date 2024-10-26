@@ -1,8 +1,8 @@
 'use client'
 
 import React, { useState } from 'react'
-import ExpenseForm from '../expenseForm/ExpenseForm'
-import Expenses from '../budgetDetails/expenses/Expenses'
+import ExpenseForm from './expenseForm/ExpenseForm'
+import Expenses from './expenses/Expenses'
 import { BudgetType, Expense } from '@/lib/types'
 import Button from '../button/Button'
 
@@ -39,7 +39,7 @@ const ExpensesContainer = ({budget, userId, expenses} : {budget: BudgetType, use
       {isShowDetailsOn && <h4>Choose group to display expense.</h4>}
       {/* <button onClick={toggleShowDetails}>Show expenses</button>} */}
       {!isShowDetailsOn && <ExpenseForm userId={userId} budgetId={budget._id} />}
-      {isShowDetailsOn && <Expenses expenses={expenses} />}
+      {isShowDetailsOn && <Expenses expenses={expenses} budget={budget} />}
     </div>
   )
 }

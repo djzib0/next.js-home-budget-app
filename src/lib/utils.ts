@@ -135,6 +135,28 @@ export const getLabelName = (value: number, labelName: string) => {
     if (value > 0) return labelName;
 }
 
+export const sumBudgetForMainGroup = (budget: BudgetType) => {
+    const foodBudget: number = budget.groceriesBudget + budget.eatingOutBudget + budget.otherFoodAndDrinksBudget;
+    const healthBudget: number = budget.doctorsBudget + budget.drugsBudget + budget.otherMedicalBudget;
+    const transportBudget: number = budget.fuelBudget + budget.publicTransportBudget + budget.otherTransportBudget;
+    const clothesBudget: number = budget.clothesHerBudget + budget.clothesHisBudget + budget.clothesKidsBudget;
+    const homeBudget: number = budget.rentBudget + budget.electricityBudget + budget.waterSupplyAndSewageBudget + budget.gasBudget + budget.otherBillsBudget;
+    const digitalServices: number = budget.internetBudget + budget.phonesBudget + budget.streamingServicesBudget + budget.otherDigitalServices;
+    const hobbyBudget: number = budget.hobbyBudget
+    const otherBudget: number = budget.otherBudget
+
+    return {
+        foodBudget: foodBudget,
+        healthBudget: healthBudget,
+        transportBudget: transportBudget,
+        clothesBudget: clothesBudget,
+        homeBudget: homeBudget,
+        digitalServices: digitalServices,
+        hobbyBudget: hobbyBudget,
+        otherBudget: otherBudget
+    }
+}
+
 export const convertBudgetToAggregatedChartData = (budget: BudgetType) => {
     const foodBudget: number = budget.groceriesBudget + budget.eatingOutBudget + budget.otherFoodAndDrinksBudget;
     const healthBudget: number = budget.doctorsBudget + budget.drugsBudget + budget.otherMedicalBudget;

@@ -76,6 +76,10 @@
     /* color: rgba(36, 36, 36, 0.443) */
 }
 
+.valueExceeded {
+    color: red;
+}
+
 @media  screen and (min-width: 720px) {
     .toggleBtn,
     .active {
