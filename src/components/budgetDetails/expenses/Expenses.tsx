@@ -53,11 +53,7 @@ const Expenses = ({expenses} : {expenses: Expense[]}) => {
       expensesStats[expense.mainGroup].value += expense.value
     }
   })
-
-  console.log(expensesStats.digitalServices.value)
-
-  console.log(expensesWithMainGroup)
-
+  
   const expensesArr = expensesWithMainGroup && expensesWithMainGroup
   .filter((expense) => {
     if (expense) return expense.mainGroup === isDetailsOn.expenseGroup

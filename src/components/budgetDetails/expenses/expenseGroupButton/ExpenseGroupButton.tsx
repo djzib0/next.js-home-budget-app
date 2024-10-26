@@ -13,7 +13,6 @@ type ExpenseGroupButtonPropsType = {
 
 const ExpenseGroupButton = ({title, groupName, expenseGroup, isOn, entriesNumber, value, handleClick} : ExpenseGroupButtonPropsType) => {
 
-  groupName === expenseGroup && console.log(styles['active'])
   return (
     <button className={
       `${isOn && groupName === expenseGroup ? styles.active : styles.toggleBtn}`
