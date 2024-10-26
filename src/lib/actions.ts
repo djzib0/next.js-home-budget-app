@@ -6,6 +6,7 @@ import { connectToDb } from "./mongooseUtils";
 import bcrypt from "bcryptjs";
 import { converYearToBudgetName } from "./utils";
 import mongoose from "mongoose";
+import { BudgetFormType, BudgetType } from "./types";
 
 export const handleGitHubLogin = async () => {
     'use server'
@@ -217,6 +218,17 @@ export const getLatestBudget = async (userId: string, latestBudgetName: string) 
      }
 }
 
+export const getBudgetByUserIdAndBudgetName = async (userId: string, budgetName: string) => {
+    if (userId) {
+        const res = await fetch(`http://localhost:3000/api/${userId}/budgets/${budgetName}`)
+        
+        if (!res.ok) {
+          throw new Error("Something went wrong")
+        } 
+        return res.json()
+     }
+}
+
 export const getAllBudgetsByUserId = async (userId: string) => {
     if (userId) {
         const res = await fetch(`http://localhost:3000/api/${userId}/budgets`)
@@ -317,4 +329,40 @@ export const editExpense = async (prevState: any, formData: any) => {
         console.log(error)
         return {error: "Something went wrong while saving a new expense"}
     }
+}
+
+export const editBudget = async (prevState: unknown, formData: BudgetFormType, userId: string, budgetId: string) => {
+
+    const editedBudget = await getCurrentBudget(userId, budgetId)
+
+    // const editedBudget: BudgetType = {
+    //     _id: budgetId,
+    //     budgetName: converYearToBudgetName((formData.budgetNameYear) + formData.budgetNameMonth),
+    //     userId: userId,
+    //     groceriesBudget: formData.groceriesBudget,
+    //     eatingOutBudget: formData.eatingOutBudget,
+    //     otherFoodAndDrinksBudget: formData.otherFoodAndDrinksBudget,
+    //     doctorsBudget: formData.doctorsBudget,
+    //     drugsBudget: formData.drugsBudget,
+    //     otherMedicalBudget: formData.otherMedicalBudget,
+    //     fuelBudget: formData.fuelBudget,
+    //     publicTransportBudget: formData.publicTransportBudget,
+    //     otherTransportBudget: formData.otherTransportBudget,
+    //     clothesHerBudget: formData.clothesHerBudget,
+    //     clothesHisBudget: formData.clothesHisBudget,
+    //     clothesKidsBudget: formData.clothesKidsBudget,
+    //     rentBudget: formData.rentBudget,
+    //     electricityBudget: formData.electricityBudget,
+    //     waterSupplyAndSewageBudget: formData.waterSupplyAndSewageBudget,
+    //     gasBudget: formData.gasBudget,
+    //     otherBillsBudget: formData.otherBillsBudget,
+    //     internetBudget: formData.internetBudget, 
+    //     phonesBudget: formData.phonesBudget,
+    //     streamingServicesBudget: formData.streamingServicesBudget,
+    //     otherDigitalServices: formData.otherDigitalServices,
+    //     hobbyBudget: formData.hobbyBudget,
+    //     otherBudget: formData.otherBudget,
+    // }
+
+    // console.log(editedBudget)
 }

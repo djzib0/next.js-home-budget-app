@@ -7,6 +7,7 @@ import { getAllExpensesByUserAndBudgetId } from "@/lib/actions";
 import styles from "./budgetDetails.module.css"
 import BudgetSummary from "./budgetSummary/BudgetSummary";
 import ExpensesContainer from "../expensesContainer/ExpensesContainer";
+import Link from "next/link";
 
 const BudgetDetails = async ({budget, userId} : {budget: BudgetType, userId: string}) => {
 
@@ -14,8 +15,10 @@ const BudgetDetails = async ({budget, userId} : {budget: BudgetType, userId: str
   const budgetSum = sumBudget(budget);
   const expensesSum = sumAllExpenses(expenses);
 
+
   return (
     <div className={styles.budgetDetailsContainer}>
+      <Link href={`/budgets/edit/${budget.budgetName}`}>Got to edit form</Link>
       {budget &&
       <div>
         <h1 id={styles.budgetTitle}>Budget for {convertBudgetNameToDate(budget.budgetName, 'en-EN')}</h1>

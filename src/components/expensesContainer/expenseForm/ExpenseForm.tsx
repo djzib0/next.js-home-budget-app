@@ -293,9 +293,8 @@ const ExpenseForm = ({userId, budgetId, defaultValues, closeFunction} : {userId:
           onChange={handleChange}
         />
         <label htmlFor='name'>Name</label>
-        <input 
-          type='text'
-          min={0}
+        <textarea 
+          minLength={1}
           name='name'
           value={formData.name}
           onChange={handleChange}
@@ -318,7 +317,7 @@ const ExpenseForm = ({userId, budgetId, defaultValues, closeFunction} : {userId:
         {isExpenseFormOn.isOn && isExpenseFormOn.expenseGroup === ExpenseGroup.Other && otherExpensesOptionsArr}
         </select>
         <br/>
-        {formData.group && formData.value > 0 && !defaultValues && <button>Add new Expense</button>}
+        {formData.group && formData.value > 0 && formData.name.length > 0 && !defaultValues && <button>Add new Expense</button>}
         {defaultValues?.budgetId && defaultValues?.userId && <button>Confirm edit</button>}
         {defaultValues?.budgetId && defaultValues?.userId && <button type='button' onClick={closeFunction}>Cancel</button>}
       </form>}

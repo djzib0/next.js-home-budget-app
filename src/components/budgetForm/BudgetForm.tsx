@@ -1,5 +1,5 @@
 'use client'
-import { createNewBudget } from '@/lib/actions'
+import { createNewBudget, editBudget } from '@/lib/actions'
 import { MonthNameLength } from '@/lib/enums'
 import { convertToMonthName } from '@/lib/utils'
 import { Session } from 'next-auth'
@@ -11,35 +11,35 @@ import { BudgetFormType } from '@/lib/types'
 
 
 
-const BudgetForm = ({session} : {session: Session}) => {
+const BudgetForm = ({session, defaultValues} : {session: Session; defaultValues?: BudgetFormType}) => {
 
   const [formData, setFormData] = useState<BudgetFormType>(
     {
       budgetNameYear: new Date().getFullYear(),
-      budgetNameMonth: "01",
-      groceriesBudget: 0,
-      eatingOutBudget: 0,
-      otherFoodAndDrinksBudget: 0,
-      doctorsBudget: 0,
-      drugsBudget: 0,
-      otherMedicalBudget: 0,
-      fuelBudget: 0,
-      publicTransportBudget: 0,
-      otherTransportBudget: 0,
-      clothesHerBudget: 0,
-      clothesHisBudget: 0,
-      clothesKidsBudget: 0,
-      rentBudget: 0,
-      electricityBudget: 0,
-      waterSupplyAndSewageBudget: 0,
-      gasBudget: 0,
-      otherBillsBudget: 0,
-      internetBudget: 0, 
-      phonesBudget: 0,
-      streamingServicesBudget: 0,
-      otherDigitalServices: 0,
-      hobbyBudget: 0,
-      otherBudget: 0,
+      budgetNameMonth: defaultValues ? defaultValues.budgetNameMonth : "01",
+      groceriesBudget: defaultValues ? defaultValues.groceriesBudget : 0,
+      eatingOutBudget: defaultValues ? defaultValues.eatingOutBudget : 0,
+      otherFoodAndDrinksBudget: defaultValues ? defaultValues.otherFoodAndDrinksBudget : 0,
+      doctorsBudget: defaultValues ? defaultValues.doctorsBudget : 0,
+      drugsBudget: defaultValues ? defaultValues.drugsBudget : 0,
+      otherMedicalBudget: defaultValues ? defaultValues.otherMedicalBudget : 0,
+      fuelBudget: defaultValues ? defaultValues.fuelBudget : 0,
+      publicTransportBudget: defaultValues ? defaultValues.publicTransportBudget : 0,
+      otherTransportBudget: defaultValues ? defaultValues.otherTransportBudget : 0,
+      clothesHerBudget: defaultValues ? defaultValues.clothesHerBudget : 0,
+      clothesHisBudget: defaultValues ? defaultValues.clothesHisBudget : 0,
+      clothesKidsBudget: defaultValues ? defaultValues.clothesKidsBudget : 0,
+      rentBudget: defaultValues ? defaultValues.rentBudget : 0,
+      electricityBudget: defaultValues ? defaultValues.electricityBudget : 0,
+      waterSupplyAndSewageBudget: defaultValues ? defaultValues.waterSupplyAndSewageBudget : 0,
+      gasBudget: defaultValues ? defaultValues.gasBudget : 0,
+      otherBillsBudget: defaultValues ? defaultValues.otherBillsBudget : 0,
+      internetBudget: defaultValues ? defaultValues.internetBudget : 0, 
+      phonesBudget: defaultValues ? defaultValues.phonesBudget : 0,
+      streamingServicesBudget: defaultValues ? defaultValues.streamingServicesBudget : 0,
+      otherDigitalServices: defaultValues ? defaultValues.otherDigitalServices : 0,
+      hobbyBudget: defaultValues ? defaultValues.hobbyBudget : 0,
+      otherBudget: defaultValues ? defaultValues.otherBudget : 0,
     }
   );
 
@@ -52,14 +52,25 @@ const BudgetForm = ({session} : {session: Session}) => {
       }
     })
   }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleSubmit = (prevState: any, formData: any) => {
+    if (defaultValues && session) {
+      editBudget(prevState, formData, session.user?.id ? session.user?.id : "", defaultValues._id ? defaultValues._id : "");
   
-  const [state, formAction] = useFormState(createNewBudget, undefined)
+    } else {
+      createNewBudget(prevState, formData);
+    }
+  }
+  
+  const [state, formAction] = useFormState(handleSubmit, undefined)
 
   const router = useRouter();
 
   useEffect(() => {
     router.refresh();
   }, [state, router])
+
 
   return (
     <>
@@ -100,6 +111,7 @@ const BudgetForm = ({session} : {session: Session}) => {
         >
           Year
         </label>
+        
         <input 
           type="number" 
           min="1900" 
@@ -301,7 +313,8 @@ const BudgetForm = ({session} : {session: Session}) => {
           min={0}
         />
         <input type='hidden' name='userId' value={session.user?.id} />
-        <button>Add new budget, MATEEEE</button>
+        {!defaultValues && <button>Add new budget, MATEEEE</button>}
+        {defaultValues && <button>Edit budget, HOMIEEEE</button>}
       </form>
       <button type='button' onClick={() => convertToMonthName(1, 'en-En', MonthNameLength.Short)}>Click to get date</button>
     </>
