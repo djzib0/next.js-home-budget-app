@@ -307,8 +307,8 @@ export const deleteExpenseById = async (expenseId: string | undefined) => {
     }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const editExpense = async (prevState: any, formData: any) => {
+
+export const editExpense = async (prevState: ActionResult, formData: FormData) => {
     const {expenseId, userId, budgetId, name, value, group} = Object.fromEntries(formData);
     console.log(formData, "editing expense")
     try {
