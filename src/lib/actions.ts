@@ -4,9 +4,9 @@ import { signIn, signOut } from "./auth";
 import { Budget, User, BudgetComment, Expense } from "./models";
 import { connectToDb } from "./mongooseUtils";
 import bcrypt from "bcryptjs";
-import { converYearToBudgetName } from "./utils";
+import { convertYearToBudgetName } from "./utils";
 import mongoose from "mongoose";
-import { BudgetFormType, BudgetType } from "./types";
+import { ActionResult } from "next/dist/server/app-render/types";
 
 export const handleGitHubLogin = async () => {
     'use server'
@@ -96,103 +96,100 @@ export const logout = async () => {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const createNewBudget = async (prevState: any, formData: any) => {
+    
+    const {
+        userId,
+        budgetNameYear,
+        budgetNameMonth,
+        groceriesBudget,
+        eatingOutBudget,
+        otherFoodAndDrinksBudget,
+        doctorsBudget,
+        drugsBudget,
+        otherMedicalBudget,
+        fuelBudget,
+        publicTransportBudget,
+        otherTransportBudget,
+        clothesHerBudget,
+        clothesHisBudget,
+        clothesKidsBudget,
+        rentBudget,
+        electricityBudget,
+        waterSupplyAndSewageBudget,
+        gasBudget,
+        otherBillsBudget,
+        internetBudget, 
+        phonesBudget,
+        streamingServicesBudget,
+        otherDigitalServices,
+        hobbyBudget,
+        otherBudget,
+        billsBudget,
+    } = Object.fromEntries(formData);
+
+    connectToDb();
+
+    const newBudget = new Budget({
+        budgetName: convertYearToBudgetName(budgetNameYear) + budgetNameMonth,
+        userId: userId,
+        groceriesBudget: groceriesBudget,
+        eatingOutBudget: eatingOutBudget,
+        otherFoodAndDrinksBudget: otherFoodAndDrinksBudget,
+        groceriesBudgetComments: [new BudgetComment({comment: " test comment"})],
+        doctorsBudget: doctorsBudget,
+        drugsBudget: drugsBudget,
+        otherMedicalBudget: otherMedicalBudget,
+        fuelBudget: fuelBudget,
+        publicTransportBudget: publicTransportBudget,
+        otherTransportBudget: otherTransportBudget,
+        clothesHerBudget: clothesHerBudget,
+        clothesHisBudget: clothesHisBudget,
+        clothesKidsBudget: clothesKidsBudget,
+        rentBudget: rentBudget,
+        electricityBudget: electricityBudget,
+        waterSupplyAndSewageBudget: waterSupplyAndSewageBudget,
+        gasBudget: gasBudget,
+        otherBillsBudget: otherBillsBudget,
+        internetBudget: internetBudget, 
+        phonesBudget: phonesBudget,
+        streamingServicesBudget: streamingServicesBudget,
+        otherDigitalServices: otherDigitalServices,
+        hobbyBudget: hobbyBudget,
+        otherBudget: otherBudget,
+        clothesBudgetComments: [],
+        billsBudget: billsBudget,
+        billsBudgetComments: [],
+    })
+
     try {
-        const {
-            userId,
-            budgetNameYear,
-            budgetNameMonth,
-            groceriesBudget,
-            eatingOutBudget,
-            otherFoodAndDrinksBudget,
-            doctorsBudget,
-            drugsBudget,
-            otherMedicalBudget,
-            fuelBudget,
-            publicTransportBudget,
-            otherTransportBudget,
-            clothesHerBudget,
-            clothesHisBudget,
-            clothesKidsBudget,
-            rentBudget,
-            electricityBudget,
-            waterSupplyAndSewageBudget,
-            gasBudget,
-            otherBillsBudget,
-            internetBudget, 
-            phonesBudget,
-            streamingServicesBudget,
-            otherDigitalServices,
-            hobbyBudget,
-            otherBudget,
-            billsBudget,
-        } = Object.fromEntries(formData);
-        connectToDb();
-        const newBudget = new Budget({
-            budgetName: converYearToBudgetName(budgetNameYear) + budgetNameMonth,
-            userId: userId,
-            groceriesBudget: groceriesBudget,
-            eatingOutBudget: eatingOutBudget,
-            otherFoodAndDrinksBudget: otherFoodAndDrinksBudget,
-            groceriesBudgetComments: [new BudgetComment({comment: " test comment"})],
-            doctorsBudget: doctorsBudget,
-            drugsBudget: drugsBudget,
-            otherMedicalBudget: otherMedicalBudget,
-            fuelBudget: fuelBudget,
-            publicTransportBudget: publicTransportBudget,
-            otherTransportBudget: otherTransportBudget,
-            clothesHerBudget: clothesHerBudget,
-            clothesHisBudget: clothesHisBudget,
-            clothesKidsBudget: clothesKidsBudget,
-            rentBudget: rentBudget,
-            electricityBudget: electricityBudget,
-            waterSupplyAndSewageBudget: waterSupplyAndSewageBudget,
-            gasBudget: gasBudget,
-            otherBillsBudget: otherBillsBudget,
-            internetBudget: internetBudget, 
-            phonesBudget: phonesBudget,
-            streamingServicesBudget: streamingServicesBudget,
-            otherDigitalServices: otherDigitalServices,
-            hobbyBudget: hobbyBudget,
-            otherBudget: otherBudget,
-            clothesBudgetComments: [],
-            billsBudget: billsBudget,
-            billsBudgetComments: [],
-        })
-
-        try {
-
-            if (newBudget.length > 4 || newBudget.budgetName < 4) {
-                return {error: ["budgetName"]}
-            }
-            // try to find budget with the given budget name
-            const budgets = await Budget.find({budgetName: converYearToBudgetName(budgetNameYear) + budgetNameMonth, userId: userId});
-            // if the budget for specific month/year exists,
-            // the budgets (array) will be longer than 0, so it means
-            // there is a budget with the given name 
-            // ...return an error
-            if (budgets.length > 0) {
-                console.log("There is already a budget for this month. Mate")
-                return {error: "There is already a budget for this month."}
-            }
-            // if there is no budget for specific month/year
-            // create and save a new one
-            await newBudget.save();
-            revalidatePath("/budgets")
-        } catch (error) {
-            console.log(error)
-            if (error instanceof mongoose.Error.ValidationError) {
-                const invalidFormFields: string[] = [];
-                for (const field in error.errors) {
-                    invalidFormFields.push(field);
-                }
-                return {error: invalidFormFields}
-            }
-            return {error: "Something went wrong."}
+        if (newBudget.length > 4 || newBudget.budgetName < 4) {
+            return {error: ["budgetName"]}
         }
-
+        // try to find budget with the given budget name
+        const budgets = await Budget.find({budgetName: convertYearToBudgetName(budgetNameYear) + budgetNameMonth, userId: userId});
+        // if the budget for specific month/year exists,
+        // the budgets (array) will be longer than 0, so it means
+        // there is a budget with the given name 
+        // ...return an error
+        if (budgets.length > 0) {
+            console.log("There is already a budget for this month. Mate")
+            return {error: "There is already a budget for this month."}
+        }
+        // if there is no budget for specific month/year
+        // create and save a new one
+        await newBudget.save();
+        revalidatePath("/budgets")
+        return {error: "", success: true, redirectPath: "/budgets"}
     } catch (error) {
-        console.log("Something went wrong while saving a new budget")
-        return {error: "Something went wrong while saving a a new budget"}
+        console.log(error)
+        if (error instanceof mongoose.Error.ValidationError) {
+            const invalidFormFields: string[] = [];
+            for (const field in error.errors) {
+                invalidFormFields.push(field);
+            }
+            return {error: invalidFormFields}
+        }
+        return {error: "Something went wrong."}
     }
 }
 
@@ -331,38 +328,56 @@ export const editExpense = async (prevState: any, formData: any) => {
     }
 }
 
-export const editBudget = async (prevState: unknown, formData: BudgetFormType, userId: string, budgetId: string) => {
+export const getBudgetById = async (budgetId: string) => {
+    if (budgetId) {
+        const res = await fetch(`http://localhost:3000/api/budgets/${budgetId}`);
+        if (!res.ok) {
+            throw new Error("Something went wrong while fetching expense.")
+        }
+        return res.json();
+    }
+}
 
-    const editedBudget = await getCurrentBudget(userId, budgetId)
+export const editBudget = async (prevState: ActionResult, formData: FormData, budgetId: string, userId: string) => {
 
-    // const editedBudget: BudgetType = {
-    //     _id: budgetId,
-    //     budgetName: converYearToBudgetName((formData.budgetNameYear) + formData.budgetNameMonth),
-    //     userId: userId,
-    //     groceriesBudget: formData.groceriesBudget,
-    //     eatingOutBudget: formData.eatingOutBudget,
-    //     otherFoodAndDrinksBudget: formData.otherFoodAndDrinksBudget,
-    //     doctorsBudget: formData.doctorsBudget,
-    //     drugsBudget: formData.drugsBudget,
-    //     otherMedicalBudget: formData.otherMedicalBudget,
-    //     fuelBudget: formData.fuelBudget,
-    //     publicTransportBudget: formData.publicTransportBudget,
-    //     otherTransportBudget: formData.otherTransportBudget,
-    //     clothesHerBudget: formData.clothesHerBudget,
-    //     clothesHisBudget: formData.clothesHisBudget,
-    //     clothesKidsBudget: formData.clothesKidsBudget,
-    //     rentBudget: formData.rentBudget,
-    //     electricityBudget: formData.electricityBudget,
-    //     waterSupplyAndSewageBudget: formData.waterSupplyAndSewageBudget,
-    //     gasBudget: formData.gasBudget,
-    //     otherBillsBudget: formData.otherBillsBudget,
-    //     internetBudget: formData.internetBudget, 
-    //     phonesBudget: formData.phonesBudget,
-    //     streamingServicesBudget: formData.streamingServicesBudget,
-    //     otherDigitalServices: formData.otherDigitalServices,
-    //     hobbyBudget: formData.hobbyBudget,
-    //     otherBudget: formData.otherBudget,
-    // }
+    try {
+        const editedBudget = await getBudgetById(budgetId);
+        const formDataObj = Object.fromEntries(formData);
+        const {budgetNameYear, budgetNameMonth, ...newData} = formDataObj 
 
-    // console.log(editedBudget)
+        connectToDb();
+        const newBudget = {
+            ...editedBudget,
+            ...newData,
+            budgetName: convertYearToBudgetName(budgetNameYear.toString()) + budgetNameMonth,
+        }
+
+        if (newBudget.length > 4 || newBudget.budgetName < 4) {
+            return {error: ["budgetName"]}
+        }
+        // try to find budget with the given budget name
+        const budgets = await Budget.find({
+            budgetName: convertYearToBudgetName(
+                budgetNameYear.toString()) + budgetNameMonth, userId: userId
+        });
+        // if the budget for specific month/year exists,
+        // and it's not the same as edited budgetName,
+        // the budgets (array) will be longer than 0, so it means
+        // there is a budget with the given name 
+        // ...return an error
+        if (budgets.length > 0 && editedBudget.budgetName != newBudget.budgetName) {
+            console.log("There is already a budget for this month. Mate")
+            return {error: "There is already a budget for this month."}
+        }
+        // if there is no budget for specific month/year
+        // create and save a new one
+
+        await Budget.findOneAndUpdate({_id: newBudget._id}, newBudget, {new: true});
+        revalidatePath("/budgets")
+        return {error: "", success: true, redirectPath: newBudget.budgetName}
+    } catch (error) {
+        console.log(error);
+        // return {error: "Something went wrong while saving a new budget"}
+        return {error: "", success: false, redirectPath: ""}
+    }
 }

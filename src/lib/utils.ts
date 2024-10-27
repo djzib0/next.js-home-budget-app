@@ -26,8 +26,16 @@ export const getExpectedCurrentBudgetName = () : string =>  {
     return currentBudgetName
 }
 
-export const converYearToBudgetName = (year: string) : string => {
+export const convertYearToBudgetName = (year: string) : string => {
     return year.slice(2)
+}
+
+export const convertBudgetNameToMonth = (budgetName: string) : string => {
+    return budgetName.slice(2)
+}
+
+export const convertBudgetNameToYear = (budgetName: string) : number => {
+    return parseInt("20" + budgetName.slice(0, 2).toString());
 }
 
 export const addZeroPrefix = (num: number) : string => {

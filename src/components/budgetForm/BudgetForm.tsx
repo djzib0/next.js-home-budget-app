@@ -1,9 +1,9 @@
 'use client'
 import { createNewBudget, editBudget } from '@/lib/actions'
 import { MonthNameLength } from '@/lib/enums'
-import { convertToMonthName } from '@/lib/utils'
+import { convertBudgetNameToMonth, convertBudgetNameToYear, convertToMonthName } from '@/lib/utils'
 import { Session } from 'next-auth'
-import { useRouter } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { useFormState } from 'react-dom';
 import styles from './budgetForm.module.css'
@@ -13,10 +13,11 @@ import { BudgetFormType } from '@/lib/types'
 
 const BudgetForm = ({session, defaultValues} : {session: Session; defaultValues?: BudgetFormType}) => {
 
+  // console.log(convertBudgetNameToMonth(defaultValues))
   const [formData, setFormData] = useState<BudgetFormType>(
     {
-      budgetNameYear: new Date().getFullYear(),
-      budgetNameMonth: defaultValues ? defaultValues.budgetNameMonth : "01",
+      budgetNameYear: defaultValues ? convertBudgetNameToYear(defaultValues.budgetName ? defaultValues.budgetName : "") : new Date().getFullYear(),
+      budgetNameMonth: defaultValues ? convertBudgetNameToMonth(defaultValues?.budgetName ? defaultValues.budgetName : "") : "01",
       groceriesBudget: defaultValues ? defaultValues.groceriesBudget : 0,
       eatingOutBudget: defaultValues ? defaultValues.eatingOutBudget : 0,
       otherFoodAndDrinksBudget: defaultValues ? defaultValues.otherFoodAndDrinksBudget : 0,
@@ -55,11 +56,10 @@ const BudgetForm = ({session, defaultValues} : {session: Session; defaultValues?
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSubmit = (prevState: any, formData: any) => {
-    if (defaultValues && session) {
-      editBudget(prevState, formData, session.user?.id ? session.user?.id : "", defaultValues._id ? defaultValues._id : "");
-  
+    if (defaultValues) {
+      return editBudget(prevState, formData, defaultValues._id ? defaultValues._id : "", session.user?.id ? session.user.id : "");
     } else {
-      createNewBudget(prevState, formData);
+      return createNewBudget(prevState, formData);
     }
   }
   
@@ -67,22 +67,24 @@ const BudgetForm = ({session, defaultValues} : {session: Session; defaultValues?
 
   const router = useRouter();
 
+  
   useEffect(() => {
+    if (defaultValues && state?.success) {
+      redirect(`/budgets/${state.redirectPath}`)
+    } else if (state?.success) {
+      redirect('/budgets')
+    }
     router.refresh();
   }, [state, router])
 
 
   return (
-    <>
-      {/* <form action={formAction}>
-        <input type="hidden" name="userId" value={session?.user?.id}/>
-        <button>Add new budget, HOMIE!</button>
-      </form> */}
-      {state && state.error}
+    <div>
+      <p>{state?.error}</p>
       <form className={styles.formContainer} action={formAction}>
         <label 
           htmlFor='budgetNameMonth'
-          className={state && state.error.includes("budgetName") ? styles.errorFont : ""}
+          className={state?.error && state?.error.includes("budgetName") ? styles.errorFont : ""}
         >
           Month
         </label>
@@ -107,7 +109,7 @@ const BudgetForm = ({session, defaultValues} : {session: Session; defaultValues?
         </select>
         <label 
           htmlFor='budgetNameYear'
-          className={state && state.error.includes("budgetName") ? styles.errorFont : ""}
+          className={state?.error && state.error.includes("budgetName") ? styles.errorFont : ""}
         >
           Year
         </label>
@@ -124,7 +126,7 @@ const BudgetForm = ({session, defaultValues} : {session: Session; defaultValues?
         />
         <label 
           htmlFor='groceriesBudget'
-          className={state && state.error.includes("groceriesBudget") ? styles.errorFont : ""}
+          className={state?.error && state.error.includes("groceriesBudget") ? styles.errorFont : ""}
         >Groceries budget</label>
         <input 
           type="number"  
@@ -135,7 +137,7 @@ const BudgetForm = ({session, defaultValues} : {session: Session; defaultValues?
         />
         <label 
           htmlFor='eatingOutBudget'
-          className={state && state.error.includes("eatingOutBudget") ? styles.errorFont : ""}
+          className={state?.error && state.error.includes("eatingOutBudget") ? styles.errorFont : ""}
         >Eating out budget</label>
         <input 
           type="number"  
@@ -317,7 +319,7 @@ const BudgetForm = ({session, defaultValues} : {session: Session; defaultValues?
         {defaultValues && <button>Edit budget, HOMIEEEE</button>}
       </form>
       <button type='button' onClick={() => convertToMonthName(1, 'en-En', MonthNameLength.Short)}>Click to get date</button>
-    </>
+    </div>
   )
 }
 

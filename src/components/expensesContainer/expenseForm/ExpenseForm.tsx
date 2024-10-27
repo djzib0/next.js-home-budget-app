@@ -196,8 +196,7 @@ const ExpenseForm = ({userId, budgetId, defaultValues, closeFunction} : {userId:
     }
   }
   
-  const [state, formAction] = useFormState(handleSubmit, undefined
-  )
+  const [state, formAction] = useFormState(handleSubmit, undefined)
 
   const router = useRouter();
 

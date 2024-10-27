@@ -41,6 +41,7 @@ export type BudgetType = {
 
 export type BudgetFormType = {
     _id?: string;
+    budgetName?: string;
     budgetNameYear: number,
     budgetNameMonth: string,
     groceriesBudget: number;
