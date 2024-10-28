@@ -249,7 +249,7 @@ export const sumAllExpenses = (expenses: Expense[]) : number => {
 }
 
 export const getProgressPercent = (a: number, b: number) => {
-    if ((a -b) > 100) {
+    if ((a -b) > 100 || b === 0) {
         return 100;
     }
     return Math.round((a / b) * 100);

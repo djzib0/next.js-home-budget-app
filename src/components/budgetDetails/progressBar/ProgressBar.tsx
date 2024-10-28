@@ -7,7 +7,6 @@ const ProgressBar = ({currentProgress, maxValue} : {currentProgress: number, max
   const completedProgressPercentage = getProgressPercent(currentProgress, maxValue)
   const notCompletedProgressPercentage = 100 - getProgressPercent(currentProgress, maxValue)
 
-  console.log(completedProgressPercentage, "% completed ")
   const currentProgressTextPosition = completedProgressPercentage < 20 ? 'right' : 'left';
 
   

@@ -8,9 +8,6 @@ import React, { useEffect, useState } from 'react'
 import { useFormState } from 'react-dom';
 import styles from './budgetForm.module.css'
 import { BudgetFormType } from '@/lib/types'
-import { ActionResult } from 'next/dist/server/app-render/types'
-
-
 
 const BudgetForm = ({session, defaultValues} : {session: Session; defaultValues?: BudgetFormType}) => {
 
@@ -55,7 +52,8 @@ const BudgetForm = ({session, defaultValues} : {session: Session; defaultValues?
     })
   }
 
-  const handleSubmit = (prevState: ActionResult, formData: FormData) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleSubmit = (prevState: any, formData: FormData) => {
     if (defaultValues) {
       return editBudget(prevState, formData, defaultValues._id ? defaultValues._id : "", session.user?.id ? session.user.id : "");
     } else {

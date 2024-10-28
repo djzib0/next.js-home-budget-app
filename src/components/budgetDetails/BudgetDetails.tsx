@@ -1,7 +1,7 @@
 import { BudgetType } from "@/lib/types";
 import { convertBudgetNameToDate, sumAllExpenses, sumBudget } from "@/lib/utils";
 // import BudgetChart from "./budgetChart/BudgetChart";
-import ProgressBar from "../progressBar/ProgressBar";
+import ProgressBar from "./progressBar/ProgressBar";
 import { getAllExpensesByUserAndBudgetId } from "@/lib/actions";
 // styles import
 import styles from "./budgetDetails.module.css"
@@ -15,6 +15,8 @@ const BudgetDetails = async ({budget, userId} : {budget: BudgetType, userId: str
   const budgetSum = sumBudget(budget);
   const expensesSum = sumAllExpenses(expenses);
 
+  console.log(expensesSum, " expenses sum in budget details")
+  console.log(budgetSum)
 
   return (
     <div className={styles.budgetDetailsContainer}>
