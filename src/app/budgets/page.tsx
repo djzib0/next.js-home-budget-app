@@ -5,6 +5,7 @@ import { BudgetType } from "@/lib/types";
 import { findLatestBudgetName } from "@/lib/utils";
 import Link from "next/link";
 import { getAllBudgetsByUserId } from "@/lib/actions";
+import BudgetsList from "@/components/budgetsList/BudgetsList";
 
 const getData = async (userId: string | undefined) => {
   if (userId) {
@@ -28,16 +29,7 @@ const BudgetsPage = async () => {
 
   const allBudgets = await getAllBudgetsByUserId(session?.user?.id ? session.user.id : "")
   
-  const allBudgetsArr = allBudgets.map((budget: BudgetType) => {
-    return (
-      <Link
-        key={budget._id}
-        href={`/budgets/${budget?.budgetName}`}
-      >
-        {budget.budgetName}
-      </Link>
-    )
-  })
+  
 
   return (
     <div className={styles.container}>
@@ -47,8 +39,7 @@ const BudgetsPage = async () => {
       >
         {latestBudget && latestBudget.budgetName}
       </Link>
-      All:
-      {allBudgetsArr}
+      <BudgetsList budgets={allBudgets} />
       <Link href={"/budgets/add"}>Add new budget</Link>
     </div>
   )
