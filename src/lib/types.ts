@@ -105,3 +105,8 @@ export type ModalType = {
     closeFunction: () => void;
     obj?: unknown;
 }
+
+// calendar picker library
+export type ValuePiece = Date | null;
+export type Value = ValuePiece | [ValuePiece, ValuePiece];
+

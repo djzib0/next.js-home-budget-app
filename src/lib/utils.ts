@@ -1,5 +1,5 @@
 import { ClothesExpense, DigitalServicesExpense, ExpenseGroup, FoodExpense, HealthExpense, HobbyExpense, HomeExpense, MonthNameLength, OtherExpense, TransportExpense } from "./enums";
-import { BudgetType, Expense, ExpenseFormType } from "./types";
+import { BudgetType, Expense, ExpenseFormType, Value } from "./types";
 
 export const findLatestBudgetName = (budgetsArr: BudgetType[]) => {
     const budgetNamesArr: string[] = [];
@@ -36,6 +36,22 @@ export const convertBudgetNameToMonth = (budgetName: string) : string => {
 
 export const convertBudgetNameToYear = (budgetName: string) : number => {
     return parseInt("20" + budgetName.slice(0, 2).toString());
+}
+
+export const convertDateToBudgetName = (date: Value) : string => {
+    // calendar picker, when the it's props maxDetail is set to 'year',
+    // save picked date wrongly, for example if you pick 5th month (May)
+    // it will set picked date to Sat Jan 05 2021, 
+    // if April Mon Jan 04 (so the day number is month number).
+    // The below code takes it into account and converts correctly
+    // picked date to budget name
+    if (date) {
+        const newDate = new Date(date.toLocaleString())
+        const newDateArr =newDate.toString().split(" ");
+        const budgetName = newDateArr[3].slice(2) + newDateArr[2];
+        return budgetName
+    }
+    return "";
 }
 
 export const addZeroPrefix = (num: number) : string => {
