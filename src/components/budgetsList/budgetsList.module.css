@@ -1,4 +1,85 @@
 .budgetsListContainer {
+    margin: 0 auto;
+    max-width: 1024px;
+    padding: 0 1em;
+    background-color: pink;
+}
+
+.searchFormContainer {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    width: 100%;
+    min-width: 90vw;
+    align-items: flex-start;
+    height: 50px;
+}
+
+.searchButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #5fa8d3;
+    background-color: #cae9ff;
+    padding: 8px 14px;
+    height: 50px;
+    border-radius: 8px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    animation-name: changeBorder;
+    animation-duration: .75s;
+    animation-timing-function: ease-in;
+}
+
+@keyframes changeBorder {
+    0% {border-top-right-radius: 8px}
+    10% {border-top-right-radius: 7px}
+    25% {border-top-right-radius: 6px}
+    35% {border-top-right-radius: 5px}
+    45% {border-top-right-radius: 4px}
+    55% {border-top-right-radius: 3px}
+    70% {border-top-right-radius: 2px}
+    85% {border-top-right-radius: 1px}
+    100% {border-top-right-radius: 0px}
+}
+
+.searchButtonTitle {
+    margin: 0 8px;
+}
+
+
+.filterForm {
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    border-top: 1px solid #ccd5ae;
+    border-bottom: 1px solid #ccd5ae;
+    border-right: 1px solid #ccd5ae;
+    max-width: fit-content;
+    animation-name: expand;
+    animation-duration: .75s;
+    animation-timing-function: ease-in;
+    background-color: #fefae0;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.inputContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 48px;
+    background-color: transparent;
+    margin: 0 8px;
+}
+
+.select {
+    background-color: transparent;
+}
+
+@keyframes expand {
+    0% {width: 0%}
+    /* 25% {width: 25%;}
+    50% {width: 50%;}
+    75% {width: 75%;} */
+    100% {width: 100%}
 }
