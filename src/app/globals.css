@@ -83,3 +83,10 @@ h6 {
   margin-right: 0;
   font-weight: bold;
 }
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}

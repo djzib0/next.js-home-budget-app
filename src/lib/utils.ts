@@ -81,6 +81,15 @@ export const convertBudgetNameToDate = (budgetName: string, language: string) : 
     return monthName + " " + newDate.getFullYear();
 }
 
+export const convertMonthAndYearToBudgetName = (month: string, year: string) : string => {
+    return convertYearToBudgetName(year) + month;
+}
+
+export const convertCurrentYearToNumber = () : number => {
+    const currentYear = new Date().getFullYear();
+    return currentYear
+}
+
 export const convertBudgetDataToChartData = (budget: BudgetType) => {
     // array with all budgets values from the passed budget
     const valuesArr = [

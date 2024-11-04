@@ -6,6 +6,7 @@ import { findLatestBudgetName } from "@/lib/utils";
 import Link from "next/link";
 import { getAllBudgetsByUserId } from "@/lib/actions";
 import BudgetsList from "@/components/budgetsList/BudgetsList";
+import BudgetLink from "@/components/budgetsList/budgetLink/BudgetLink";
 
 const getData = async (userId: string | undefined) => {
   if (userId) {
@@ -33,14 +34,14 @@ const BudgetsPage = async () => {
 
   return (
     <div className={styles.container}>
-      Latest:
-      <Link
-        href={`/budgets/${latestBudget?.budgetName}`}
-      >
-        {latestBudget && latestBudget.budgetName}
-      </Link>
+      <h3>Latest:</h3>
+      {latestBudget && 
+      <BudgetLink 
+        budget={latestBudget}
+        linkTo={`/budgets/${latestBudget?.budgetName}`}
+      />}
+      <h3>Other:</h3>
       <BudgetsList budgets={allBudgets} />
-      <Link href={"/budgets/add"}>Add new budget</Link>
     </div>
   )
 }
