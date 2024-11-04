@@ -1,10 +1,16 @@
-.container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.navbarContainer {
     padding: 1rem 2rem;
     font-size: 1.2rem;
     background-color: var(--colorLight);
+}
+
+.navbar {
+    max-width: 1024px;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 auto;
 }
 
 .navbarRight {

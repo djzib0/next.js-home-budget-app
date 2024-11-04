@@ -19,6 +19,13 @@
   }
 }
 
+html {
+  /* keep scroll always visible to avoid layout movement while
+  scroll bar appears*/
+  overflow: -moz-scrollbars-vertical; 
+  overflow-y: scroll;
+}
+
 body {
   color: var(--colorDark);
   background: var(--colorLighter);

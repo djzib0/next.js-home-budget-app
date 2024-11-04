@@ -9,24 +9,26 @@ const Navbar = async () => {
   const session = await auth();
   
   return (
-    <nav className={styles.container}>
-      <div className={styles.navbarLeft}>
-        Logo
+    <nav className={styles.navbarContainer}>
+      <div className={styles.navbar}>
+        <div className={styles.navbarLeft}>
+          Logo
+        </div>
+        {session?.user && <div className={styles.navbarRight}>
+          <Link href={"/"}>Home</Link>
+          <Link href={"/budgets"}>Budgets</Link>
+          {session?.user && <form action={handleGitHubLogout}>
+            <button>Logout </button>
+          </form>}
+        </div>}
+        {!session?.user && <div className={styles.navbarRight}>
+          <Link href={"/login"}>Login</Link>
+          <Link href={"/register"}>Register</Link>
+          {session?.user && <form action={handleGitHubLogout}>
+            <button>Logout </button>
+          </form>}
+        </div>}      
       </div>
-      {session?.user && <div className={styles.navbarRight}>
-        <Link href={"/"}>Home</Link>
-        <Link href={"/budgets"}>Budgets</Link>
-        {session?.user && <form action={handleGitHubLogout}>
-          <button>Logout </button>
-        </form>}
-      </div>}
-      {!session?.user && <div className={styles.navbarRight}>
-        <Link href={"/login"}>Login</Link>
-        <Link href={"/register"}>Register</Link>
-        {session?.user && <form action={handleGitHubLogout}>
-          <button>Logout </button>
-        </form>}
-      </div>}
     </nav>
   )
 }
