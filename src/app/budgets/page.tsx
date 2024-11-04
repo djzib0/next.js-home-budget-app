@@ -3,7 +3,6 @@ import { auth } from "@/lib/auth";
 import styles from "./budgets.module.css"
 import { BudgetType } from "@/lib/types";
 import { findLatestBudgetName } from "@/lib/utils";
-import Link from "next/link";
 import { getAllBudgetsByUserId } from "@/lib/actions";
 import BudgetsList from "@/components/budgetsList/BudgetsList";
 import BudgetLink from "@/components/budgetsList/budgetLink/BudgetLink";
