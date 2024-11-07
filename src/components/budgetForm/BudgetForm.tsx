@@ -4,8 +4,7 @@ import { MonthNameLength } from '@/lib/enums'
 import { convertBudgetNameToMonth, convertBudgetNameToYear, convertToMonthName } from '@/lib/utils'
 import { Session } from 'next-auth'
 import { redirect, useRouter } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
-import { useFormState } from 'react-dom';
+import React, { useActionState, useEffect, useState } from 'react'
 import styles from './budgetForm.module.css'
 import { BudgetFormType } from '@/lib/types'
 
@@ -61,7 +60,7 @@ const BudgetForm = ({session, defaultValues} : {session: Session; defaultValues?
     }
   }
   
-  const [state, formAction] = useFormState(handleSubmit, undefined)
+  const [state, formAction] = useActionState(handleSubmit, undefined)
 
   const router = useRouter();
 

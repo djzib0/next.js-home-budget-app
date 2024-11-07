@@ -15,6 +15,9 @@
         {
             "folderPath": "next.js-home-budget-app\\src\\app\\api\\",
             "color": "foldercolorizer.LightRed"
-        }
-    ]
+        },
+    ],
+    "files.associations": {
+        "*.css": "tailwindcss"
+      }
 }

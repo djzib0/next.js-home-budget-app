@@ -2,15 +2,14 @@
 
 import styles from "./loginForm.module.css";
 import { login} from "@/lib/actions";
-import { useFormState } from "react-dom"  
 import { useRouter } from "next/navigation"
-import { useEffect } from "react"
+import { useActionState, useEffect } from "react"
 import Link from "next/link";
 
 
 const LoginForm = () => {
 
-  const [state, formAction] = useFormState(login, undefined); 
+  const [state, formAction] = useActionState(login, undefined); 
 
   const router = useRouter();
 

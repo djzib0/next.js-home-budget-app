@@ -56,8 +56,7 @@ const BudgetChart = ({budget} : {budget: BudgetType}) => {
   const Plot: PlotParams | any = dynamic(() => import("react-plotly.js"), { ssr: false, })
   return (
     <div className={styles.chartContainer}>
-      <button onClick={toggle}>Toggle detailed chart</button>
-      <p>Window width is {windowWidth}px</p>
+      <button onClick={toggle}>Show details</button>
       <div>
         {aggregatedData && !isOn && <Plot
           data={aggregatedData}

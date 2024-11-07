@@ -1,17 +1,16 @@
 'use client'
 
 import { registerNewUser } from "@/lib/actions";
-import { useFormState } from "react-dom";
-import { useEffect } from "react";
+import { useActionState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import styles from "./registerForm.module.css"
 
 const RegisterForm = () => {
 
-  // utilize useFormState with two parameters:
+  // utilize useActionState with two parameters:
   // function, and initial state
-  const [state, formAction] = useFormState(registerNewUser, undefined);
+  const [state, formAction] = useActionState(registerNewUser, undefined);
 
   // initialize router
   const router = useRouter();

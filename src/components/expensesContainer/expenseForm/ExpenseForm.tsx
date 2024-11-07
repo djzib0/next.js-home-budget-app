@@ -1,8 +1,7 @@
 'use client'
 import { addExpense, editExpense } from '@/lib/actions'
 import { useRouter } from 'next/navigation'
-import React, { useEffect, useState } from 'react'
-import { useFormState } from 'react-dom'
+import React, { useActionState, useEffect, useState } from 'react'
 import { ExpenseFormType } from '@/lib/types'
 import { ClothesExpense, DigitalServicesExpense, ExpenseGroup, FoodExpense, HealthExpense, HobbyExpense, HomeExpense, OtherExpense, TransportExpense } from '@/lib/enums';
 import styles from './expenseForm.module.css'
@@ -196,7 +195,7 @@ const ExpenseForm = ({userId, budgetId, defaultValues, closeFunction} : {userId:
     }
   }
   
-  const [state, formAction] = useFormState(handleSubmit, undefined)
+  const [state, formAction] = useActionState(handleSubmit, undefined)
 
   const router = useRouter();
 
