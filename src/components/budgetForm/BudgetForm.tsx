@@ -72,7 +72,7 @@ const BudgetForm = ({session, defaultValues} : {session: Session; defaultValues?
       redirect('/budgets')
     }
     router.refresh();
-  }, [state, router])
+  }, [state, router, defaultValues])
 
 
   return (
