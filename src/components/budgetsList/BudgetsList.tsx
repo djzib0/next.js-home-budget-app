@@ -98,6 +98,14 @@ const BudgetsList = ({budgets} : {budgets: BudgetType[]}) => {
   return (
     <div className={styles.budgetsListContainer}>
       <div className={styles.buttonsContainer}>
+        <Link href={"/budgets/add"}>
+              <Button 
+              btnHtmlType={'button'}
+              btnType={'info'}
+              btnSize={'large'}
+              btnText={'Add new budget'}
+              />
+          </Link>
         <div className={styles.searchFormContainer}>
           <button 
             onClick={toggleSearchFilter}
@@ -151,14 +159,6 @@ const BudgetsList = ({budgets} : {budgets: BudgetType[]}) => {
             </form>
           }     
         </div>
-        <Link href={"/budgets/add"}>
-            <Button 
-            btnHtmlType={'button'}
-            btnType={'info'}
-            btnSize={'large'}
-            btnText={'Add new budget'}
-            />
-        </Link>
       </div>
       <div className={styles.budgetLinksContainer}>
         {isSearchFilterOn && filteredBudget}

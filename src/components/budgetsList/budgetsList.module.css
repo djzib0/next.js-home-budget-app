@@ -5,8 +5,9 @@
 
 .buttonsContainer {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
+    gap: .3rem;
     max-width: 1024px;
     justify-content: space-around;
 }
@@ -57,10 +58,11 @@
     overflow: hidden;
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
     border-top: 1px solid #ccd5ae;
     border-bottom: 1px solid #ccd5ae;
     border-right: 1px solid #ccd5ae;
-    max-width: fit-content;
+    width: 100%;
     animation-name: expand;
     animation-duration: .75s;
     animation-timing-function: ease-in;
@@ -95,4 +97,23 @@
     50% {width: 50%;}
     75% {width: 75%;} */
     100% {width: 100%}
+}
+
+@keyframes expand--down {
+    0% {height: 0%}
+    100% {height: 100%}
+}
+
+@media (min-width: 650px) {
+    .buttonsContainer {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        gap: .3rem;
+    }
+
+    .filterForm {
+        max-width: fit-content;
+    }
 }
