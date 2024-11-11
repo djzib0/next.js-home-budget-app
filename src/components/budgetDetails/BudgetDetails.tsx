@@ -1,5 +1,8 @@
+
 import { BudgetType } from "@/lib/types";
 import { convertBudgetNameToDate, sumAllExpenses, sumBudget } from "@/lib/utils";
+// component import 
+import BudgetCtaContainer from "./budgetCtaContainer/BudgetCtaContainer";
 // import BudgetChart from "./budgetChart/BudgetChart";
 import ProgressBar from "./progressBar/ProgressBar";
 import { getAllExpensesByUserAndBudgetId } from "@/lib/actions";
@@ -7,9 +10,7 @@ import { getAllExpensesByUserAndBudgetId } from "@/lib/actions";
 import styles from "./budgetDetails.module.css"
 import BudgetSummary from "./budgetSummary/BudgetSummary";
 import ExpensesContainer from "../expensesContainer/ExpensesContainer";
-import Link from "next/link";
 // icons import
-import { FaEdit } from "react-icons/fa";
 
 const BudgetDetails = async ({budget, userId} : {budget: BudgetType, userId: string}) => {
 
@@ -19,12 +20,14 @@ const BudgetDetails = async ({budget, userId} : {budget: BudgetType, userId: str
 
   return (
     <div className={styles.budgetDetailsContainer}>
-      <Link href={`/budgets/edit/${budget.budgetName}`}>Got to edit form</Link>
       {budget &&
       <div>
         <div className={styles.budgetTitleContainer}>
           <h1 id={styles.budgetTitle}>Budget for {convertBudgetNameToDate(budget.budgetName, 'en-EN')}</h1>
-          <Link href={`/budgets/edit/${budget.budgetName}`}>Edit budget<FaEdit /></Link>
+          <BudgetCtaContainer 
+            budgetName={budget.budgetName} 
+            budgetId={budget._id}
+          />
         </div>
           <ProgressBar currentProgress={expensesSum} maxValue={budgetSum} />
           <div className={styles.budgetChartAndSummaryContainer}>

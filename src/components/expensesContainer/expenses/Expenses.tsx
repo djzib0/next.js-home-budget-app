@@ -2,7 +2,7 @@
 import { BudgetType, Expense, ExpenseDetails } from '@/lib/types';
 import React, { useState } from 'react';
 import styles from "./expenses.module.css"
-import { convertBudgetToAggregatedChartData, setExpenseGroup, sumBudgetForMainGroup } from '@/lib/utils';
+import {setExpenseGroup, sumBudgetForMainGroup } from '@/lib/utils';
 import { ExpenseGroup, ModalEnumType } from '@/lib/enums';
 import useModal from '@/customHooks/useModal';
 import Modal from '@/components/modal/Modal';
@@ -16,7 +16,6 @@ import ExpenseGroupButton from './expenseGroupButton/ExpenseGroupButton';
 
 const Expenses = ({expenses, budget} : {expenses: Expense[]; budget: BudgetType}) => {
 
-  console.log(convertBudgetToAggregatedChartData(budget)[0].values)
   // utilize useModal custom hook
   const {
     setModalData,

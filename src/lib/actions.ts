@@ -7,6 +7,7 @@ import bcrypt from "bcryptjs";
 import { convertYearToBudgetName } from "./utils";
 import mongoose from "mongoose";
 import { ActionResult } from "next/dist/server/app-render/types";
+import { redirect } from "next/navigation";
 
 export const handleGitHubLogin = async () => {
     'use server'
@@ -237,6 +238,21 @@ export const getAllBudgetsByUserId = async (userId: string) => {
     }
 }
 
+export const deleteBudgetById = async (budgetId: string | undefined) => {
+    // if (budgetId) {
+    //     const res = await fetch(`http://localhost:3000/api/budgets/${expenseId}`, {
+    //         method: "DELETE",
+    //     });
+    //     if (!res.ok) {
+    //         throw new Error("Something went wrong while deleting budget.")
+    //     }
+    //     revalidatePath("/budgets")
+    //     redirect("/budgets")
+        // return res.json();
+    // }
+    redirect("/budgets")
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const addComment = async (prevState: any, formData: any) => {
     const {budgetId} = Object.fromEntries(formData)
@@ -306,7 +322,6 @@ export const deleteExpenseById = async (expenseId: string | undefined) => {
         return res.json();
     }
 }
-
 
 export const editExpense = async (prevState: ActionResult, formData: FormData) => {
     const {expenseId, userId, budgetId, name, value, group} = Object.fromEntries(formData);

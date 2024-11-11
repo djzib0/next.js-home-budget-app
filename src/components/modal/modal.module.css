@@ -9,6 +9,7 @@
     transform: translate(-50%, -50%);
     width: 90%;
     max-width: 1024px;
+    z-index: 500;
 }
 
 .modalBody--information,
