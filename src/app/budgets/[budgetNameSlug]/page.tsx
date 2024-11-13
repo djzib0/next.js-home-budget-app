@@ -2,9 +2,9 @@ import BudgetDetails from '@/components/budgetDetails/BudgetDetails'
 import { getCurrentBudget } from '@/lib/actions';
 import { auth } from '@/lib/auth';
 
-const BudgetPage = async ({params}: {params: {budgetNameSlug: string}}) => {
+const BudgetPage = async ({params}: {params: Promise<{budgetNameSlug: string}>}) => {
 
-  const {budgetNameSlug} = params;
+  const {budgetNameSlug} = await params;
 
   const session = await auth();
   const budget = session && await getCurrentBudget(session.user?.id ? session.user.id : "", budgetNameSlug) 

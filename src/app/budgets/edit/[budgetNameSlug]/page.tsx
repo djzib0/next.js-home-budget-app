@@ -3,9 +3,9 @@ import { getBudgetByUserIdAndBudgetName } from '@/lib/actions';
 import { auth } from '@/lib/auth';
 import React from 'react'
 
-const EditBudgetPage = async ({params} : {params: {budgetNameSlug: string}}) => {
+const EditBudgetPage = async ({params} : {params: Promise<{budgetNameSlug: string}>}) => {
 
-  const {budgetNameSlug} = params;
+  const {budgetNameSlug} = await params;
 
   const session = await auth();
   const budget = session && await getBudgetByUserIdAndBudgetName(session.user?.id ? session.user.id : "", budgetNameSlug)

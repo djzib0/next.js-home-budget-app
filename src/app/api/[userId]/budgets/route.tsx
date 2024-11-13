@@ -4,8 +4,8 @@ import { NextResponse } from "next/server";
 import { unstable_noStore as noStore } from "next/cache";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
-export const GET = async (request: never, {params}: {params: any}) => {
-    const {userId, budgetId} = params;
+export const GET = async (request: never, {params}: {params: Promise<{userId: string, budgetId: string}>}) => {
+    const {userId, budgetId} = await params;
     noStore();
     try {
         connectToDb();

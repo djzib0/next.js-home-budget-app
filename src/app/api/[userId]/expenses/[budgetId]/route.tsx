@@ -3,8 +3,8 @@ import { connectToDb } from "@/lib/mongooseUtils";
 import { NextResponse } from "next/server";
 import { unstable_noStore as noStore } from "next/cache";
 
-export const GET = async (request: never, {params}: {params: {userId: string; budgetId: string}}) => {
-    const {userId, budgetId} = params;
+export const GET = async (request: never, {params}: {params: Promise<{userId: string; budgetId: string}>}) => {
+    const {userId, budgetId} = await params;
     noStore();
     try {
         connectToDb();

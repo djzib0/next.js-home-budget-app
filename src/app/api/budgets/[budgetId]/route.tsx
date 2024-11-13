@@ -1,11 +1,10 @@
 import { Budget } from "@/lib/models";
 import { connectToDb } from "@/lib/mongooseUtils";
 import { unstable_noStore } from "next/cache";
-import { useParams } from "next/navigation";
 import { NextResponse } from "next/server";
 
-export const GET = async (request: never, {params}: {params: {budgetId: string}}) => {
-    const {budgetId} = params;
+export const GET = async (request: never, {params}: {params: Promise<{budgetId: string}>}) => {
+    const {budgetId} = await params;
     console.log(budgetId, " paraaaaaaaaaaaaaaaaaaams")
     unstable_noStore();
     try {
