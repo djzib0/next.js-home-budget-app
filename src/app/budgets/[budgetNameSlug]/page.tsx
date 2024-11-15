@@ -1,6 +1,8 @@
 import BudgetDetails from '@/components/budgetDetails/BudgetDetails'
 import { getCurrentBudget } from '@/lib/actions';
 import { auth } from '@/lib/auth';
+import Loading from '@/Loading';
+import { Suspense } from 'react';
 
 const BudgetPage = async ({params}: {params: Promise<{budgetNameSlug: string}>}) => {
 
@@ -12,7 +14,9 @@ const BudgetPage = async ({params}: {params: Promise<{budgetNameSlug: string}>})
   return (
     <div>
         {session?.user?.id && 
-          <BudgetDetails budget={budget && budget} userId={session.user?.id} />
+          <Suspense fallback={<Loading />}>
+            <BudgetDetails budget={budget && budget} userId={session.user?.id} />
+          </Suspense>
         }
     </div>
   )

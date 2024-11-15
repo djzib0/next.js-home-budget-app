@@ -10,7 +10,6 @@ import { getAllExpensesByUserAndBudgetId } from "@/lib/actions";
 import styles from "./budgetDetails.module.css"
 import BudgetSummary from "./budgetSummary/BudgetSummary";
 import ExpensesContainer from "../expensesContainer/ExpensesContainer";
-// icons import
 
 const BudgetDetails = async ({budget, userId} : {budget: BudgetType, userId: string}) => {
 
@@ -34,8 +33,7 @@ const BudgetDetails = async ({budget, userId} : {budget: BudgetType, userId: str
             {/* <BudgetChart budget={budget}/> */}
             <BudgetSummary budgetSum={budgetSum} expensesSum={expensesSum} />
           </div>
-          <ExpensesContainer userId={userId} budget={budget} expenses={expenses} />
-      </div>
+          <ExpensesContainer userId={userId} budget={budget} expenses={expenses} />      </div>
       }
     </div>
   )

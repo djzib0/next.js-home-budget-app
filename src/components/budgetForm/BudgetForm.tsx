@@ -72,7 +72,8 @@ const BudgetForm = ({session, defaultValues} : {session: Session; defaultValues?
       redirect('/budgets')
     }
     router.refresh();
-  }, [state, router, defaultValues])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state, router])
 
 
   return (
