@@ -1,16 +1,14 @@
-.formContainer {
-    display: flex;
-    max-width: 800px;
-    border: 1px solid var(--colorDarker);
+.budgetFormContainer {
+    max-width: 1024px;
     margin: 1em auto;
-    flex-wrap: wrap;
-    gap: .5rem;
-
+    padding: .5rem;
 }
 
-.formContainer > label {
-    display: flex;
-    flex-basis: 50%;
+.formContainer {
+    display: grid;
+    grid-template-columns: .4fr .7fr;
+    flex-direction: column;
+    gap: .5rem;
 }
 
 .formContainer > input,
@@ -26,7 +24,7 @@
     font-weight: 400;
     padding: 4px 8px;
     min-height: 28px;
-    width: 150px;
+    width: 90%;
     vertical-align: middle;
     transition: background-color .24s,box-shadow .24s;
     transition-property: background-color, box-shadow;
@@ -42,6 +40,12 @@
 
 .errorFont {
     color: red;
+}
+
+.formButtonsContainer {
+    display: flex;
+    flex-direction: row;
+    gap: .5rem;
 }
 
 

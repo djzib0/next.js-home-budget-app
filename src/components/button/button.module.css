@@ -14,7 +14,7 @@
     padding: 0 11px;
     text-align: center;
     width: fit-content;
-    min-width: 200px;
+    min-width: 120px;
     font-weight: 500;
     color: #0F1111;
     line-height: 1.25rem;
@@ -22,20 +22,43 @@
     margin-bottom: .6em;
     transition: background-color 0.3s, transform 0.2s;
 }
-.buttonContainer:hover{
-        background: #F7CA00;
-        border-color: #F2C200;
-        box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
-        transform: scale(1.05);
-    }
-    
+   
 
 .info {
     background: #FFD814;
     border: 1px solid #FCD200;
 }
 
+.info:hover {
+    background: #F7CA00;
+    border-color: #F2C200;
+    box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
+    transform: scale(1.05);
+}
+
+.cancel {
+    background-color: #ffffff;
+    border: 1px solid #898989;
+}
+
+.action {
+    background-color: rgb(0, 213, 64);
+    border: 1px solid #1a8200;
+}
+
+.cancel:hover {
+    background-color: #c6c6c6;
+    border: 1px solid #898989;
+    box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
+    transform: scale(1.05);
+}
+
 .large {
     height: 50px;
+}
+
+.small {
+    width: 30px;
+    font-size: .7rem;
 }
 

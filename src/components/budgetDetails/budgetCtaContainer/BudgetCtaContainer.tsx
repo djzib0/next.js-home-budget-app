@@ -25,7 +25,7 @@ const BudgetCtaContainer = ({budgetName, budgetId} : {budgetName: string; budget
   }
 
   return (
-    <>
+    <div>
       <Link href={`/budgets/edit/${budgetName}`} className={styles.editBtn}>
         Edit <FaEdit/>
       </Link>
@@ -54,7 +54,7 @@ const BudgetCtaContainer = ({budgetName, budgetId} : {budgetName: string; budget
           closeFunction={modalData.closeFunction}
         />
       }
-    </>
+    </div>
   )
 }
 

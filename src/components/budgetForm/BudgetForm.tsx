@@ -1,12 +1,12 @@
 'use client'
 import { createNewBudget, editBudget } from '@/lib/actions'
-import { MonthNameLength } from '@/lib/enums'
-import { convertBudgetNameToMonth, convertBudgetNameToYear, convertToMonthName } from '@/lib/utils'
+import { convertBudgetNameToMonth, convertBudgetNameToYear } from '@/lib/utils'
 import { Session } from 'next-auth'
 import { redirect, useRouter } from 'next/navigation'
 import React, { useActionState, useEffect, useState } from 'react'
 import styles from './budgetForm.module.css'
 import { BudgetFormType } from '@/lib/types'
+import Button from '../button/Button'
 
 const BudgetForm = ({session, defaultValues} : {session: Session; defaultValues?: BudgetFormType}) => {
 
@@ -77,7 +77,7 @@ const BudgetForm = ({session, defaultValues} : {session: Session; defaultValues?
 
 
   return (
-    <div>
+    <div className={styles.budgetFormContainer}>
       <p>{state?.error}</p>
       <form className={styles.formContainer} action={formAction}>
         <label 
@@ -313,10 +313,32 @@ const BudgetForm = ({session, defaultValues} : {session: Session; defaultValues?
           min={0}
         />
         <input type='hidden' name='userId' value={session.user?.id} />
-        {!defaultValues && <button>Add new budget, MATEEEE</button>}
-        {defaultValues && <button>Edit budget, HOMIEEEE</button>}
+        <div className={styles.formButtonsContainer}>
+          {!defaultValues && 
+            <Button 
+              btnHtmlType='submit'
+              btnType='info'
+              btnSize='medium'
+              btnText={'SAVE'}
+            />
+          }
+          {defaultValues && 
+          <Button 
+            btnHtmlType={'submit'}
+            btnType={'info'}
+            btnSize={'medium'}
+            btnText={'EDIT'}
+          />
+          }
+          <Button
+            btnHtmlType={'button'}
+            btnType={'cancel'}
+            btnSize={'medium'}
+            btnText={'cancel'}
+            handleClick={() => router.back()}
+          />
+        </div>
       </form>
-      <button type='button' onClick={() => convertToMonthName(1, 'en-En', MonthNameLength.Short)}>Click to get date</button>
     </div>
   )
 }

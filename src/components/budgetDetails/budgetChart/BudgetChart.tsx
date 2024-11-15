@@ -7,6 +7,7 @@ import useToggle from "@/customHooks/useToggle";
 // styles import
 import styles from "./budgetChart.module.css"
 import { useEffect, useState } from "react";
+import Button from "@/components/button/Button";
 
 
 const BudgetChart = ({budget} : {budget: BudgetType}) => {
@@ -56,7 +57,13 @@ const BudgetChart = ({budget} : {budget: BudgetType}) => {
   const Plot: PlotParams | any = dynamic(() => import("react-plotly.js"), { ssr: false, })
   return (
     <div className={styles.chartContainer}>
-      <button onClick={toggle}>Show details</button>
+      <Button 
+        btnHtmlType={'button'}
+        btnText={'Show details'}
+        btnSize={'small'}
+        btnType={'action'}
+        handleClick={toggle}
+      />
       <div>
         {aggregatedData && !isOn && <Plot
           data={aggregatedData}
