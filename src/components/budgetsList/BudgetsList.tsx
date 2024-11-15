@@ -105,7 +105,7 @@ const BudgetsList = ({budgets} : {budgets: BudgetType[]}) => {
               btnSize={'large'}
               btnText={'Add new budget'}
               />
-          </Link>
+        </Link>
         <div className={styles.searchFormContainer}>
           <button 
             onClick={toggleSearchFilter}

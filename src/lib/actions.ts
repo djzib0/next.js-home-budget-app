@@ -8,6 +8,7 @@ import { convertYearToBudgetName } from "./utils";
 import mongoose from "mongoose";
 import { ActionResult } from "next/dist/server/app-render/types";
 import { redirect } from "next/navigation";
+import { NextResponse } from "next/server";
 
 export const handleGitHubLogin = async () => {
     'use server'
@@ -194,6 +195,17 @@ export const createNewBudget = async (prevState: any, formData: any) => {
     }
 }
 
+export const getUser = async (userId: string) => {
+    if (userId) {
+        const res = await fetch(`http://localhost:3000/api/${userId}`)
+        if (!res.ok) {
+          throw new Error("Something went wrong")
+        } 
+        return res.json()
+     }
+}
+
+
 export const getCurrentBudget = async (userId: string, currentBudgetName: string) => {
     if (userId) {
         const res = await fetch(`http://localhost:3000/api/${userId}/budgets/${currentBudgetName}`)
@@ -239,17 +251,17 @@ export const getAllBudgetsByUserId = async (userId: string) => {
 }
 
 export const deleteBudgetById = async (budgetId: string | undefined) => {
-    // if (budgetId) {
-    //     const res = await fetch(`http://localhost:3000/api/budgets/${expenseId}`, {
-    //         method: "DELETE",
-    //     });
-    //     if (!res.ok) {
-    //         throw new Error("Something went wrong while deleting budget.")
-    //     }
-    //     revalidatePath("/budgets")
-    //     redirect("/budgets")
-        // return res.json();
-    // }
+    if (budgetId) {
+        const res = await fetch(`http://localhost:3000/api/budgets/${budgetId}`, {
+            method: "DELETE",
+        });
+        if (!res.ok) {
+            throw new Error("Something went wrong while deleting budget.")
+        }
+        revalidatePath("/budgets")
+        redirect("/budgets")
+        return res.json();
+    }
     redirect("/budgets")
 }
 
@@ -325,7 +337,6 @@ export const deleteExpenseById = async (expenseId: string | undefined) => {
 
 export const editExpense = async (prevState: ActionResult, formData: FormData) => {
     const {expenseId, userId, budgetId, name, value, group} = Object.fromEntries(formData);
-    console.log(formData, "editing expense")
     try {
         connectToDb();
         const editedExpense = {

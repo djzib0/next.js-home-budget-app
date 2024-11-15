@@ -8,7 +8,8 @@ export const GET = async (request: never, userId: string) => {
     noStore();
     try {
         connectToDb();
-        const user = await User.find({userId: userId});
+        console.log(userId, " in api")
+        const user = await User.findById(userId);
         return NextResponse.json(user);
     } catch (err) {
         throw new Error("Failed to fetch budgets!")
