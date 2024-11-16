@@ -12,14 +12,16 @@ export const authConfig = {
                 token.id = user.id;
                 token.isAdmin = user.isAdmin;
                 token.username = user.username
-            }
-            return token
-        },
-        async session({session, token}) {
-          console.log(token.username, " in jwt")
-            if (token) {
+              }
+              console.log(token, " token in jwt")
+              return token
+            },
+            async session({session, token}) {
+              console.log(token.username, " in session")
+              if (token) {
                 session.user.id = token.id;
                 session.user.isAdmin = token.isAdmin;
+                session.user.name = token.username
             }
             return session
         },

@@ -1,0 +1,49 @@
+.loginFormContainer {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #bbd0ff;
+    width: 500px;
+    border-radius: .5rem;
+    padding: 2rem;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.form > input {
+    width: 100%;
+    padding: 1rem;
+    /* margin: .8rem auto; */
+    font-weight: 700;
+}
+
+.form > input,
+.btn {
+    border-radius: .2rem;
+}
+
+.registerContainer {
+    display: flex;
+    flex-direction: row;
+    gap: .3rem;
+}
+
+.btn {
+    height: 62px;
+    width: 100%;
+    padding: 0 25px;
+    background-color: #1e6091;
+    margin: 1rem 0;
+    font-size: 1rem;
+    font-weight: bolder;
+    letter-spacing: .1rem;
+    text-transform: uppercase;
+}

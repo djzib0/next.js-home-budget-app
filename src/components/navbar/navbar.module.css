@@ -1,7 +1,8 @@
 .navbarContainer {
     padding: 1rem 2rem;
     font-size: 1.2rem;
-    background-color: var(--colorLight);
+    background-color: #a1c181;
+    color: #001524;
 }
 
 .navbar {

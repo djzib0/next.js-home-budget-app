@@ -7,7 +7,7 @@ import Button from '../button/Button';
 // styles import
 import styles from "./homePageContent.module.css"
 
-const HomePageContent = ({currentBudget, userName} : {currentBudget: BudgetType; userName: string}) => {
+const HomePageContent = ({currentBudget, userName} : {currentBudget: BudgetType; userName: string | undefined | null}) => {
   console.log(userName)
   return (
     <div className={styles.homePageContainer}>

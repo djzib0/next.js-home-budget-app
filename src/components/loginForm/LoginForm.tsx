@@ -19,15 +19,19 @@ const LoginForm = () => {
   }, [state?.success, router])
 
   return (
-    <div>
+    <div className={styles.loginFormContainer}>
+      <h3 className={styles.formTitle}>LOGIN</h3>
       <form className={styles.form} action={formAction}>
-          <input type='text' placeholder='login' name='username' />
-          <input type='password' placeholder='password' name='password' />
-          <button>Login</button> 
-          <Link href="/register" className={styles.link}>
-        {"Don't Have an account?"} <b>Register</b>
-      </Link>
-        </form>
+        <input type='text' placeholder='login' name='username' />
+        <input type='password' placeholder='password' name='password' />
+        <button className={styles.btn}>Login</button> 
+      </form>
+      <div className={styles.registerContainer}>
+        <p>Not a member?</p>
+        <Link href="/register" className={styles.link}>
+          <b>Register</b>
+        </Link>
+      </div>
     </div>
   )
 }
