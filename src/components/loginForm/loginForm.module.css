@@ -4,10 +4,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #bbd0ff;
+    background-color: #f4ebfc;
     width: 500px;
     border-radius: .5rem;
     padding: 2rem;
+    box-shadow: 0 3.2px 7.2px 0 rgb(0 0 0 / 13%), 0 0.6px 1.8px 0 rgb(0 0 0 / 11%);
 }
 
 .form {
@@ -30,20 +31,93 @@
     border-radius: .2rem;
 }
 
+.btn {
+    height: 62px;
+    width: 100%;
+    padding: 0 25px;
+    background-color: #9b5de5;
+    color: #f5f5f5;
+    margin: 2rem 0;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: .1rem;
+    text-transform: uppercase;
+    transition: background-color .2s ease-in;
+}
+
+.btn:hover {
+    background-color: #212529;
+}
+
 .registerContainer {
     display: flex;
     flex-direction: row;
     gap: .3rem;
 }
 
-.btn {
-    height: 62px;
+.link b {
+    /* text-decoration: underline; */
+    border-bottom: 1px solid;
+}
+
+.registerContainer,
+.providersLoginContainer p {
+    color: #76808b;
+    font-weight: 300;
+    margin: 1rem auto;
+}
+
+.providersLoginContainer {
     width: 100%;
-    padding: 0 25px;
-    background-color: #1e6091;
-    margin: 1rem 0;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.providersBtnsContainer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.providerBtn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    outline: 0;
+    cursor: pointer;
+    text-align: center;
+    border: 1px solid #babfc3;
+    padding: 11px 24px;
+    min-height: 44px;
+    width: 48%;
+    color: #202223;
+    background: #ffffff;
+    border-radius: 4px;
+    font-weight: 500;
     font-size: 1rem;
-    font-weight: bolder;
-    letter-spacing: .1rem;
-    text-transform: uppercase;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 0px 0px;
+}
+
+#facebookLoginBtn {
+    color: #4267B2;
+}
+
+#facebookLoginBtn,
+#googleLoginBtn {
+    transition: color .2s ease-in, border-color .2s ease-in;
+}
+
+#facebookLoginBtn:hover,
+#googleLoginBtn:hover {
+    color: #9b5de5;
+    border-color: #9b5de5;
+}
+
+.providerBtnText {
+    display: inline-block;
+}
+
+.providerBtnIcon {
+    font-size: 1rem;
+    margin-right: .3rem;
 }
