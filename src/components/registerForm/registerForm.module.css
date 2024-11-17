@@ -1,0 +1,85 @@
+.registerFormContainer {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4ebfc;
+    max-width: 500px;
+    min-width: 320px;
+    width: 100%;
+    border-radius: .5rem;
+    padding: 2rem;
+    box-shadow: 0 3.2px 7.2px 0 rgb(0 0 0 / 13%), 0 0.6px 1.8px 0 rgb(0 0 0 / 11%);
+}
+
+.formTitle {
+    font-weight: bolder;
+    margin: 2rem auto;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.form > input {
+    width: 100%;
+    padding: 1rem;
+    /* margin: .8rem auto; */
+    font-weight: 700;
+}
+
+.form > input,
+.btn {
+    border-radius: .2rem;
+}
+
+.btn {
+    height: 62px;
+    width: 100%;
+    padding: 0 25px;
+    background-color: #9b5de5;
+    color: #f5f5f5;
+    margin: 2rem 0;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: .1rem;
+    text-transform: uppercase;
+    transition: background-color .2s ease-in;
+}
+
+.errorMsg {
+    width: 100%;
+    padding: 1rem 1rem;
+    font-size: .8rem;
+    background-color: #fce4e4;
+    border: 1px solid #fcc2c3;
+    color: #ff0000;
+    border-radius: .2rem;
+    line-height: 20px;
+}
+
+.btn:hover {
+    background-color: #212529;
+}
+
+.registerContainer {
+    display: flex;
+    flex-direction: row;
+    gap: .3rem;
+}
+
+.link b {
+    /* text-decoration: underline; */
+    border-bottom: 1px solid;
+}
+
+.registerContainer {
+    color: #76808b;
+    font-weight: 300;
+    margin: 1rem auto;
+}

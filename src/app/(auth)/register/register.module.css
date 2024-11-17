@@ -1,30 +1,14 @@
 .container {
+    max-width: 1024px;
+    margin: 0 auto;
     display: flex;
+    gap: 2rem;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
+    width: 100%;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
-
-.wrapper {
-    width: 500px;
-    background-color: var(--bgSoft);
-    padding: 50px;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    gap: 30px;
-    border-radius: 5px;
-}
-
-.wrapper > form {
-    display: flex;
-    flex-direction: column;
-    gap: .5em;
-}
-
-.wrapper > form > input {
-    border: 1px solid black;
-    padding: 5px;
-    border-radius: 8px;
-}
-

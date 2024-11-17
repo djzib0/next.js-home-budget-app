@@ -1,0 +1,34 @@
+.container {
+    max-width: 1024px;
+    margin: 0 auto;
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    align-items: center;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+}
+
+.summaryIcon {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    display: none;
+}
+
+@media (min-width: 900px) {
+
+    .container {
+        flex-direction: row;
+    }
+
+    .summaryIcon {
+        display: block;
+    }
+
+}

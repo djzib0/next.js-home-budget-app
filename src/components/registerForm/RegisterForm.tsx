@@ -20,17 +20,23 @@ const RegisterForm = () => {
   }, [state?.success, router ])
 
   return (
-    <form className={styles.form} action={formAction}>
-        <input type="text" placeholder="username" name="username"/>
+    <div className={styles.registerFormContainer}>
+      <h2 className={styles.formTitle}>REGISTER</h2>
+      <form className={styles.form} action={formAction}>
+      <input type="text" placeholder="username" name="username"/>
         <input type="text" placeholder="email" name="email"/>
         <input type="password" placeholder="password" name="password"/>
         <input type="password" placeholder="password again" name="passwordRepeat"/>
-        <button>Register</button>
-        {state?.error}
-        <Link href='/login' className={styles.link}>
-          Have an account? <b>Login</b>
-        </Link>
+        {state?.error && <p className={styles.errorMsg}>{state?.error}</p>}
+        <button className={styles.btn}>Register</button> 
       </form>
+      <div className={styles.registerContainer}>
+        <p>Have an account?</p>
+        <Link href="/login" className={styles.link}>
+          <b>Log in</b>
+        </Link>
+      </div>
+    </div>
   )
 }
 
