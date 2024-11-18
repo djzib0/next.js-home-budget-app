@@ -8,16 +8,16 @@ export const authConfig = {
     // },
     callbacks: {
         async jwt({token, user}) {
+            console.log(token, ' token')
+            console.log(user, ' user')
             if(user) {
                 token.id = user.id;
                 token.isAdmin = user.isAdmin;
-                token.username = user.username
+                token.username = user.name || user.username
               }
-              console.log(token, " token in jwt")
               return token
             },
             async session({session, token}) {
-              console.log(token.username, " in session")
               if (token) {
                 session.user.id = token.id;
                 session.user.isAdmin = token.isAdmin;
@@ -28,7 +28,8 @@ export const authConfig = {
         authorized({ auth, request }) {
             
         const user = auth?.user;
-            
+        
+        const isOnHomePage = request.nextUrl?.pathname.startsWith("/")
         const isOnAdminPanel = request.nextUrl?.pathname.startsWith("/admin");
         const isOnBudgetsPage = request.nextUrl?.pathname.startsWith("/budgets");
         const isOnLoginPage = request.nextUrl?.pathname.startsWith("/login");
@@ -37,6 +38,10 @@ export const authConfig = {
     
   
         if (isOnAdminPanel && !user?.isAdmin) {
+          return false;
+        }
+
+        if (isOnHomePage && !user) {
           return false;
         }
 

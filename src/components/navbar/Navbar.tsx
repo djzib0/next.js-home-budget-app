@@ -2,7 +2,7 @@
 import Link from "next/link"
 import styles from "./navbar.module.css"
 import { auth } from "@/lib/auth";
-import { handleGitHubLogout } from "@/lib/actions";
+import { handleLogout } from "@/lib/actions";
 
 const Navbar = async () => {
 
@@ -17,14 +17,14 @@ const Navbar = async () => {
         {session?.user && <div className={styles.navbarRight}>
           <Link href={"/"}>Home</Link>
           <Link href={"/budgets"}>Budgets</Link>
-          {session?.user && <form action={handleGitHubLogout}>
+          {session?.user && <form action={handleLogout}>
             <button>Logout </button>
           </form>}
         </div>}
         {!session?.user && <div className={styles.navbarRight}>
           <Link href={"/login"}>Login</Link>
           <Link href={"/register"}>Register</Link>
-          {session?.user && <form action={handleGitHubLogout}>
+          {session?.user && <form action={handleLogout}>
             <button>Logout </button>
           </form>}
         </div>}      

@@ -1,7 +1,7 @@
 "use client"
 
 import styles from "./loginForm.module.css";
-import { login} from "@/lib/actions";
+import { handleGoogleLogin, login } from "@/lib/actions";
 import { useRouter } from "next/navigation"
 import { useActionState, useEffect } from "react"
 import Link from "next/link";
@@ -35,7 +35,11 @@ const LoginForm = () => {
             <div className={styles.providerBtnIcon}><ImFacebook2 /></div>
             <div className={styles.providerBtnText}>Facebook</div>
           </button>
-          <button className={styles.providerBtn} id={styles.googleLoginBtn}>
+          <button 
+            className={styles.providerBtn} 
+            id={styles.googleLoginBtn}
+            onClick={handleGoogleLogin}
+          >
             <div className={styles.providerBtnIcon}><FcGoogle /></div>
             <div className={styles.providerBtnText}>Google</div>
           </button>
