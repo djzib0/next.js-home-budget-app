@@ -1,11 +1,11 @@
 import NextAuth from "next-auth"
-import GitHub from "next-auth/providers/github"
 import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs"
 import { connectToDb } from "./mongooseUtils"
 import { User } from "./models";
 import {authConfig} from "@/lib/auth.config"
 import Google from "next-auth/providers/google";
+import Facebook from "next-auth/providers/facebook";
 
 const login = async (credentials) => {
   try {
@@ -38,9 +38,9 @@ const login = async (credentials) => {
 export const { handlers, signIn, signOut, auth } = NextAuth({
   ...authConfig,
   providers: [
-    GitHub({
-      clientId: process.env.AUTH_GITHUB_ID,
-      clientSecret: process.env.AUTH_GITHUB_SECRET,
+    Facebook({
+      clientId: process.env.AUTH_FACEBOOK_ID,
+      clientSecret: process.env.AUTH_FACEBOOK_SECRET,
     }),
     Google({
       clientId: process.env.AUTH_GOOGLE_ID,
@@ -73,6 +73,26 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
               username: profile?.username,
               email: profile?.email,
               img: profile?.avatar_url,
+            });
+
+            await newUser.save();
+          }
+        } catch (error) {
+          console.log(error)
+          return false
+        }
+      }
+      if (account?.provider === 'facebook') {
+        console.log("yeah, it's a facebook provider moin")
+        connectToDb();
+        try {
+          console.log(profile, " profile moin")
+          const user = await User.findOne({email: profile?.email});
+          if (!user) {
+            const newUser = new User({
+              username: profile?.name,
+              email: profile?.email,
+              img: profile?.picture,
             });
 
             await newUser.save();

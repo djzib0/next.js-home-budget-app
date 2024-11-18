@@ -19,6 +19,12 @@ export const handleGoogleLogin = async () => {
     await signIn("google")
 }
 
+
+export const handleFacebookLogin = async () => {
+    'use server'
+    await signIn("facebook")
+}
+
 export const handleLogout = async () => {
     'use server'
     await signOut()
