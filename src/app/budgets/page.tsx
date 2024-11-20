@@ -8,9 +8,9 @@ import BudgetsList from "@/components/budgetsList/BudgetsList";
 import BudgetLink from "@/components/budgetsList/budgetLink/BudgetLink";
 
 const getData = async (userId: string | undefined) => {
-  // https://home-budget-app-eight.vercel.app
+  // http://localhost:3000
   if (userId) {
-    const res = await fetch(`https://home-budget-app-eight.vercel.app/api/${userId}/budgets`)
+    const res = await fetch(`http://localhost:3000/api/${userId}/budgets`)
     
     if (!res.ok) {
       throw new Error("Something went wrong")

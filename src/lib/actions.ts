@@ -207,7 +207,7 @@ export const createNewBudget = async (prevState: any, formData: any) => {
 
 export const getUser = async (userId: string) => {
     if (userId) {
-        const res = await fetch(`https://home-budget-app-eight.vercel.app/api/${userId}`)
+        const res = await fetch(`http://localhost:3000/api/${userId}`)
         if (!res.ok) {
           throw new Error("Something went wrong")
         } 
@@ -218,7 +218,7 @@ export const getUser = async (userId: string) => {
 
 export const getCurrentBudget = async (userId: string, currentBudgetName: string) => {
     if (userId) {
-        const res = await fetch(`https://home-budget-app-eight.vercel.app/api/${userId}/budgets/${currentBudgetName}`)
+        const res = await fetch(`http://localhost:3000/api/${userId}/budgets/${currentBudgetName}`)
         
         if (!res.ok) {
           throw new Error("Something went wrong")
@@ -229,7 +229,7 @@ export const getCurrentBudget = async (userId: string, currentBudgetName: string
 
 export const getLatestBudget = async (userId: string, latestBudgetName: string) => {
     if (userId) {
-        const res = await fetch(`https://home-budget-app-eight.vercel.app/api/${userId}/budgets/${latestBudgetName}`)
+        const res = await fetch(`http://localhost:3000/api/${userId}/budgets/${latestBudgetName}`)
         
         if (!res.ok) {
           throw new Error("Something went wrong")
@@ -240,7 +240,7 @@ export const getLatestBudget = async (userId: string, latestBudgetName: string) 
 
 export const getBudgetByUserIdAndBudgetName = async (userId: string, budgetName: string) => {
     if (userId) {
-        const res = await fetch(`https://home-budget-app-eight.vercel.app/api/${userId}/budgets/${budgetName}`)
+        const res = await fetch(`http://localhost:3000/api/${userId}/budgets/${budgetName}`)
         
         if (!res.ok) {
           throw new Error("Something went wrong")
@@ -251,7 +251,7 @@ export const getBudgetByUserIdAndBudgetName = async (userId: string, budgetName:
 
 export const getAllBudgetsByUserId = async (userId: string) => {
     if (userId) {
-        const res = await fetch(`https://home-budget-app-eight.vercel.app/api/${userId}/budgets`)
+        const res = await fetch(`http://localhost:3000/api/${userId}/budgets`)
 
         if (!res.ok) {
             throw new Error("Something went wrong while fetching all budgets")
@@ -262,7 +262,7 @@ export const getAllBudgetsByUserId = async (userId: string) => {
 
 export const deleteBudgetById = async (budgetId: string | undefined) => {
     if (budgetId) {
-        const res = await fetch(`https://home-budget-app-eight.vercel.app/api/budgets/${budgetId}`, {
+        const res = await fetch(`http://localhost:3000/api/budgets/${budgetId}`, {
             method: "DELETE",
         });
         if (!res.ok) {
@@ -314,7 +314,7 @@ export const addExpense = async (prevState: any, formData: any) => {
 
 export const getAllExpensesByUserAndBudgetId = async (userId: string, budgetId: string) => {
     if (userId && budgetId) {
-        const res = await fetch(`https://home-budget-app-eight.vercel.app/api/${userId}/expenses/${budgetId}`);
+        const res = await fetch(`http://localhost:3000/api/${userId}/expenses/${budgetId}`);
         if (!res.ok) {
             throw new Error("Something went wrong while fetching all expenses.")
         }
@@ -324,7 +324,7 @@ export const getAllExpensesByUserAndBudgetId = async (userId: string, budgetId: 
 
 export const getExpenseById = async (expenseId: string) => {
     if (expenseId) {
-        const res = await fetch(`https://home-budget-app-eight.vercel.app/api/expenses/${expenseId}`);
+        const res = await fetch(`http://localhost:3000/api/expenses/${expenseId}`);
         if (!res.ok) {
             throw new Error("Something went wrong while fetching expense.")
         }
@@ -334,7 +334,7 @@ export const getExpenseById = async (expenseId: string) => {
 
 export const deleteExpenseById = async (expenseId: string | undefined) => {
     if (expenseId) {
-        const res = await fetch(`https://home-budget-app-eight.vercel.app/api/expenses/${expenseId}`, {
+        const res = await fetch(`http://localhost:3000/api/expenses/${expenseId}`, {
             method: "DELETE",
         });
         if (!res.ok) {
@@ -366,7 +366,7 @@ export const editExpense = async (prevState: ActionResult, formData: FormData) =
 
 export const getBudgetById = async (budgetId: string) => {
     if (budgetId) {
-        const res = await fetch(`https://home-budget-app-eight.vercel.app/api/budgets/${budgetId}`);
+        const res = await fetch(`http://localhost:3000/api/budgets/${budgetId}`);
         if (!res.ok) {
             throw new Error("Something went wrong while fetching expense.")
         }
