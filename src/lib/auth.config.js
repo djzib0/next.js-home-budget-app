@@ -3,6 +3,7 @@ export const authConfig = {
         signIn: "/login",
     },
     providers: [],
+    secret: process.env.AUTH_SECRET,
     // session: {
     //   maxAge: 5,
     // },
