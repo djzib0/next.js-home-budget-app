@@ -13,7 +13,7 @@ import Button from "@/components/button/Button";
 const BudgetChart = ({budget} : {budget: BudgetType}) => {
 
   //state variables
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+  const [windowWidth, setWindowWidth] = useState(0)
 
   useEffect(() => {
     const handleResize = () => {
