@@ -10,6 +10,7 @@ import { convertCurrentYearToNumber, convertMonthAndYearToBudgetName } from '@/l
 import BudgetLink from './budgetLink/BudgetLink';
 import Button from '../button/Button';
 import Link from 'next/link';
+import Image from 'next/image';
 
 
 const BudgetsList = ({budgets} : {budgets: BudgetType[]}) => {
@@ -97,78 +98,99 @@ const BudgetsList = ({budgets} : {budgets: BudgetType[]}) => {
 
   return (
     <div className={styles.budgetsListContainer}>
-      <div className={styles.buttonsContainer}>
-        <Link href={"/budgets/add"}>
-              <Button 
+      {budgets.length === 0 && 
+        <div className={styles.noDataContainer}>
+          <div className={styles.noDataIcon}>
+            <Image alt={'icon with magnifying glass and document, represents no data found'} src={'/nodataicon.svg'} fill />
+          </div>
+          <p>There are no budgets in database.</p>
+          <p>Do you want to create a new budget?</p>
+          <Link href={"/budgets/add"}>
+            <Button 
               btnHtmlType={'button'}
               btnType={'info'}
               btnSize={'large'}
               btnText={'Add new budget'}
-              />
-        </Link>
-        <div className={styles.searchFormContainer}>
-          <button 
-            onClick={toggleSearchFilter}
-            className={styles.searchButton}
-          >
-            <div className={styles.searchButtonTitle}>FILTER</div>
-            <div>
-              <GoSearch />
-            </div>
-          </button>
-          {isSearchFilterOn && 
-            <form 
-              className={styles.filterForm}
-            >
-              <div className={styles.inputContainer}>
-                <label htmlFor='budgetNameMonth'>Month:</label>
-                <select
-                  className={styles.select}
-                  id='budgetNameMonth'
-                  value={filterForm.budgetNameMonth}
-                  onChange={handleChange}
-                  name='budgetNameMonth'
-                >
-                  <option value={""}>---</option>
-                  <option value={"01"}>January</option>
-                  <option value={"02"}>February</option>
-                  <option value={"03"}>March</option>
-                  <option value={"04"}>April</option>
-                  <option value={"05"}>May</option>
-                  <option value={"06"}>June</option>
-                  <option value={"07"}>July</option>
-                  <option value={"08"}>August</option>
-                  <option value={"09"}>September</option>
-                  <option value={"10"}>October</option>
-                  <option value={"11"}>November</option>
-                  <option value={"12"}>December</option>
-                </select>
-              </div>
-              <div className={styles.inputContainer}>
-                <label htmlFor='budgetNameYear'>Year:</label>
-                <select
-                  className={styles.select}
-                  id='budgetNameYear'
-                  value={filterForm.budgetNameYear}
-                  onChange={handleChange}
-                  name='budgetNameYear'
-                  >
-                  {yearOptionsArray}
-                </select>
-              </div>
-            </form>
-          }     
+            />
+          </Link>
         </div>
-      </div>
-      <div className={styles.budgetLinksContainer}>
-        {isSearchFilterOn && filteredBudget}
-        {isSearchFilterOn && filterForm.budgetNameMonth === "" && filteredBudget.length === 0 &&
-        <p>There is no budget for the selected date.</p>}
-        {isSearchFilterOn && filteredBudget.length === 0 && 
-        filterForm.budgetNameMonth != "" &&
-        <p>There is no budget for the selected date.</p>}
-        {isShowAllOn && allBudgetsArr}
-      </div>
+      }
+      {budgets.length > 0 && 
+      <>
+        <div className={styles.buttonsContainer}>
+          <Link href={"/budgets/add"}>
+                <Button 
+                btnHtmlType={'button'}
+                btnType={'info'}
+                btnSize={'large'}
+                btnText={'Add new budget'}
+                />
+          </Link>
+          <div className={styles.searchFormContainer}>
+            <button 
+              onClick={toggleSearchFilter}
+              className={styles.searchButton}
+            >
+              <div className={styles.searchButtonTitle}>FILTER</div>
+              <div>
+                <GoSearch />
+              </div>
+            </button>
+            {isSearchFilterOn && 
+              <form 
+                className={styles.filterForm}
+              >
+                <div className={styles.inputContainer}>
+                  <label htmlFor='budgetNameMonth'>Month:</label>
+                  <select
+                    className={styles.select}
+                    id='budgetNameMonth'
+                    value={filterForm.budgetNameMonth}
+                    onChange={handleChange}
+                    name='budgetNameMonth'
+                  >
+                    <option value={""}>---</option>
+                    <option value={"01"}>January</option>
+                    <option value={"02"}>February</option>
+                    <option value={"03"}>March</option>
+                    <option value={"04"}>April</option>
+                    <option value={"05"}>May</option>
+                    <option value={"06"}>June</option>
+                    <option value={"07"}>July</option>
+                    <option value={"08"}>August</option>
+                    <option value={"09"}>September</option>
+                    <option value={"10"}>October</option>
+                    <option value={"11"}>November</option>
+                    <option value={"12"}>December</option>
+                  </select>
+                </div>
+                <div className={styles.inputContainer}>
+                  <label htmlFor='budgetNameYear'>Year:</label>
+                  <select
+                    className={styles.select}
+                    id='budgetNameYear'
+                    value={filterForm.budgetNameYear}
+                    onChange={handleChange}
+                    name='budgetNameYear'
+                    >
+                    {yearOptionsArray}
+                  </select>
+                </div>
+              </form>
+            }     
+          </div>
+        </div>
+        <div className={styles.budgetLinksContainer}>
+          {isSearchFilterOn && filteredBudget}
+          {isSearchFilterOn && filterForm.budgetNameMonth === "" && filteredBudget.length === 0 &&
+          <p>There is no budget for the selected date.</p>}
+          {isSearchFilterOn && filteredBudget.length === 0 && 
+          filterForm.budgetNameMonth != "" &&
+          <p>There is no budget for the selected date.</p>}
+          {isShowAllOn && allBudgetsArr}
+        </div>
+      </>
+      }
     </div>
   )
 }

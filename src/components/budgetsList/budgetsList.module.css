@@ -37,6 +37,25 @@
     animation-timing-function: ease-in;
 }
 
+.noDataContainer {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+    margin: 0 auto;
+    max-width: 1024px;
+    padding: 0 1em;
+}
+
+
+.noDataIcon {
+    position: relative;
+    width: 250px;
+    height: 250px;
+}
+
 @keyframes changeBorder {
     0% {border-top-right-radius: 8px}
     10% {border-top-right-radius: 7px}

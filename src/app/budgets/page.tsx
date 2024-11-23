@@ -34,13 +34,13 @@ const BudgetsPage = async () => {
 
   return (
     <div className={styles.container}>
-      <h3>Latest:</h3>
+      {latestBudget && <h3>Latest:</h3>}
       {latestBudget && 
       <BudgetLink 
         budget={latestBudget}
         linkTo={`/budgets/${latestBudget?.budgetName}`}
       />}
-      <h3>Other:</h3>
+      {budgets.length > 1 && <h3>Other:</h3>}
       <BudgetsList budgets={allBudgets} />
     </div>
   )
