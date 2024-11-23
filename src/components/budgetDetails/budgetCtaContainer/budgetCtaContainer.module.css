@@ -1,3 +1,8 @@
+.budgetCtaContainer {
+    display: flex;
+    flex-direction: row;
+}
+
 .budgetEditBtnContainer {
     display: flex;
     flex-direction: row;
@@ -7,9 +12,12 @@
 }
 
 .editBtn,
-.deleteBtn {
+.deleteBtn,
+.backBtn {
     display: flex;
+    justify-content: center;
     align-items: center;
+    width: 120px;
     gap: 8px;
     padding: 10px 20px;
     font-size: 16px;
@@ -23,22 +31,38 @@
 
 .editBtn {
     color: #ffffff;
-    background-color: #3a99ff ;
+    background-color: #0077b6;
 }
 
 .deleteBtn {
     color: #ffffff;
-    background-color: #ff0000 ;
+    background-color: #ff5400;
+}
+
+.backBtn {
+    background-color: #a7c957;
 }
   
 .editBtn i {
-font-size: 18px;
+    font-size: 18px;
+}
 
+.editBtn:hover,
+.deleteBtn:hover,
+.backBtn:hover {
+    transform: scale(1.05);
 }
 
 .editBtn:hover {
-background-color: #007bff;
-transform: scale(1.05);
+    background-color: #007bff;
+}
+
+.deleteBtn:hover {
+    background-color: #b50000;
+}
+
+.backBtn:hover {
+    background-color: #849f46;
 }
 
 .editBtn:active {

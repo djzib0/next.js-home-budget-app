@@ -33,7 +33,9 @@ const Modal = (props: ModalType) => {
         <ModalIcon modalType={modalType} />
         <ModalTitle modalTitle={messageTitle} />
         <ModalMessageText messageText={messageText} />
-        {modalType === 'edit' && form}
+        <div className={styles.formContainer}>
+          {modalType === 'edit' && form}
+        </div>
         <ModalButtonsContainer 
           modalType={modalType} 
           handleClick={handleClick} 

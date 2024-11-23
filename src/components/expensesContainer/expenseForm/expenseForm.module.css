@@ -37,6 +37,7 @@
 
 .expenseForm {
     display: flex;
+    flex-direction: column;
     gap: .5rem;
     height: 0%;
     animation-name: open;
@@ -75,7 +76,8 @@
 
 .expenseForm > textarea {
     resize: none;
-    max-height: 36px;
+    padding-top: 7px;
+    /* max-height: fit-content; */
     min-height: 36px;
 }
 

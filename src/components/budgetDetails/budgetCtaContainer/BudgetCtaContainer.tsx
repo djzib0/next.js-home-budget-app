@@ -1,16 +1,19 @@
 'use client'
-
 import Link from "next/link"
 import { FaEdit } from "react-icons/fa"
 import { IoTrashOutline } from "react-icons/io5"
 import useModal from "@/customHooks/useModal"
-// styles import
 import styles from "./budgetCtaContainer.module.css"
 import { ModalEnumType } from "@/lib/enums"
 import Modal from "@/components/modal/Modal"
 import { deleteBudgetById } from "@/lib/actions"
+import { useRouter } from "next/navigation"
+import { IoIosArrowBack } from "react-icons/io";
+
 
 const BudgetCtaContainer = ({budgetName, budgetId} : {budgetName: string; budgetId: string}) => {
+
+  const router = useRouter();
 
   // utilize useModal custom hook
   const {
@@ -25,7 +28,7 @@ const BudgetCtaContainer = ({budgetName, budgetId} : {budgetName: string; budget
   }
 
   return (
-    <div>
+    <div className={styles.budgetCtaContainer}>
       <Link href={`/budgets/edit/${budgetName}`} className={styles.editBtn}>
         Edit <FaEdit/>
       </Link>
@@ -40,6 +43,12 @@ const BudgetCtaContainer = ({budgetName, budgetId} : {budgetName: string; budget
         })}
       >
         Delete <IoTrashOutline />
+      </button>
+      <button
+        className={styles.backBtn}
+        onClick={() => router.back()}
+      >
+        <IoIosArrowBack /> Back
       </button>
       {modalData.isActive && 
         <Modal
