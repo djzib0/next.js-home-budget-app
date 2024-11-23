@@ -35,7 +35,6 @@ export const registerNewUser = async (prevState: any, formData: any) => {
     // 'use server'
     const {username, password, email, passwordRepeat, img} = Object.fromEntries(formData)
     if (password !== passwordRepeat) {
-        console.log("Password do not match, gringo.")
         return {error: "Passwords do not match"}
     }
 
@@ -286,7 +285,7 @@ export const addComment = async (prevState: any, formData: any) => {
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const budget = await Budget.findOneAndUpdate(filter, update, {new: true});
     } catch (error) {
-        console.log("console logged error")
+        console.log("Couldn't find requested budget")
         return {error: "Couldn't find requested budget"}
     }
 }

@@ -9,8 +9,6 @@ export const authConfig = {
     // },
     callbacks: {
         async jwt({token, user}) {
-            console.log(token, ' token')
-            console.log(user, ' user')
             if(user) {
                 token.id = user.id;
                 token.isAdmin = user.isAdmin;

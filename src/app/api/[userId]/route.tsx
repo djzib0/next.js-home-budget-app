@@ -8,7 +8,6 @@ export const GET = async (request: never, userId: string) => {
     noStore();
     try {
         connectToDb();
-        console.log(userId, " in api")
         const user = await User.findById(userId);
         return NextResponse.json(user);
     } catch (err) {

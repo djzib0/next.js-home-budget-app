@@ -10,7 +10,6 @@ import Button from '../button/Button'
 
 const BudgetForm = ({session, defaultValues} : {session: Session; defaultValues?: BudgetFormType}) => {
 
-  // console.log(convertBudgetNameToMonth(defaultValues))
   const [formData, setFormData] = useState<BudgetFormType>(
     {
       budgetNameYear: defaultValues ? convertBudgetNameToYear(defaultValues.budgetName ? defaultValues.budgetName : "") : new Date().getFullYear(),

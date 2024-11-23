@@ -83,7 +83,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         }
       }
       if (account?.provider === 'facebook') {
-        console.log("yeah, it's a facebook provider moin")
         connectToDb();
         try {
           console.log(profile, " profile moin")
@@ -103,7 +102,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         }
       }
       if (account?.provider === 'google') {
-        console.log("yeah, it's a google provider moin")
         connectToDb();
         try {
           console.log(profile, " profile moin")

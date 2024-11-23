@@ -4,7 +4,6 @@ import styles from "./modalButton.module.css"
 
 const ModalButton = ({btnType, btnText, handleFunction} : {btnType: ButtonEnumType, btnText: string; handleFunction: () => void }) => {
 
-  console.log("button type", btnType)
   return (
     <button
       onClick={handleFunction}
