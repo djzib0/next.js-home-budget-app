@@ -65,7 +65,7 @@ const BudgetsList = ({budgets} : {budgets: BudgetType[]}) => {
     })
   }
 
-  const sortedBudgetsArr = budgets.sort((a: BudgetType, b: BudgetType) => parseInt(a.budgetName) - parseInt(b.budgetName))
+  const sortedBudgetsArr = budgets.sort((a: BudgetType, b: BudgetType) => parseInt(b.budgetName) - parseInt(a.budgetName))
 
   const filteredBudget = budgets.filter((budget) => {
     if (!filterForm.budgetNameMonth) {
