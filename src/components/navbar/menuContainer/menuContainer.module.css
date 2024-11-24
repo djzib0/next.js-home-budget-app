@@ -1,0 +1,87 @@
+.navbarContainer {
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    background-color: #1b1b1b;
+    color: #ffffff;
+}
+
+.navbar {
+    max-width: 1024px;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.navbarLeft {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logoImgContainer {
+    position: relative;
+    width: 120px;
+    height: 40px;
+    overflow: hidden;
+}
+
+.menuContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.menuButton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 6px;
+    width: 56px;
+    height: 56px;
+    background-color: transparent;
+}
+
+.menuButtonLine,
+.menuButton::before,
+.menuButton::after {
+    content: "";
+    width: 28px;
+    height: 3px;
+    background-color: #ffffff;
+    color: #ffffff;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+  
+  .menuButton.isOpened .menuButtonLine {
+    opacity: 0;
+  }
+  
+  .menuButton.isOpened::before {
+    transform: translateY(9px) rotate(45deg);
+  }
+  
+  .menuButton.isOpened::after {
+    transform: translateY(-9px) rotate(-45deg);
+  }
+
+  @media (min-width: 450px) {
+    .navbar {
+        flex-direction: row;
+    }
+
+    .menuContainer {
+        flex-direction: row;
+    }
+
+    .menuButton {
+        display: none;
+    }
+  }
