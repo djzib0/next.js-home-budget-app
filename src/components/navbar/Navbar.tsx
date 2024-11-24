@@ -3,6 +3,7 @@ import Link from "next/link"
 import styles from "./navbar.module.css"
 import { auth } from "@/lib/auth";
 import { handleLogout } from "@/lib/actions";
+import Image from "next/image";
 
 const Navbar = async () => {
 
@@ -12,7 +13,9 @@ const Navbar = async () => {
     <nav className={styles.navbarContainer}>
       <div className={styles.navbar}>
         <div className={styles.navbarLeft}>
-          Logo
+          <div className={styles.logoImgContainer}>
+            <Image alt={'application logo with bee and app name'} src={'/logo.png'} fill />
+          </div>
         </div>
         {session?.user && <div className={styles.navbarRight}>
           <Link href={"/"}>Home</Link>

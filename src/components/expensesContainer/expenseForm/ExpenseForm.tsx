@@ -6,6 +6,7 @@ import { ExpenseFormType } from '@/lib/types'
 import { ClothesExpense, DigitalServicesExpense, ExpenseGroup, FoodExpense, HealthExpense, HobbyExpense, HomeExpense, OtherExpense, TransportExpense } from '@/lib/enums';
 import styles from './expenseForm.module.css'
 import { setExpenseGroup } from '@/lib/utils'
+import Button from '@/components/button/Button'
 
 type ExpenseForm = {
   isOn: boolean;
@@ -314,9 +315,33 @@ const ExpenseForm = ({userId, budgetId, defaultValues, closeFunction} : {userId:
         {isExpenseFormOn.isOn && isExpenseFormOn.expenseGroup === ExpenseGroup.Other && otherExpensesOptionsArr}
         </select>
         <br/>
-        {formData.group && formData.value > 0 && formData.name.length > 0 && !defaultValues && <button>Add new Expense</button>}
-        {defaultValues?.budgetId && defaultValues?.userId && <button>Confirm edit</button>}
-        {defaultValues?.budgetId && defaultValues?.userId && <button type='button' onClick={closeFunction}>Cancel</button>}
+          {formData.group && formData.value > 0 && formData.name.length > 0 && !defaultValues && 
+          <div className={styles.ctaBtnsContainer}>
+              <Button 
+                btnHtmlType={'submit'}
+                btnType={'confirm'}
+                btnText={'add new expense'}
+                btnSize={'small'}
+              />
+            </div>
+          }
+          {defaultValues?.budgetId && defaultValues?.userId && 
+            <div className={styles.ctaBtnsContainer}>
+              <Button 
+                btnHtmlType={'submit'}
+                btnType={'confirm'}
+                btnText={'confirm'}
+                btnSize={'small'}
+              />
+              <Button 
+                btnHtmlType={'button'}
+                btnType={'cancel'}
+                btnText={'cancel'}
+                btnSize={'small'}
+                handleClick={closeFunction}
+              />
+            </div>
+          }
       </form>}
     </div>
   )

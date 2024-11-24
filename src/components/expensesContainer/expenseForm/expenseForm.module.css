@@ -10,6 +10,7 @@
     gap: .2rem;
 }
 
+
 .toggleBtn,
 .active {
     display: inline-block;
@@ -87,6 +88,13 @@
     box-shadow: rgb(231 238 236) 0px 0px 0px 3px;
 }
 
+.ctaBtnsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    grid-column: span 2;
+}
+
 @media screen and (min-width: 481px) {
     .expenseFormButtons {
         display: grid;
@@ -110,6 +118,15 @@
     .expenseForm {
         display: grid;
         grid-template-columns: .5fr 1fr;
+    }
+
+    .expenseForm:last-child {
+        grid-column: span 2;
+    }
+
+    .ctaBtnsContainer {
+        display: flex;
+        gap: .3rem;
     }
     
     /* .expenseForm > input,
