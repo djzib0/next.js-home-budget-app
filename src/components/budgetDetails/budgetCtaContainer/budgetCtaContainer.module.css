@@ -1,6 +1,10 @@
 .budgetCtaContainer {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
 }
 
 .budgetEditBtnContainer {
@@ -17,7 +21,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 120px;
+    width: 100%;
     gap: 8px;
     padding: 10px 20px;
     font-size: 16px;
@@ -67,4 +71,17 @@
 
 .editBtn:active {
 transform: scale(0.98);
+}
+
+@media (min-width: 430px) {
+    .budgetCtaContainer {
+        flex-direction: row;
+    }
+
+    .editBtn,
+    .deleteBtn,
+    .backBtn {
+        width: 120px;
+
+    }
 }

@@ -18,9 +18,13 @@ const MenuContainer = ({session} : {session: Session}) => {
   }
 
   //state variables
-  const [windowWidth, setWindowWidth] = useState(0)
+
+  // window width set to 450 pixels, it's the minimum width where the 
+  // link menu shows up
+  const [windowWidth, setWindowWidth] = useState(0) 
 
   useEffect(() => {
+    if (windowWidth === 0 && window) setWindowWidth(window.innerWidth)
     const handleResize = () => {
       setWindowWidth(window.innerWidth)
     }
